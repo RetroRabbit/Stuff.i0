@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
-import { headerNav } from '../components/headerNav'
 import './accountScreen.css'
+import SearchBar from 'material-ui-search-bar'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+
+/* function Search(props) {
+  return  (
+  <div className='searchContainer'>
+    <div className='rectangle-7'>
+      <p className='search-chats'>Search</p>
+    </div>
+  </div>
+  );
+} */
 
 class AccountScreen extends Component {
   constructor(props){
@@ -10,11 +21,17 @@ class AccountScreen extends Component {
 
   render() {
     return (
-      <div className='rectangle-4'>
-        <p>hi</p>
-      </div>
+      <MuiThemeProvider>       
+        <div className='rectangle-4'>
+          <div className='searchContainer'>
+           <SearchBar hintText='Search Chats'/>
+          </div>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
+
+
 
 export default AccountScreen;
