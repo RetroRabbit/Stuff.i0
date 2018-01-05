@@ -60,7 +60,7 @@ class headerNav extends Component{
                 <IconMenu
                   iconButtonElement={
                     <IconButton>
-                      <Avatar src="https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1" />
+                      <Avatar src={ this.state.user.img } />
                   </IconButton>
                   }
                   targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -71,7 +71,7 @@ class headerNav extends Component{
                 <IconButton>
                   <Avatar src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
                 </IconButton>
-      </div>
+              </div>
               :
               <div>
                   <Link to="/settings">Settings</Link>
