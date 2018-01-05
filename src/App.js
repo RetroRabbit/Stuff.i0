@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // TODO : Import all the components
 import home from './components/home'
 
-import settings from './components/setings'
+import settings from './components/settings'
 
 import headerNav from './components/headerNav'
 
