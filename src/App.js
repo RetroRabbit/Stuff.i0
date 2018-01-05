@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom'
 import './css/index.css';
-import { headerNav } from './header.js'
+
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//Import Material-UI
 
 // TODO : Import all the components
 import home from './components/home'
+
+import settings from './components/setings'
+
+import headerNav from './components/headerNav'
 
 
 class App extends Component {
@@ -15,14 +22,18 @@ class App extends Component {
   render() {
     return (
       <div>
+        <MuiThemeProvider>
         <header>
-          <headerNav></headerNav>
           <Link to="/">Home</Link>
+          <Link to="/nav">Header</Link>
         </header>
 
         <main>
-          <Route exact path="/" component={home} />
-        </main>
+            <Route exact path="/" component={home} />
+            <Route exact path="/nav" component={headerNav} />
+            <Route exact path="/settings" component={settings} />
+          </main>
+        </MuiThemeProvider>
       </div>
     );
   }
