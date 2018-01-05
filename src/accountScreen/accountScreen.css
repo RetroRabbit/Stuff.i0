@@ -23,4 +23,9 @@
 
 .searchContainer{
     padding-top: 26px;
+    padding-bottom: 50px;
+}
+
+.cardContainer{
+    padding-top: 5px;
 }
