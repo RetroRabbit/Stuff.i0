@@ -3,7 +3,7 @@
     width: 533px;
     border-radius: 12px;
     background-color: #01B9BD;
-    align-content: auto;
+    align-content: center;
     margin: auto
 }
 
@@ -15,8 +15,8 @@
     font-size: 30px;
     font-weight: 500;
     line-height: 41px;
-    align-content: center;
-    margin: auto;
+    align-content: auto;
+    margin: 0 auto;
 }
 
 .profile-picture {
@@ -87,6 +87,6 @@
     height: 25px;
     width: 24px;
     margin: auto;
-    top: 23.5px;
+    top: 28px;
     position: relative
 }

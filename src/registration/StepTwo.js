@@ -23,14 +23,14 @@ class Register extends React.Component {
           <div className="space">
 
           </div>
-            <h2 className="step-two">Step One</h2>
+            <h2 className="step-two">Step Two</h2>
             <h2 className="profile-picture">PROFILE PICTURE</h2>
             <div className="oval">
               <div className="oval-2">
                 <div className="plus">
                   <div className="line"></div>
                   <div className="line-copy"></div>
-                </div>
+              </div>
               </div>
         
             </div>
