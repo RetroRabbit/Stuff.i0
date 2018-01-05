@@ -24,8 +24,7 @@ class App extends Component {
       <div>
         <MuiThemeProvider>
         <header>
-          <Link to="/">Home</Link>
-          <Link to="/nav">Header</Link>
+          
         </header>
 
         <main>

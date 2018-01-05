@@ -1,6 +1,11 @@
 
 import React,{ Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+
+import { Route, Link } from 'react-router-dom'
+
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -16,7 +21,8 @@ import '../css/index.css'
 
 class headerNav extends Component{
   state = {
-      logged: true,
+      props:'',
+      logged: false,
       user:{
         img:"https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1",
         surname:"Hogan",
@@ -29,8 +35,14 @@ class headerNav extends Component{
       this.setState({logged: logged});
     };
 
-  constructor(prop){
-    super(prop);
+  constructor(props){
+    super(props);
+    this.props = props;
+  }
+
+  changePage(value){
+    alert('in');
+    push('/' + value)
   }
 
     render() {
@@ -49,16 +61,21 @@ class headerNav extends Component{
                   iconButtonElement={
                     <IconButton>
                       <Avatar src="https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1" />
-                    </IconButton>
+                  </IconButton>
                   }
                   targetOrigin={{horizontal: 'right', vertical: 'top'}}
                   anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-                  <MenuItem primaryText="Settings" onClick={ () =>{ push('/settings') } }/>
-                  <MenuItem primaryText="Log out" />
+                  <MenuItem primaryText="Settings" onClick={()=>{ push('settings') }} onClick=""/>
+                  <MenuItem primaryText="Log out" onClick={()=>{ this.setState({ logged:false })}}  />
                 </IconMenu>
-            </div>
-              :<div>
-                    <FlatButton {...this.props} label="Login" />
+                <IconButton>
+                  <Avatar src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
+                </IconButton>
+      </div>
+              :
+              <div>
+                  <Link to="/settings">Settings</Link>
+                  <FlatButton {...this.props} onClick={()=>{ this.setState({ logged:true })}} label="Login" />
               </div>
             }
           />
@@ -67,4 +84,16 @@ class headerNav extends Component{
     }
 }
 
-export default headerNav;
+const mapStateToProps = state => ({
+  user: state.user,
+  logged : state.logged
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changePage: () => alert('/settings')
+}, dispatch)
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(headerNav)

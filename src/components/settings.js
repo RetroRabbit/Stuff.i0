@@ -22,7 +22,7 @@ class settings extends Component{
     render() {
       return (
         <div>
-
+          <p>this is settings</p>
         </div>
       );
     }
