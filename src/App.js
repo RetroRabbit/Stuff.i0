@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom'
 import './css/index.css';
-import { headerNav } from './components/headerNav'
+import headerNav  from './components/headerNav'
 import AccountScreen  from './accountScreen/accountScreen'
 
-// TODO : Import all the components
 import home from './components/home'
 
 

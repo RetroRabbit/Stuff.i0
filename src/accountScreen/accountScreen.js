@@ -7,7 +7,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 
 const ChatCard = function(props) {
-  if(props.selected){
+  if (props.selected) {
     return (
       <Card style={{
         backgroundColor:'#cacaca'}}>
@@ -22,7 +22,7 @@ const ChatCard = function(props) {
     );
   }
 
-  else{
+  else {
     return (
       <Card>
         <CardHeader
@@ -38,15 +38,15 @@ const ChatCard = function(props) {
 };
 
 class AccountScreen extends Component {
-  
+
 
 
   render() {
     return (
       <MuiThemeProvider>       
-        <div className='rectangle-4'>
+        <div className='rectangle4'>
           <div className='searchContainer'>
-           <SearchBar hintText='Search Chats'/>
+            <SearchBar hintText='Search Chats'/>
           </div>
 
           <div className='cardContainer'>
