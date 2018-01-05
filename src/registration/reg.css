@@ -1,1 +1,6 @@
-rectangle {	height: 644px;	width: 533px;	border-radius: 12px;	background-color: #01B9BD;}.step-one {	height: 67px;	width: 424px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 30px;	font-weight: 500;	line-height: 41px;	text-align: center;}
+.rectangle {	height: 644px;	width: 533px;	border-radius: 12px;	background-color: #01B9BD;}
+.form-field {	height: 38px;	width: 390px;}
+.label {	height: 30px;	width: 201px;	color: #F3F3F3;	font-family: "Avenir Next";	font-size: 20px;	line-height: 27px;}
+.line{	box-sizing: border-box;	height: 3px;	width: 390px;	border: 1px solid #FFFFFF;}
+.step-one {	height: 67px;	width: 424px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 30px;	font-weight: 500;	line-height: 41px;	text-align: center;}
+.the-basics {	height: 67px;	width: 424px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 36px;	font-weight: 500;	letter-spacing: 2px;	line-height: 49px;	text-align: center;}
