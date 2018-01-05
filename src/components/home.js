@@ -6,11 +6,11 @@ import { connect } from 'react-redux'
 // TODO : Import all the functions from the reducers
 
 import { alert } from '../reducers/reducer1'
-import { headerNav } from './headerNav'
+import HeaderNav  from './headerNav'
 
 const home = props => (
   <div>
-      <headerNav></headerNav>
+      <HeaderNav></HeaderNav>
       <div>
           <p>
             Home

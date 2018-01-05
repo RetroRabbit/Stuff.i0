@@ -19,7 +19,7 @@ import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../css/index.css'
 
-class headerNav extends Component{
+class HeaderNav extends Component{
   state = {
       props:'',
       logged: false,
@@ -45,10 +45,15 @@ class headerNav extends Component{
     push('/' + value)
   }
 
+    styles ={
+        'padding-bottom':'2px'
+    }
+
     render() {
       return (
         <div>
           <AppBar
+            className="pad-top-20px"
             iconElementLeft={
               <div>
                   <RaisedButton label="New chat" primary={true}></RaisedButton>
@@ -83,7 +88,6 @@ class headerNav extends Component{
       );
     }
 }
-
 const mapStateToProps = state => ({
   user: state.user,
   logged : state.logged
@@ -96,4 +100,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(headerNav)
+)(HeaderNav)

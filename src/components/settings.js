@@ -10,6 +10,8 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import HeaderNav from './headerNav';
+
 import '../css/index.css'
 
 const styles = {
@@ -38,7 +40,8 @@ class settings extends Component{
 
     render() {
       return (
-          <div style={styles.root}>
+          <div>
+            <HeaderNav />
             <GridList
               cols={1}
               cellHeight={70}
