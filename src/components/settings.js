@@ -5,6 +5,8 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
+
+import ActionDone from 'material-ui/svg-icons/action/done';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import Avatar from 'material-ui/Avatar';
@@ -12,6 +14,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import HeaderNav from './headerNav';
 
+import TextField from 'material-ui/TextField';
 import '../css/index.css'
 
 const styles = {
@@ -27,7 +30,14 @@ class settings extends Component{
     super(prop);
   }
 
+  saveChanges(){
+    alert('saving changes');
+  }
+
+
   state = {
+    editingEmail:false,
+    editingNames:false,
       props:'',
       logged: false,
       user:{
@@ -51,30 +61,77 @@ class settings extends Component{
               </GridTile>
 
                 <GridTile  className="text-center" cols={1} rows={1}>
-                  <label className="addie-hogan-addiehog">
-                    {this.state.user.surname} {this.state.user.name}
-                  </label>
-                  <IconButton
-                    iconStyle={styles.mediumIcon}
-                    style={styles.medium}>
-                    <EditorModeEdit />
-                  </IconButton>
+                  <div>
+                    {
+                      this.state.editingNames ?
+                      <div>
+                        <TextField onChange={(e) => {
+                              var newSelected = this.state.user;
+                              newSelected.surname = e.target.value.split(' ')[0]
+                              newSelected.name = e.target.value.split(' ')[1]
+                              this.setState({
+                               user:newSelected})
+                          }} hintText="Surname Name"/>
+                          <IconButton
+                            onClick={() => { this.setState({editingNames : false}) }}
+                            iconStyle={styles.mediumIcon}
+                            style={styles.medium}>
+                            <ActionDone />
+                          </IconButton>
+                      </div>
+                      :
+                      <div>
+                        <label className="addie-hogan-addiehog">
+                          {this.state.user.surname} {this.state.user.name}
+                        </label>
+                        <IconButton
+                          onClick={() => { this.setState({editingNames : true}) }}
+                              iconStyle={styles.mediumIcon}
+                          style={styles.medium}>
+                          <EditorModeEdit />
+                        </IconButton>
+                      </div>
+                    }
+                  </div>
 
                 </GridTile>
 
                 <GridTile className="text-center" cols={1} rows={1}>
-                  <label className="addie-hogan-addiehog">
-                    {this.state.user.email}
-                  </label>
-                  <IconButton
-                    iconStyle={styles.mediumIcon}
-                    style={styles.medium}>
-                    <EditorModeEdit />
-                  </IconButton>
+                  <div>
+                    {
+                      this.state.editingEmail ?
+                      <div>
+                        <TextField onChange={(e) => {
+                              var newSelected = this.state.user;
+                              newSelected.email = e.target.value
+                              this.setState({
+                               user:newSelected})
+                          }} hintText="Email Address"/>
+                          <IconButton
+                            onClick={() => { this.setState({editingEmail : false}) }}
+                            iconStyle={styles.mediumIcon}
+                            style={styles.medium}>
+                            <ActionDone />
+                          </IconButton>
+                      </div>
+                      :
+                      <div>
+                        <label className="addie-hogan-addiehog">
+                          {this.state.user.email}
+                        </label>
+                        <IconButton
+                          onClick={() => { this.setState({editingEmail : true}) }}
+                          iconStyle={styles.mediumIcon}
+                          style={styles.medium}>
+                          <EditorModeEdit />
+                        </IconButton>
+                      </div>
+                    }
+                  </div>
                 </GridTile>
 
                 <GridTile  className="text-center" cols={1} rows={2}>
-                  <RaisedButton label="Done" secondary={true}></RaisedButton>
+                  <RaisedButton onClick={ ()=> this.saveChanges() } label="Done" secondary={true}></RaisedButton>
                 </GridTile>
             </GridList>
          </div>
