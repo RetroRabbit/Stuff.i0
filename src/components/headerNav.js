@@ -79,8 +79,7 @@ class HeaderNav extends Component{
               </div>
               :
               <div>
-                  <Link to="/settings">Settings</Link>
-                  <FlatButton {...this.props} onClick={()=>{ this.setState({ logged:true })}} label="Login" />
+                <FlatButton {...this.props} onClick={()=>{ this.setState({ logged:true })}} label="Login" />
               </div>
             }
           />

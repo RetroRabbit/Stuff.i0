@@ -41,7 +41,7 @@ class settings extends Component{
       props:'',
       logged: false,
       user:{
-        img:"https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1",
+        img:"https://images.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-MjluFiP9tPk%2FUkInFfUONuI%2FAAAAAAAABNg%2FGTBZ2kxMKvU%2Fs1600%2FFacebook-Anonymous.jpg&f=1",
         surname:"Hogan",
         name:"Addie",
         email:"Hogan.Addie@gmail.com"
