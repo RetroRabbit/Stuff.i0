@@ -1,7 +1,56 @@
-.rectangle {	height: 500px;	width: 420px;	border-radius: 12px;	background-color: #01B9BD; align-content: center; margin: auto}
-.form-field {	height: 38px;	width: 390px; align-content: center; margin: auto} 
-.label {	height: 30px;	width: 201px;	color: #F3F3F3;	font-family: "Avenir Next";	font-size: 20px;	line-height: 27px;}
-.line{	box-sizing: border-box;	height: 3px;	width: 390px;	border: 1px solid #FFFFFF;}
-.step-one {	height: 67px;	width: 424px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 30px;	font-weight: 500;	line-height: 41px;	text-align: center;}
-.the-basics {	height: 67px;	width: 424px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 36px;	font-weight: 500;	letter-spacing: 2px;	line-height: 49px;	text-align: center;}
-.space{ height: 100px}
+.reg-rectangle {
+    height: 500px;
+    width: 420px;
+    border-radius: 12px;
+    background-color: #01B9BD;
+    align-content: center;
+    margin: auto;
+    
+}
+
+.form-field {
+    height: 38px;
+    width: 390px;
+    align-content: center;
+    margin: auto;
+    padding-left:80px;
+}
+
+.h2 {
+    height: 30px;
+    width: 201px;
+    color: #F3F3F3;
+    font-family: "Avenir Next";
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.line {
+    box-sizing: border-box;
+    height: 3px;
+    width: 390px;
+    border: 1px solid #FFFFFF;
+}
+
+.step-one {
+    height: 67px;
+    width: 424px;
+    color: #FFFFFF;
+    font-family: "Avenir Next";
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 41px;
+    text-align: center;
+}
+
+.the-basics {
+    height: 67px;
+    width: 424px;
+    color: #FFFFFF;
+    font-family: "Avenir Next";
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 49px;
+    text-align: center;
+}
