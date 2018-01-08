@@ -1,18 +1,18 @@
 import React from 'react'
-import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 // TODO : Import all the functions from the reducers
 
 import { alert } from '../reducers/reducer1'
+import HeaderNav  from './headerNav'
 
 const home = props => (
   <div>
-    <h1>Home</h1>
+      <HeaderNav></HeaderNav>
       <div>
           <p>
-            <button onClick={alert(props.alert)}>Alert {props.alert.text}</button>
+            Home
           </p>
         </div>
     </div>
