@@ -12,7 +12,6 @@ import FlatButton from 'material-ui/FlatButton';
 
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
-import '../css/index.css'
 
 class HeaderNav extends Component{
   state = {
@@ -43,7 +42,7 @@ class HeaderNav extends Component{
       return (
         <div>
           <AppBar
-            className="pad-top-20px"
+            className=""
             iconElementLeft={
               <div>
                   <RaisedButton label="New chat" primary={true} onClick={() => { alert(" TODO - Start a new chat") }}></RaisedButton>
