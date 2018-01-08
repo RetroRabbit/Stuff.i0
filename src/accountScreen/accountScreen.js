@@ -36,15 +36,36 @@ const ChatCard = function(props) {
   
 };
 
-const ChatBubble = function(props) {
+const ChatBubbleRight = function(props) {
   return (
-  <Card>
-    <CardText>
-     Does this chat work?? No it does not!
-    </CardText>
-  </Card>
+    <div className='bubbleContainerRight'>
+      <div className='bubbleRight'>
+        <Card>
+          <CardText>
+            {props.text}
+          </CardText>
+        </Card>
+      </div>
+    </div>
+  
   );
 }
+
+const ChatBubbleLeft = function(props) {
+  return (
+    <div className= 'bubbleContainerLeft'>
+      <div className='bubbleLeft'>
+        <Card>
+          <CardText>
+            {props.text}
+          </CardText>
+        </Card>
+      </div>
+    </div>
+  
+  );
+}
+
 
 class AccountScreen extends Component {
 
@@ -89,18 +110,14 @@ class AccountScreen extends Component {
 
         </div>
 
-         <div className='mainBubbleContainer'>
-            <div className='bubbleContainerRight'>
-              <div className='bubbleRight'>
-                <ChatBubble/>
-              </div>
-            </div>
-            <div className= 'bubbleContainerLeft'>
-              <div className='bubbleLeft'>
-                <ChatBubble/>
-              </div>
-            </div>
-          </div>
+        <div className='mainBubbleContainer'>
+
+          <ChatBubbleRight text='Does this chat work?? Yes it does!'/>
+
+          <ChatBubbleLeft text='Does this chat work?? Yes it does!'/>
+
+          <ChatBubbleRight text='Does this chat work?? Yes it does!'/>
+        </div>
 
       </div>
 
