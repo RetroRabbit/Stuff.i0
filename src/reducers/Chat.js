@@ -6,6 +6,7 @@ export const GET_MSGS = 'Chat/GET_MSGS'
 export const ADD_MSG = 'Chat/ADD_MSG'
 
 const initialState = {
+    allMsgs:[{}],
     msgs:[
       {
         senderID:0,
@@ -22,30 +23,34 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_MSG:
-      state.msgs.push(
-        {
-          senderID:action.senderID,
-          recieverID:action.receiverID,
-          sender:getUser(action.senderID),
-          receiver:getUser(action.receiverID),
-          timeSent:new Date(),
-          text:action.msg
-        }
-      );
+      var newMsg = {
+        senderID:action.senderID,
+        recieverID:action.receiverID,
+        sender:getUser(action.senderID),
+        receiver:getUser(action.receiverID),
+        timeSent:new Date(),
+        text:action.msg
+      };
 
-      //Yes i know there is no return or break for this and it is fine :)
+      state.allMsgs.push(newMsg);
+      var chat = state.allMsgs.filter((msg)=>{
+        return (msg.senderID === action.senderID && msg.receiverID === action.recieverID)
+      });
+
+
+      return {
+        ...state,
+        msgs:chat
+      }
 
     case GET_MSGS:
-        var chat = state.msgs.filter((msg)=>{
-          return (msg.senderID == action.senderID && msg.receiverID == action.recieverID)
+        chat = state.allMsgs.filter((msg)=>{
+          return (msg.senderID === action.senderID && msg.receiverID === action.recieverID)
         });
 
-        state.currentChat = chat;
-        alert("Total = " + chat.length)
-        state.msgs = chat;
-
         return {
-          ...state
+          ...state,
+          msgs:chat
         }
 
     default:

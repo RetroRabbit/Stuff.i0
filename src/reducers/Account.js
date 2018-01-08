@@ -1,59 +1,87 @@
 export const USER_ACCOUNT = 'Account/USER_ACCOUNT'
+export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT'
+export const LOGIN_USER_ACCOUNT = 'Account/LOGIN_USER_ACCOUNT'
 export const CURRENT_USER_ACCOUNT = 'Account/CURRENT_USER_ACCOUNT'
 export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 
 const initialState = {
-      currentUser : {
-          userID:0,
-          userName:'Joseph',
-          userSurname:'Sirwali',
-          userEmail:'mulavhe@gmail.com',
-          userImg:'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-      },
-      users:[
-        {
-            userID:4,
-            userName:'Mpho',
-            userSurname:'Sirwali',
-            userEmail:'mulavhe@gmail.com',
-            userImg:'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID:2,
-            userName:'Rendani',
-            userSurname:'Sirwali',
-            userEmail:'mulavhe@gmail.com',
-            userImg:'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID:0,
-            userName:'Joseph',
-            userSurname:'Sirwali',
-            userEmail:'mulavhe@gmail.com',
-            userImg:'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        }
-      ]
+  currentUser: {
+    userID: 0,
+    userName: 'Joseph',
+    userSurname: 'Sirwali',
+    userEmail: 'mulavhe@gmail.com',
+    userPassword: 'joseph',
+    userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+  },
+  users: [
+    {
+      userID: 5,
+      userName: 'Joe',
+      userSurname: 'Sirwali',
+      userPassword:'joe',
+      userEmail: 'joe@gmail.com',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    }, {
+      userID: 2,
+      userName: 'Rendani',
+      userSurname: 'Sirwali',
+      userEmail: 'mulavhe@gmail.com',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    }, {
+      userID: 4,
+      userName: 'Joseph',
+      userSurname: 'Sirwali',
+      userEmail: 'mulavhe@gmail.com',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    },{
+      userID: 0,
+      userName: 'Joseph',
+      userSurname: 'Sirwali',
+      userEmail: 'mulavhe@gmail.com',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    }
+  ]
 }
 
-
-export default (state = initialState, action) => {
+export default(state = initialState, action) => {
   switch (action.type) {
-    case CURRENT_USER_ACCOUNT:
+
+    case REGISTER_USER_ACCOUNT:
+      state.users.push(action.user);
       return {
-        ...state.currentUser,
+        ...state,
+        currentUser:action.user
       }
 
-    case USER_ACCOUNT:
+    case LOGIN_USER_ACCOUNT:
       var user = null;
-      alert("Trying to get user " + action.ID);
-      for(let i =0; i< state.users.length;i++){
-        if(state.users[i].userID == action.ID){
+      for (let i = 0; i < state.users.length; i++) {
+        if (state.users[i].userEmail === action.user.userEmail && state.users[i].userPassword === action.user.userPassword) {
           user = state.users[i];
         }
       }
 
       return {
-        ...user
+        ...state,
+        currentUser:user
+      }
+
+    case CURRENT_USER_ACCOUNT:
+      return {
+        ...state
+      }
+
+    case USER_ACCOUNT:
+      user = null;
+      for (let i = 0; i < state.users.length; i++) {
+        if (state.users[i].userID === action.ID) {
+          user = state.users[i];
+        }
+      }
+
+      return {
+        ...state,
+        currentUser:user
       }
 
     case CHANGE_USER_ACCOUNT:
@@ -67,29 +95,32 @@ export default (state = initialState, action) => {
   }
 }
 
-
 export const getUser = (userID) => {
   return dispatch => {
-    dispatch({
-      type: USER_ACCOUNT,
-      ID:userID
-    })
+    dispatch({type: USER_ACCOUNT, ID: userID})
   }
 }
 
 export const getCurrentUser = () => {
   return dispatch => {
-    dispatch({
-      type: CURRENT_USER_ACCOUNT
-    })
+    dispatch({type: CURRENT_USER_ACCOUNT})
+  }
+}
+
+export const registerUser = (user) => {
+  return dispatch => {
+    dispatch({type: REGISTER_USER_ACCOUNT,user:user})
+  }
+}
+
+export const loginUser = (user) => {
+  return dispatch => {
+    dispatch({type: LOGIN_USER_ACCOUNT,user:user})
   }
 }
 
 export const changeUser = (changes) => {
   return dispatch => {
-    dispatch({
-      type: CHANGE_USER_ACCOUNT,
-      new:changes
-    })
+    dispatch({type: CHANGE_USER_ACCOUNT, new: changes})
   }
 }

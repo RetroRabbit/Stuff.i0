@@ -8,7 +8,9 @@ import HeaderNav  from './headerNav'
 import {
   getUser,
   changeUser,
-  getCurrentUser
+  getCurrentUser,
+  registerUser,
+  loginUser
 } from '../reducers/Account'
 
 import {
@@ -20,18 +22,20 @@ const home = props => (
   <div>
       <HeaderNav></HeaderNav>
       <div>
-        <a href="#" onClick={()=> { props.getUser(4) }}>GET USER</a><br/><br/><br/>
-          <a href="#" onClick={()=> { props.getMsgs(2,4) }}>GetMsgs</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.getUser(12) }}>GET USER (12)</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.getMsgs(2,4) }}>GetMsgs</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.addMsg("New msg",2,4) }}>Add MSG</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.addMsg("New msg other",0,4) }}>Add MSG other</a><br/><br/><br/>
 
-            <a href="#" onClick={()=> { props.addMsg("New msg",2,4) }}>Add MSG</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.registerUser({ userName:"NewMember",userID:12,userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Register</a><br/><br/><br/>
+          <a href="#!" onClick={()=> { props.loginUser({ userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Login</a><br/><br/><br/>
 
           <p>
-            Current User Name = { props.currentUser.userName }
+            Current User Name = { props.currentUser ? props.currentUser.userName : <p>Not Logged in</p> }
           </p>
           <p>
             Msgs length = { props.msgs.length }
           </p>
-
           <p>
             users length = { props.users.length }
           </p>
@@ -50,7 +54,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getCurrentUser,
   changeUser,
   addMsg,
-  getMsgs
+  getMsgs,
+  registerUser,
+  loginUser
 }, dispatch)
 
 export default connect(
