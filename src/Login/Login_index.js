@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import './Login_index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import './login_components';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import history from './history';
 
 class App extends Component {
-	constructor(props){
-		super(props);
-		this.state={
-		email:'',
-		password:''
-		}
-	 }
 
 	 onSubmit(e) {
 		e.preventDefault();
