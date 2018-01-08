@@ -2,9 +2,6 @@
 import React,{ Component } from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
-import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-
 
 import ActionDone from 'material-ui/svg-icons/action/done';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
@@ -26,9 +23,6 @@ const styles = {
 
 
 class settings extends Component{
-  constructor(prop){
-    super(prop);
-  }
 
   saveChanges(){
     alert('saving changes');

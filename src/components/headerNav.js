@@ -3,17 +3,12 @@ import React,{ Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-
-import { Route, Link } from 'react-router-dom'
-
+import { Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
-import Toggle from 'material-ui/Toggle';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -35,11 +30,6 @@ class HeaderNav extends Component{
       this.setState({logged: logged});
     };
 
-  constructor(props){
-    super(props);
-    this.props = props;
-  }
-
   changePage(value){
     alert('in');
     push('/' + value)
@@ -56,12 +46,14 @@ class HeaderNav extends Component{
             className="pad-top-20px"
             iconElementLeft={
               <div>
-                  <RaisedButton label="New chat" primary={true}></RaisedButton>
-                  <RaisedButton label="New Group" primary={true}></RaisedButton>
-              </div>}
+                  <RaisedButton label="New chat" primary={true} onClick={() => { alert(" TODO - Start a new chat") }}></RaisedButton>
+                  <RaisedButton label="New Group" primary={true} onClick={() => { alert(" TODO - Start a new group") }}></RaisedButton>
+                </div>}
             iconElementRight={this.state.logged ?
               <div>
-                <FlatButton {...this.props} label={this.state.user.surname + " " + this.state.user.name} />
+                <Route render={({ history}) => (
+                  <FlatButton {...this.props} onClick={() => { alert(" TODO - Send the user his/her to the Profile Page") }}  label={this.state.user.surname + " " + this.state.user.name} />
+                  )} />
                 <IconMenu
                   iconButtonElement={
                     <IconButton>
@@ -70,7 +62,9 @@ class HeaderNav extends Component{
                   }
                   targetOrigin={{horizontal: 'right', vertical: 'top'}}
                   anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-                  <MenuItem primaryText="Settings" onClick={()=>{ push('settings') }} onClick=""/>
+                  <Route render={({ history}) => (
+                      <MenuItem primaryText="Settings" onClick={() => { history.push('/settings') }} />
+                  )} />
                   <MenuItem primaryText="Log out" onClick={()=>{ this.setState({ logged:false })}}  />
                 </IconMenu>
                 <IconButton>
@@ -79,7 +73,13 @@ class HeaderNav extends Component{
               </div>
               :
               <div>
-                <FlatButton {...this.props} onClick={()=>{ this.setState({ logged:true })}} label="Login" />
+                <Route render={({ history}) => (
+                  <FlatButton {...this.props} onClick={()=>{
+                      this.setState({ logged:true })
+                      alert("TODO : Send the user to the login page")
+                      history.push('/')
+                    }} label="Login" />
+                )} />
               </div>
             }
           />

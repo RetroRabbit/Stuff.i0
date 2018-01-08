@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './css/index.css';
 
 
@@ -15,16 +15,12 @@ import headerNav from './components/headerNav'
 
 
 class App extends Component {
-  constructor(props){
-    super(props)
-  }
-
   render() {
     return (
       <div>
         <MuiThemeProvider>
         <header>
-          
+
         </header>
 
         <main>
