@@ -1,8 +1,12 @@
-export const GET_MSGS = 'Account/GET_MSGS'
-export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
+import {
+  getUser
+} from './Account'
+
+export const GET_MSGS = 'Chat/GET_MSGS'
+export const ADD_MSG = 'Chat/ADD_MSG'
 
 const initialState = {
-    Msgs:[
+    msgs:[
       {
         senderID:0,
         recieverID:0,
@@ -11,27 +15,38 @@ const initialState = {
         timeSent:new Date(),
         text:''
       }
-    ]
+    ],
+    currentChat:[]
   }
-}
-
-function getMsgs(sender,receiver){
-
-}
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_MSGS:
-      state = getMsgs(action.senderID,action.receiverID);
-      return {
-        ...state,
-      }
+    case ADD_MSG:
+      state.msgs.push(
+        {
+          senderID:action.senderID,
+          recieverID:action.receiverID,
+          sender:getUser(action.senderID),
+          receiver:getUser(action.receiverID),
+          timeSent:new Date(),
+          text:action.msg
+        }
+      );
 
-    case CHANGE_USER_ACCOUNT:
-    state.currentUser.userName = action.new;
-    return {
-      ...state
-    }
+      //Yes i know there is no return or break for this and it is fine :)
+
+    case GET_MSGS:
+        var chat = state.msgs.filter((msg)=>{
+          return (msg.senderID == action.senderID && msg.receiverID == action.recieverID)
+        });
+
+        state.currentChat = chat;
+        alert("Total = " + chat.length)
+        state.msgs = chat;
+
+        return {
+          ...state
+        }
 
     default:
       return state
@@ -48,11 +63,13 @@ export const getMsgs = (senderID,receiverID) => {
   }
 }
 
-export const changeUser = (changes) => {
+export const addMsg = (msg,senderID,receiverID) => {
   return dispatch => {
     dispatch({
-      type: CHANGE_USER_ACCOUNT,
-      new:changes
+      type: ADD_MSG,
+      msg:msg,
+      senderID:senderID,
+      receiverID:receiverID
     })
   }
 }
