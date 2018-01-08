@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form'
+import React from 'react';
+import {reduxForm } from 'redux-form'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TextField from 'material-ui/TextField';
-import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import './reg.css'
 import './register'
@@ -26,9 +22,6 @@ const StepTwo = (props) => {
 
 }
 
-const style = {
-  margin: 15,
-};
 export default reduxForm({
   form: 'wizard',              // <------ same form name
    destroyOnUnmount: false,     // <------ preserve form data

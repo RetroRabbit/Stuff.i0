@@ -8,18 +8,15 @@ import StepThree from './StepThree'
 class Register extends Component {
   constructor(props) {
     super(props)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.nextPage = this.nextPage.bind(this)
-    this.previousPage = this.previousPage.bind(this)
     this.state = {
       page: 1
     }
   }
   nextPage() {
     this.setState({ page: this.state.page + 1 })
-  }
-
-  previousPage() {
-    this.setState({ page: this.state.page - 1 })
   }
 
   render() {
@@ -31,6 +28,14 @@ class Register extends Component {
         {page === 3 && <StepThree onSubmit={onSubmit}/>}
       </div>
     )
+  }
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('An essay was submitted: ' + this.state.value);
+    event.preventDefault();
   }
 }
 
