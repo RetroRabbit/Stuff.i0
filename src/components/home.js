@@ -15,35 +15,53 @@ import {
 
 import {
   addMsg,
-  getMsgs
+  getMsgs,
+  getChats
 } from '../reducers/Chat'
 
 const home = props => (
   <div>
       <HeaderNav></HeaderNav>
       <div>
-          <a href="#!" onClick={()=> { props.getUser(12) }}>GET USER (12)</a><br/><br/><br/>
-          <a href="#!" onClick={()=> { props.getMsgs(2,4) }}>GetMsgs</a><br/><br/><br/>
-          <a href="#!" onClick={()=> { props.addMsg("New msg",2,4) }}>Add MSG</a><br/><br/><br/>
-          <a href="#!" onClick={()=> { props.addMsg("New msg other",0,4) }}>Add MSG other</a><br/><br/><br/>
-
-          <a href="#!" onClick={()=> { props.registerUser({ userName:"NewMember",userID:12,userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Register</a><br/><br/><br/>
-          <a href="#!" onClick={()=> { props.loginUser({ userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Login</a><br/><br/><br/>
 
           <p>
-            Current User Name = { props.currentUser ? props.currentUser.userName : <p>Not Logged in</p> }
+            <a href="#!" onClick={()=> { props.loginUser({ userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Login</a><br/><br/><br/>
+
+            Current User Name = { props.currentUser ? JSON.stringify(props.currentUser) : <p>Not Logged in</p> }
           </p>
           <p>
-            Msgs length = { props.msgs.length }
+            <a href="#!" onClick={()=> { props.getMsgs(2,4) }}>GetMsgs</a><br/>
+            <a href="#!" onClick={()=> { props.addMsg("New msg",2,4) }}>Add MSG</a><br/>
+            <a href="#!" onClick={()=> { props.addMsg("New msg other",0,4) }}>Add MSG other</a><br/>
+
+            <h4>Msgs length = { props.msgs.length }</h4>
+            <p>
+              { JSON.stringify(props.msgs) }
+            </p>
           </p>
           <p>
-            users length = { props.users.length }
+
+            <a href="#!" onClick={()=> { props.registerUser({ userName:"NewMember",userID:12,userPassword:"joe",userEmail:"joe@gmail.com" }) }}>Register</a><br/><br/><br/>
+
+            <h4>users length = { props.users.length }</h4>
+            <p>
+              { JSON.stringify(props.users) }
+            </p>
+          </p>
+          <p>
+            <a href="#!" onClick={()=> { props.getChats(2) }}>GetChats</a><br/><br/><br/>
+
+            <h4>chats length = { props.chats.length }</h4>
+            <p>
+              { JSON.stringify(props.chats) }
+            </p>
           </p>
         </div>
     </div>
 )
 
 const mapStateToProps = state => ({
+  chats:state.Chat.chats,
   msgs:state.Chat.msgs,
   currentUser: state.Account.currentUser,
   users: state.Account.users,
@@ -56,7 +74,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   addMsg,
   getMsgs,
   registerUser,
-  loginUser
+  loginUser,
+  getChats
 }, dispatch)
 
 export default connect(

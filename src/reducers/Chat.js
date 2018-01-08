@@ -2,6 +2,7 @@ import {
   getUser
 } from './Account'
 
+export const GET_CHATS = 'Chat/GET_CHATS'
 export const GET_MSGS = 'Chat/GET_MSGS'
 export const ADD_MSG = 'Chat/ADD_MSG'
 
@@ -17,7 +18,8 @@ const initialState = {
         text:''
       }
     ],
-    currentChat:[]
+    currentChat:[],
+    chats:[]
   }
 
 export default (state = initialState, action) => {
@@ -43,18 +45,38 @@ export default (state = initialState, action) => {
         msgs:chat
       }
 
+    case GET_CHATS:
+      var chats = state.allMsgs.filter((msg)=>{
+        return (msg.senderID === action.senderID)
+      });
+
+      return {
+        ...state,
+        chats:chats
+      }
+
+
     case GET_MSGS:
-        chat = state.allMsgs.filter((msg)=>{
+        var msgs = state.allMsgs.filter((msg)=>{
           return (msg.senderID === action.senderID && msg.receiverID === action.recieverID)
         });
 
         return {
           ...state,
-          msgs:chat
+          msgs:msgs
         }
 
     default:
       return state
+  }
+}
+
+export const getChats = (userID) => {
+  return dispatch => {
+  dispatch({
+    type : GET_CHATS,
+    senderID : userID
+    })
   }
 }
 
