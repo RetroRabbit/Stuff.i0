@@ -13,8 +13,11 @@ import settings from './components/settings'
 
 import headerNav from './components/headerNav'
 
-
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+
   render() {
     return (
       <div>
