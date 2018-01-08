@@ -15,25 +15,23 @@
     float: right;
     text-align: right;
     border-radius: 35%;
-    margin-bottom: 3vh;
 }
 
 .bubbleContainerLeft { 
     float: left;
     text-align: left;
     border-radius: 35%;
-    margin-bottom: 3vh;
     max-width: 35vw;
 }
 
 .bubbleRight{
-    padding-bottom: 3%;
+    padding-bottom: 1%;
     float: right;
 }
 
 
 .bubbleLeft{
-    padding-bottom: 3%;
+    padding-bottom: 1%;
     float: left;
 }
 
@@ -93,4 +91,33 @@
     background-color: #EFF2F3;
     margin-right: 5vw;
     border-radius: 26px;
+}
+
+.timeNowLeft {
+    height: 18px;
+    width: 35px;
+    font-size: 13px;
+    color: #75BECA;
+    font-family: Helvetica;
+    margin-bottom: 3vh;
+}
+
+.timeNowRight {
+    height: 18px;
+    float: right;
+    width: 35px;
+    font-size: 13px;
+    color: #75BECA;
+    font-family: Helvetica;
+    margin-bottom: 3vh;
+}
+
+.timeStampLeft {
+    float: left;
+    margin-left: 1%;
+}
+
+.timeStampRight {
+    float: right;
+    margin-right: 1%;
 }
