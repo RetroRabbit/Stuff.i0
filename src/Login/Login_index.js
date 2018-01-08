@@ -7,7 +7,7 @@ import history from './history';
 
 class App extends Component {
 
-	 onSubmit(e) {
+	onSubmit(e) {
 		e.preventDefault();
 	
 		const { email, password } = this.state;
@@ -48,31 +48,31 @@ class App extends Component {
 				</MuiThemeProvider >
 				<div className="loginboxpos">
 				<MuiThemeProvider >
-						<div >
-							<TextField className="loginbox"
-									hintText="Email"
-									floatingLabelText="Email"
-									type="email"
-									onChange = {(event,newValue) => this.setState({email:newValue})}
-							/>
-							<br></br>
-							<TextField className="loginbox"
-									hintText="Password"
-									floatingLabelText="Password"
-									type="password"
-									onChange = {(event,newValue) => this.setState({password:newValue})}
-							/>
+					<div >
+						<TextField className="loginbox"
+							hintText="Email"
+							floatingLabelText="Email"
+							type="email"
+							onChange = {(event,newValue) => this.setState({email:newValue})}
+						/>
+						<br></br>
+						<TextField className="loginbox"
+							hintText="Password"
+							floatingLabelText="Password"
+							type="password"
+							onChange = {(event,newValue) => this.setState({password:newValue})}
+						/>
 					</div>
 				</MuiThemeProvider>
 				</div>
 
 				<MuiThemeProvider >
-						<div >
-							<FlatButton className="loginbtn"
-									label="Login"
-									type="submit"
-									onClick={(event) => this.onSubmit(event)}
-							/>
+					<div >
+						<FlatButton className="loginbtn"
+							label="Login"
+							type="submit"
+							onClick={(event) => this.onSubmit(event)}
+						/>
 					</div>
 				</MuiThemeProvider>
 			</div>
