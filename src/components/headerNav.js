@@ -70,8 +70,7 @@ class HeaderNav extends Component {
           : <div>
             <Route render={({history}) => (<FlatButton {...this.props} onClick={() => {
                   this.setState({logged: true})
-                  alert("TODO : Send the user to the login page")
-                  history.push('/')
+                  history.push('./Login/Login_index.js')
                 }} label="Login"/>)}/>
           </div>}/>
     </div>);
