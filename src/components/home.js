@@ -16,18 +16,18 @@ const home = props => (
           </p>
         </div>
     </div>
-)
-
+);
 
 const mapStateToProps = state => ({
-  text: state.reducers1.text
-})
+    text: state.reducers1.text
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  alert
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            alert
+        },
+        dispatch
+    );
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(home)
+export default connect(mapStateToProps, mapDispatchToProps)(home);

@@ -13,6 +13,8 @@ import settings from './components/settings'
 
 import headerNav from './components/headerNav'
 
+import AccountScreen from './accountScreen/accountScreen';
+
 class App extends Component {
   constructor(props){
     super(props)
@@ -30,6 +32,7 @@ class App extends Component {
             <Route exact path="/" component={home} />
             <Route exact path="/nav" component={headerNav} />
             <Route exact path="/settings" component={settings} />
+            <Route exact path="/AccountScreen" component={AccountScreen} />
           </main>
         </MuiThemeProvider>
       </div>
