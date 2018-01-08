@@ -115,9 +115,11 @@
 .timeStampLeft {
     float: left;
     margin-left: 1%;
+    padding-top: 1%;
 }
 
 .timeStampRight {
     float: right;
     margin-right: 1%;
+    padding-top: 1%;
 }

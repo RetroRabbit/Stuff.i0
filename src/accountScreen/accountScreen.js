@@ -92,13 +92,11 @@ const ChatBubbleRight = function(props) {
 
 const ChatBubbleLeft = function(props) {
     return (
-        <div>
-            <div className="bubbleContainerLeft">
-                <div className="bubbleLeft">
-                    <Card style={ChatBubbleLeftStyle}>
-                        <CardText style={ChatTextStyle}>{props.text}</CardText>
-                    </Card>
-                </div>
+        <div className="bubbleContainerLeft">
+            <div className="bubbleLeft">
+                <Card style={ChatBubbleLeftStyle}>
+                    <CardText style={ChatTextStyle}>{props.text}</CardText>
+                </Card>
             </div>
         </div>
     );
