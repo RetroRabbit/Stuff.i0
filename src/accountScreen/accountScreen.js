@@ -129,20 +129,16 @@ const NewText = function(props) {
 
 const MessageTimeLeft = function(props) {
     return (
-        <div className='timeStampLeft'>
-            <div className='timeNowLeft'>
-                {props.text}
-            </div> 
+        <div className="timeStampLeft">
+            <div className="timeNowLeft">{props.text}</div>
         </div>
     );
 };
 
 const MessageTimeRight = function(props) {
     return (
-        <div className='timeStampRight'>
-            <div className='timeNowRight'>
-                {props.text}
-            </div> 
+        <div className="timeStampRight">
+            <div className="timeNowRight">{props.text}</div>
         </div>
     );
 };
@@ -154,7 +150,7 @@ class AccountScreen extends Component {
     render() {
         return (
             <div>
-                <HeaderNav/>
+                <HeaderNav />
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar style={searchBarStyle} hintText="Search Chats" />
@@ -196,13 +192,13 @@ class AccountScreen extends Component {
 
                 <div className="mainBubbleContainer">
                     <ChatBubbleLeft text="Many healthy and tasty alternatives" />
-                    <MessageTimeLeft text='7:25'/>
+                    <MessageTimeLeft text="7:25" />
 
                     <ChatBubbleLeft text={getShort(longText)} />
-                    <MessageTimeLeft text='7:28'/>
+                    <MessageTimeLeft text="7:28" />
 
                     <ChatBubbleRight text="I understand this and it makes sence" />
-                    <MessageTimeRight text='7:30'/>
+                    <MessageTimeRight text="7:30" />
 
                     <Plus />
 
