@@ -1,29 +1,43 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom'
 import './css/index.css';
-import headerNav from './components/headerNav';
-import AccountScreen from './accountScreen/accountScreen';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import home from './components/home';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//Import Material-UI
+
+// TODO : Import all the components
+import home from './components/home'
+
+import settings from './components/settings'
+
+import headerNav from './components/headerNav'
+
+import AccountScreen from './accountScreen/accountScreen';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props){
+    super(props)
+  }
 
-    render() {
-        return (
-            <MuiThemeProvider>
-                <div>
-                    <main>
-                        <Route exact path="/" component={home} />
-                        <Route exact path="/AccountScreen" component={AccountScreen} />
-                    </main>
-                </div>
-            </MuiThemeProvider>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <MuiThemeProvider>
+        <header>
+
+        </header>
+
+        <main>
+            <Route exact path="/" component={home} />
+            <Route exact path="/nav" component={headerNav} />
+            <Route exact path="/settings" component={settings} />
+            <Route exact path="/AccountScreen" component={AccountScreen} />
+          </main>
+        </MuiThemeProvider>
+      </div>
+    );
+  }
 }
 
 export default App;
