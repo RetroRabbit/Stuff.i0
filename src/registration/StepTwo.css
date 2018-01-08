@@ -1,10 +1,16 @@
+.background{
+    background-color: #004853;
+    margin: auto;
+    align-content: center;
+}
+
 .rectangle {
     height: 644px;
     width: 533px;
     border-radius: 12px;
     background-color: #01B9BD;
     align-content: center;
-    margin: auto
+    margin: center;
 }
 
 .step-two {
@@ -15,8 +21,16 @@
     font-size: 30px;
     font-weight: 500;
     line-height: 41px;
-    align-content: auto;
-    margin: 0 auto;
+    text-align: auto;
+    margin: auto;
+}
+
+.oval-4 {
+	height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    margin: auto;
+    padding: 13px;
 }
 
 .profile-picture {
@@ -89,4 +103,8 @@
     margin: auto;
     top: 28px;
     position: relative
+}
+
+.button {
+    margin: auto
 }

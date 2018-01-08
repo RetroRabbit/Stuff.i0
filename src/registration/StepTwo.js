@@ -3,18 +3,35 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import './StepTwo.css'
 
-class Register extends React.Component {
+class Register2 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: '',
-      email: '',
-      password: ''
-    }
+    
   }
+  state = {
+    profilephoto: '',
+    hasimg: false,
+  }
+
+  changeImg(e){
+    console.log(e.target);
+    console.log(e.target.files[0]);
+    
+    if (e.target.files && e.target.files[0]) {
+      let reader = new FileReader();
+      reader.onload = (event) => {
+          this.setState({profilephoto: event.target.result});
+      };
+      reader.readAsDataURL(e.target.files[0]);
+  }
+
+    this.setState({hasimg:true});
+    
+  }
+
   render() {
     return (
-      <div>
+      <div className="background">
         <MuiThemeProvider>
           <div className="space">
 
@@ -26,17 +43,25 @@ class Register extends React.Component {
             <h2 className="step-two">Step Two</h2>
             <h2 className="profile-picture">PROFILE PICTURE</h2>
             <div className="oval">
-              <div className="oval-2">
-                <div className="plus">
+              {
+                  !this.state.hasimg ? 
+                  <div className="oval-2">
+                    
+                  <div className="plus" >
                   <div className="line"></div>
                   <div className="line-copy"></div>
-              </div>
-              </div>
-        
+                </div>
+                <input type="file" onChange={(e)=>{this.changeImg(e)}} style={inputimg}></input>
+                
+                </div>
+                :
+                <img src={this.state.profilephoto} className="oval-4" alt="Profile Photo"></img>
+                }
+             
             </div>
-            <RaisedButton label="Next Step" primary={true} style={style} onClick={(event) => this.handleClick(event)} />
+            <RaisedButton className="button" label="Next Step" primary={true} style={style} onClick={(event) => this.handleClick(event)} />
             <h6 className="skip-for-now">Skip for now</h6>
-            </div>
+         </div>
         </MuiThemeProvider>
       </div>
     );
@@ -45,4 +70,17 @@ class Register extends React.Component {
 const style = {
   margin: 15,
 };
-export default Register;
+
+const inputimg ={
+  opacity: 0,
+  position: "absolute",
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  width: "100%"
+}
+
+
+
+export default Register2;
