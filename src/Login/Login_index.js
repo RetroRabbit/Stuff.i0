@@ -18,11 +18,11 @@ class App extends Component {
 		if (!(email === '123@123.co.za' && password === '123')) {
 			return this.setState({ error: true });
 		}
-		history.push('/accountScreen/accountScreen.js');
+		history.push('/accountScreen');
 	}
 
 	onRegister(e) {
-		history.push('registration/StepOne.js');
+		history.push('registration');
 	}
 
 	render() {
