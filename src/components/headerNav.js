@@ -30,7 +30,6 @@ class HeaderNav extends Component{
     };
 
   changePage(value){
-    alert('in');
     push('/' + value)
   }
 
@@ -45,13 +44,13 @@ class HeaderNav extends Component{
             className=""
             iconElementLeft={
               <div>
-                  <RaisedButton label="New chat" primary={true} onClick={() => { alert(" TODO - Start a new chat") }}></RaisedButton>
-                  <RaisedButton label="New Group" primary={true} onClick={() => { alert(" TODO - Start a new group") }}></RaisedButton>
+                  <RaisedButton label="New chat" primary={true} onClick={() => {  }}></RaisedButton>
+                  <RaisedButton label="New Group" primary={true} onClick={() => {  }}></RaisedButton>
                 </div>}
             iconElementRight={this.state.logged ?
               <div>
                 <Route render={({ history}) => (
-                  <FlatButton {...this.props} onClick={() => { alert(" TODO - Send the user his/her to the Profile Page") }}  label={this.state.user.surname + " " + this.state.user.name} />
+                  <FlatButton {...this.props} onClick={() => {  }}  label={this.state.user.surname + " " + this.state.user.name} />
                   )} />
                 <IconMenu
                   iconButtonElement={
@@ -75,7 +74,7 @@ class HeaderNav extends Component{
                 <Route render={({ history}) => (
                   <FlatButton {...this.props} onClick={()=>{
                       this.setState({ logged:true })
-                      alert("TODO : Send the user to the login page")
+
                       history.push('/')
                     }} label="Login" />
                 )} />
@@ -92,7 +91,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: () => alert('/settings')
+  changePage: () => console.log('/settings')
 }, dispatch)
 
 export default connect(

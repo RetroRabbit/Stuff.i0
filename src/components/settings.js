@@ -26,7 +26,7 @@ const styles = {
 class settings extends Component{
 
   saveChanges(){
-    alert('saving changes');
+    // TODO : 'saving changes';
   }
 
 
