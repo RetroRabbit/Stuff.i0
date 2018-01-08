@@ -3,6 +3,7 @@ import './accountScreen.css';
 import SearchBar from 'material-ui-search-bar';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
+import HeaderNav from '../components/headerNav';
 
 const ChatBubbleRightStyle = {
     backgroundColor: '#007D80',
@@ -153,6 +154,7 @@ class AccountScreen extends Component {
     render() {
         return (
             <div>
+                <HeaderNav/>
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar style={searchBarStyle} hintText="Search Chats" />
