@@ -14,11 +14,16 @@
 .bubbleContainerRight {
     float: right;
     text-align: right;
+    border-radius: 35%;
+    margin-bottom: 3vh;
 }
 
 .bubbleContainerLeft { 
     float: left;
     text-align: left;
+    border-radius: 35%;
+    margin-bottom: 3vh;
+    max-width: 35vw;
 }
 
 .bubbleRight{
@@ -37,6 +42,56 @@
     position: fixed;
     bottom: 10%;
     right: 10%;
-    width: 45%;
+    width: 55%;
     display: inline-grid;
+}
+
+.addDoc {
+    height: 72px;
+    width: 72px;
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    top: 98.5px;
+    float: left;
+    margin-bottom: 2vh;
+}
+ 
+.line {
+    box-sizing: border-box;
+    height: 3px;
+    width: 24px;
+    border: 3px solid #979797 ;
+    top: 5.25px;
+    position: relative
+} /*Horizontal line*/
+ 
+.line-copy {
+    box-sizing: border-box;
+    height: 3px;
+    width: 24px;
+    border: 3px solid #979797 ;
+    transform: rotate(90deg);
+    margin: auto;
+} /*vertical line*/
+ 
+.plus {
+    height: 25px;
+    width: 24px;
+    margin: auto;
+    top: 28px;
+    position: relative
+}
+
+.newTextContainer {
+    background-color: #EFF2F3;
+    float: left;
+    height: 7.5vh;
+    width: 50vw;
+    border-radius: 26px;
+}
+
+.newText {
+    background-color: #EFF2F3;
+    margin-right: 5vw;
+    border-radius: 26px;
 }
