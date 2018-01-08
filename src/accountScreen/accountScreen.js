@@ -121,7 +121,7 @@ const NewText = function(props) {
             <div className="newText">
                 <TextField
                     hintText="Insert text message Here"
-                    style={{ padding: '1px 0px 1px 25px' }}
+                    style={{ padding: '1px 0px 1px 25px', width: '100%' }}
                 />
             </div>
         </div>
