@@ -14,7 +14,13 @@ class Register extends Component {
     this.state = {
       page: 1
     }
+    
   }
+  state = {
+    profilephoto: '',
+    hasimg: false
+  };
+ 
   nextPage() {
     this.setState({ page: this.state.page + 1 })
   }
@@ -24,7 +30,7 @@ class Register extends Component {
     const { page } = this.state
     return (<div>
         {page === 1 && <StepOne onSubmit={this.nextPage}/>}
-        {page === 2 && <StepTwo onSubmit={this.nextPage}/>}
+        {page === 2 && <StepTwo profilepic={this.state.profilephoto} hasimg={this.state.hasimg} onSubmit={this.nextPage}/>}
         {page === 3 && <StepThree onSubmit={onSubmit}/>}
       </div>
     )
