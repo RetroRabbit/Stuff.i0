@@ -11,6 +11,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import HeaderNav from './headerNav';
 
+import Paper from 'material-ui/Paper';
+
 import TextField from 'material-ui/TextField';
 import '../css/index.css'
 
@@ -19,6 +21,14 @@ const styles = {
     width: '100%',
     overflowX: 'auto',
   },
+};
+
+const style = {
+  height: 100,
+  width: 100,
+  margin: 20,
+  textAlign: 'center',
+  display: 'inline-block',
 };
 
 
@@ -48,10 +58,12 @@ class settings extends Component{
             <HeaderNav />
             <GridList
               cols={1}
-              cellHeight={70}
+              cellHeight={80}
               style={styles.gridList}>
               <GridTile  className="text-center" cols={1} rows={4}>
-                <Avatar size="60" className="oval" src={this.state.user.img} />
+                 <Paper className="oval text-center" size="50" zDepth={4} circle={true}>
+                   <Avatar size="60" className="oval" src={this.state.user.img} />
+                 </Paper>
               </GridTile>
 
                 <GridTile  className="text-center" cols={1} rows={1}>
