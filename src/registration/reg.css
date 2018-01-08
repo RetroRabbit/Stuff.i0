@@ -1,3 +1,14 @@
+.space {
+    height: 70px;
+}
+.body style {
+	display: block;
+	background: #FFFFFF;
+	color: white;
+	font: 13px/1.8 Monaco, Mono-Space;
+	padding: 20px;
+	white-space: pre;
+}
 .reg-rectangle {
     height: 500px;
     width: 420px;
@@ -5,7 +16,6 @@
     background-color: #01B9BD;
     align-content: center;
     margin: auto;
-    
 }
 
 .form-field {
@@ -13,16 +23,18 @@
     width: 390px;
     align-content: center;
     margin: auto;
-    padding-left:80px;
+    padding-left: 80px;
+    color: #F3F3F3 !important;
 }
 
-.h2 {
-    height: 30px;
-    width: 201px;
-    color: #F3F3F3;
-    font-family: "Avenir Next";
-    font-size: 20px;
-    line-height: 27px;
+.input {
+    height: 30px ;
+    width: 201px ;
+    color: #FFFFFF !important;
+    font-family: "Helvetica" !important;
+    font-size: 15px !important;
+    line-height: 27px ;
+    
 }
 
 .line {
@@ -30,27 +42,41 @@
     height: 3px;
     width: 390px;
     border: 1px solid #FFFFFF;
+
 }
 
 .step-one {
     height: 67px;
     width: 424px;
     color: #FFFFFF;
-    font-family: "Avenir Next";
+    font-family: "Helvetica";
     font-size: 30px;
     font-weight: 500;
     line-height: 41px;
     text-align: center;
+    margin: auto;
 }
 
 .the-basics {
     height: 67px;
     width: 424px;
     color: #FFFFFF;
-    font-family: "Avenir Next";
+    font-family: "Helvetica";
     font-size: 36px;
     font-weight: 500;
     letter-spacing: 2px;
     line-height: 49px;
     text-align: center;
+    margin: auto;
+}
+
+.next-button {
+    height: 14px;
+    width: 14px;
+    align-self: center;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    padding-left: 20px;
+    font-family: "Helvetica";
 }
