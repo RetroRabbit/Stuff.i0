@@ -22,3 +22,33 @@
 .cardContainer{
     padding-top: 5px;
 }
+
+.bubbleContainerRight {
+    float: right;
+    text-align: right;
+}
+
+.bubbleContainerLeft { 
+    float: left;
+    text-align: left;
+}
+
+.bubbleRight{
+    padding-bottom: 3%;
+    float: right;
+}
+
+
+.bubbleLeft{
+    padding-bottom: 3%;
+    float: left;
+}
+
+.mainBubbleContainer{
+    float: right;
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+    width: 45%;
+    display: inline-grid;
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './accountScreen.css'
 import SearchBar from 'material-ui-search-bar'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 
 
@@ -37,13 +36,23 @@ const ChatCard = function(props) {
   
 };
 
+const ChatBubble = function(props) {
+  return (
+  <Card>
+    <CardText>
+     Does this chat work?? No it does not!
+    </CardText>
+  </Card>
+  );
+}
+
 class AccountScreen extends Component {
 
 
 
   render() {
     return (
-      <MuiThemeProvider>       
+      <div>
         <div className='rectangle4'>
           <div className='searchContainer'>
             <SearchBar hintText='Search Chats'/>
@@ -79,7 +88,22 @@ class AccountScreen extends Component {
           </div>
 
         </div>
-      </MuiThemeProvider>
+
+         <div className='mainBubbleContainer'>
+            <div className='bubbleContainerRight'>
+              <div className='bubbleRight'>
+                <ChatBubble/>
+              </div>
+            </div>
+            <div className= 'bubbleContainerLeft'>
+              <div className='bubbleLeft'>
+                <ChatBubble/>
+              </div>
+            </div>
+          </div>
+
+      </div>
+
     );
   }
 }

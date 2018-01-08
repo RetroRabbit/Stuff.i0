@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import './css/index.css';
 import headerNav  from './components/headerNav'
 import AccountScreen  from './accountScreen/accountScreen'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import home from './components/home'
 
@@ -14,13 +15,14 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-
-        <main>
-          <Route exact path="/" component={home} />
-          <Route exact path="/AccountScreen" component={AccountScreen} />
-        </main>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <main>
+            <Route exact path="/" component={home} />
+            <Route exact path="/AccountScreen" component={AccountScreen} />
+          </main>
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
