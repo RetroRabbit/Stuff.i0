@@ -3,33 +3,64 @@ import './accountScreen.css';
 import SearchBar from 'material-ui-search-bar';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 
+const cardHeaderStyle = {
+    backgroundColor: '#EAEAEA',
+    backgroundClip: 'content-box',
+    borderRadius: '50px'
+};
+
+const cardHeaderTextStyle = {
+    paddingTop: '3%'
+};
+
+const cardTextStyle = {
+    padding: '0px 16px 35px 16px'
+};
+
+const searchBarStyle = {
+    borderRadius: '21.5px',
+    height: '43px',
+    width: '345px',
+    border: '1px solid #979797',
+    margin: '0px auto'
+};
+
 const ChatCard = function(props) {
     if (props.selected) {
         return (
             <Card
                 style={{
-                    backgroundColor: '#cacaca'
+                    backgroundColor: '#F5F5F5'
                 }}
             >
-                <CardHeader title={props.title} avatar={props.avatar} />
-                <CardText>{props.text}</CardText>
+                <CardHeader
+                    title={props.title}
+                    avatar={props.avatar}
+                    style={cardHeaderStyle}
+                    textStyle={cardHeaderTextStyle}
+                />
+                <CardText style={cardTextStyle}>{props.text}</CardText>
             </Card>
         );
     } else {
         return (
             <Card>
-                <CardHeader title={props.title} avatar={props.avatar} />
-                <CardText>{props.text}</CardText>
+                <CardHeader
+                    title={props.title}
+                    avatar={props.avatar}
+                    style={cardHeaderStyle}
+                    textStyle={cardHeaderTextStyle}
+                />
+                <CardText style={cardTextStyle}>{props.text}</CardText>
             </Card>
         );
     }
 };
-
 const ChatBubbleRight = function(props) {
     return (
         <div className="bubbleContainerRight">
             <div className="bubbleRight">
-                <Card>
+                <Card style={{ backgroundColor: '#e6ffe2' }}>
                     <CardText>{props.text}</CardText>
                 </Card>
             </div>
@@ -41,7 +72,7 @@ const ChatBubbleLeft = function(props) {
     return (
         <div className="bubbleContainerLeft">
             <div className="bubbleLeft">
-                <Card>
+                <Card style={{ backgroundColor: '#cfe9ff' }}>
                     <CardText>{props.text}</CardText>
                 </Card>
             </div>
@@ -55,10 +86,10 @@ class AccountScreen extends Component {
             <div>
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
-                        <SearchBar hintText="Search Chats" />
+                        <SearchBar style={searchBarStyle} hintText="Search Chats" />
                     </div>
 
-                    <div className="cardContainer">
+                    <div>
                         <ChatCard
                             title="Lloyd Jimenez"
                             avatar="http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png"
@@ -67,7 +98,7 @@ class AccountScreen extends Component {
                         />
                     </div>
 
-                    <div className="cardContainer">
+                    <div>
                         <ChatCard
                             title="Jeffrey Thomas"
                             avatar="http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png"
@@ -75,7 +106,7 @@ class AccountScreen extends Component {
                         />
                     </div>
 
-                    <div className="cardContainer">
+                    <div>
                         <ChatCard
                             title="Catherine Sanders"
                             avatar="http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png"
@@ -83,7 +114,7 @@ class AccountScreen extends Component {
                         />
                     </div>
 
-                    <div className="cardContainer">
+                    <div>
                         <ChatCard
                             title="Terry Gordon"
                             avatar="http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png"

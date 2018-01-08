@@ -6,14 +6,9 @@
     box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
 }
 
-
 .searchContainer{
     padding-top: 26px;
     padding-bottom: 50px;
-}
-
-.cardContainer{
-    padding-top: 5px;
 }
 
 .bubbleContainerRight {
