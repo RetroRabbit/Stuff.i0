@@ -15,7 +15,7 @@ const home = props => (
   <div>
       <HeaderNav></HeaderNav>
       <div>
-        <a href="#" onClick={()=> {props.getUser}}>Click</a>
+        <a href="#" onClick={()=> {props.getUser() }}>Click</a>
         <a href="#" onClick={()=> { props.changeUser("joe") }}>CHange</a>
           <p>
             Home { props.currentUser.userName }

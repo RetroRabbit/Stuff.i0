@@ -1,21 +1,28 @@
-export const USER_ACCOUNT = 'Account/USER_ACCOUNT'
+export const GET_MSGS = 'Account/GET_MSGS'
 export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 
 const initialState = {
-      currentUser : {
-          userName:'Joseph',
-          userSurname:'Sirwali',
-          userEmail:'mulavhe@gmail.com',
-          userImg:'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    Msgs:[
+      {
+        senderID:0,
+        recieverID:0,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:''
       }
+    ]
+  }
 }
 
+function getMsgs(sender,receiver){
 
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case USER_ACCOUNT:
-    alert("Here");
+    case GET_MSGS:
+      state = getMsgs(action.senderID,action.receiverID);
       return {
         ...state,
       }
@@ -31,10 +38,12 @@ export default (state = initialState, action) => {
   }
 }
 
-export const getUser = () => {
+export const getMsgs = (senderID,receiverID) => {
   return dispatch => {
     dispatch({
-      type: USER_ACCOUNT
+      type: GET_MSGS,
+      senderID:senderID,
+      receiverID:receiverID
     })
   }
 }
