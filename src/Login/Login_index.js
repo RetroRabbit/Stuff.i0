@@ -58,7 +58,6 @@ class App extends Component {
 								hintText="Email"
 								floatingLabelText="Email"
 								type="email"
-								onChange = {(event,newValue) => this.setState({email:newValue})}
         						validate={email}
       						/>
 							<br></br>
@@ -66,7 +65,6 @@ class App extends Component {
 								hintText="Password"
 								floatingLabelText="Password"
 								type="password"
-								onChange = {(event,newValue) => this.setState({password:newValue})}
 							/>
 						</div>
 					</MuiThemeProvider>
