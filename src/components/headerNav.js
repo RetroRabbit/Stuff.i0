@@ -21,7 +21,6 @@ class HeaderNav extends Component {
 
     constructor(props){
       super(props);
-      this.props = props;
     }
     handleChange = (event, logged) => {
         this.setState({ logged: logged });

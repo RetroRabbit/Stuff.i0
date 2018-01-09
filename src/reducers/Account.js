@@ -102,8 +102,8 @@ export default(state = initialState, action) => {
 
     case CHANGE_USER_ACCOUNT:
       state.currentUser.userName = action.new.userName;
-
       state.currentUser.userSurname = action.new.userSurname;
+      alert("New user " + state.currentUser.userName);
       return {
         ...state,
         currentUser:state.currentUser

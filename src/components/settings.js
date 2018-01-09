@@ -38,10 +38,8 @@ class settings extends Component {
   }
 
   saveChanges() {
-    alert("about to change " );
     this.props.changeUser({userName:this.state.user.name,userSurname:this.state.user.surname});
-    this.props.getCurrentUser()
-    alert("done changing");
+    this.props.getCurrentUser();
   }
 
   state = {
@@ -51,8 +49,10 @@ class settings extends Component {
   };
 
   render() {
-    return (<div>
-      <HeaderNav { ...this.props }></HeaderNav>
+    return (
+    <div>
+
+      <HeaderNav changeProps={ this.props } { ...this.props }></HeaderNav>
       <GridList cols={1} cellHeight={80} style={styles.gridList}>
         <GridTile className="text-center" cols={1} rows={4}>
           <Paper className="oval text-center" size="50" zDepth={4} circle={true}>
