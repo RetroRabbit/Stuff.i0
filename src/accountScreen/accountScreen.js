@@ -31,7 +31,11 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-    return str.getHours() + ':' + str.getMinutes();
+    var value = str.getMinutes().toString();
+    if(value.length == 1){
+      value += "0";
+    }
+    return str.getHours() + ':' + value;
 };
 
 const cardHeaderStyle = {
@@ -133,6 +137,12 @@ const NewText = function(props) {
             <div className="newText">
                 <TextField
                     hintText="Insert Text Message Here"
+                    onKeyDown={(e)=>{
+                      if(e.key == 'Enter' && e.target.value.length > 2){
+                        props.addMsg(e.target.value, props.currentUser.userID , props.receiver.userID);
+                        e.target.value = "";
+                      }
+                    }}
                     style={{
                         padding: '1px 0px 1px 25px',
                         width: '100%'
@@ -223,6 +233,9 @@ class AccountScreen extends Component {
     constructor(props) {
         super(props);
         props.getCurrentUser();
+
+        props.getMsgs(props.currentUser.userID,props.receiver.userID);
+        
         this.filterList = this.filterList.bind(this);
         this.state = { initialItems: initialItems, items: initialItems };
     }
@@ -266,10 +279,11 @@ class AccountScreen extends Component {
                 </div>
 
                 <div className="mainBubbleContainer">
-                    {this.props.msgs.map(chat => {
+                    {
+                      this.props.msgs.map(chat => {
                         if (
                             chat.senderID == this.props.currentUser.userID &&
-                            chat.recieverID == this.props.receiver.userID
+                            chat.receiverID == this.props.receiver.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">
@@ -279,7 +293,7 @@ class AccountScreen extends Component {
                             );
                         } else if (
                             chat.senderID == this.props.receiver.userID &&
-                            chat.recieverID == this.props.currentUser.userID
+                            chat.receiverID == this.props.currentUser.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">
@@ -293,8 +307,7 @@ class AccountScreen extends Component {
                 </div>
                 <div className="inputBubbleContainer">
                     <Plus />
-
-                    <NewText />
+                    <NewText {...this.props} />
                 </div>
             </div>
         );

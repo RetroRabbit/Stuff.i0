@@ -7,11 +7,11 @@ export const GET_MSGS = 'Chat/GET_MSGS'
 export const ADD_MSG = 'Chat/ADD_MSG'
 
 const initialState = {
-    allMsgs:[{}],
-    msgs:[
+    msgs:[{}],
+    allMsgs:[
       {
         senderID:20,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -19,7 +19,7 @@ const initialState = {
       },
       {
         senderID:20,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -27,7 +27,7 @@ const initialState = {
       },
       {
         senderID:20,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -35,7 +35,7 @@ const initialState = {
       },
       {
         senderID:20,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -43,7 +43,7 @@ const initialState = {
       },
       {
         senderID:20,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -51,49 +51,49 @@ const initialState = {
       },
       {
         senderID:2,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to someone'
       },{
         senderID:2,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to someone'
       },{
         senderID:2,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to someone'
       },{
         senderID:2,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to someone'
       },{
         senderID:2,
-        recieverID:10,
+        receiverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to someone'
       },{
         senderID:10,
-        recieverID:20,
+        receiverID:20,
         sender:'',
         receiver:'',
         timeSent:new Date(),
         text:'This is from him to me'
       },{
         senderID:10,
-        recieverID:1,
+        receiverID:1,
         sender:'',
         receiver:'',
         timeSent:new Date(),
@@ -109,7 +109,7 @@ export default (state = initialState, action) => {
     case ADD_MSG:
       var newMsg = {
         senderID:action.senderID,
-        recieverID:action.receiverID,
+        receiverID:action.receiverID,
         sender:getUser(action.senderID),
         receiver:getUser(action.receiverID),
         timeSent:new Date(),
@@ -118,9 +118,8 @@ export default (state = initialState, action) => {
 
       state.allMsgs.push(newMsg);
       var chat = state.allMsgs.filter((msg)=>{
-        return (msg.senderID === action.senderID && msg.receiverID === action.recieverID)
+        return (msg.senderID === action.senderID && msg.receiverID === action.receiverID || msg.senderID === action.receiverID && msg.senderID === action.receiverID )
       });
-
 
       return {
         ...state,
@@ -140,7 +139,7 @@ export default (state = initialState, action) => {
 
     case GET_MSGS:
         var msgs = state.allMsgs.filter((msg)=>{
-          return (msg.senderID === action.senderID && msg.receiverID === action.recieverID)
+          return (msg.senderID === action.senderID && msg.receiverID === action.receiverID || msg.senderID === action.receiverID && msg.senderID === action.receiverID )
         });
 
         return {
