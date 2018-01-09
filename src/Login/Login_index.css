@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica;
+    background: #004853;
+    height: 1024px;
+    width: 1440;
+}
+
+.backbox {
+    height: 644px;
+    width: 533px;
+    border-radius: 12px;
+    background-color: #FDFDFD;
+    position: relative;
+    top: 172px;
+    left: 31%;
+}
+
+.bottombox {
+    height: 103px;
+    width: 533px;
+    border-radius: 0 0 12px 12px;
+    background-color: #01B9BD;
+    position: relative;
+    top: 415px;
+    left: 0px;
+}
+
+.welcome-to-the {
+    height: 67px;
+    width: 424px;
+    color: #004853;
+    font-family: Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 41px;
+    text-align: center;
+    position: relative;
+    top: 60px;
+    left: 52px;
+}
+
+.logo {
+    height: 62px;
+    width: 318px;
+    position: relative;
+    top: 27px;
+    left: 107px;
+}
+
+.loginboxpos {
+    top: 54;
+    left: 71;
+    position: relative;
+}
+
+.loginbox {
+    font-size: 20px !important;
+    line-height: 24px !important;
+    width: 390px !important;
+    height: 72px !important;
+    display: inline-block !important;
+    position: relative !important;
+    background-color: transparent !important;
+    font-family: Helvetica !important;
+    transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms !important;
+    left: 71px;
+}
+
+.loginbtn {
+    top: 76px;
+    left: 168px;
+    font-family: Helvetica !important;
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    height: 57px !important;
+    width: 197px !important;
+    line-height: 30px !important;
+    min-width: 197px !important;
+    color: #FFFFFF !important;
+    border-radius: 5px !important;
+    background-color: #FB6902 !important;
+    text-align: center !important;
+}
+
+.no-account-yet-get {
+	height: 27px !important;
+	width: 300px !important;
+	color: #FFFFFF !important;
+	font-family: Helvetica !important;
+	font-size: 20px !important;
+	line-height: 27px !important;
+    text-align: center !important;
+    position: relative !important;
+    top: 38px;
+    left: 107.5px;
+}
+
+.path-2 {
+    top: 38px;
+    right: 107.5px;
+	box-sizing: border-box;
+	height: 11.5px;
+	width: 18.19px;
+	border: 2px solid #FFFFFF;
+}

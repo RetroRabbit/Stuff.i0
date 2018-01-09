@@ -16,7 +16,8 @@ import StepOne from './registration/StepOne';
 import StepTwo from './registration/StepTwo';
 import StepThree from './registration/StepThree';
 
-
+import AccountScreen from './accountScreen/accountScreen';
+import Login from './Login/Login_index';
 class App extends Component {
   constructor(props){
     super(props)
@@ -27,7 +28,6 @@ class App extends Component {
       <div>
         <MuiThemeProvider>
         <header>
-          
         </header>
 
         <main>
@@ -37,6 +37,8 @@ class App extends Component {
             <Route exact path="/StepOne" component={StepOne} />
             <Route exact path="/StepTwo" component={StepTwo} />
             <Route exact path="/StepThree" component={StepThree} />
+            <Route exact path="/AccountScreen" component={AccountScreen} />
+            <Route exact path="/Login" component={Login}/>
           </main>
         </MuiThemeProvider>
       </div>
