@@ -1,78 +1,75 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import './StepTwo.css';
-import './register.js';
+import { Route, Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+import './reg.css';
 
+class StepTwo extends React.Component {
 
- 
-
-const StepTwo = (props) => {
-
-    const changeImg = (e) => {
+    changeImg = (e) => {
         console.log(e.target);
         console.log(e.target.files[0]);
-    
+
         if (e.target.files && e.target.files[0]) {
             let reader = new FileReader();
             reader.onload = event => {
-                props.profilephoto = event.target.result;
+                this.setState({ profilephoto: event.target.result });
             };
             reader.readAsDataURL(e.target.files[0]);
 
         }
-        props.hasimg = true;    
+        this.setState({ hasimg: true });
     }
-   
-  const { handleSubmit } = props
+    state = {
+        profilephoto: '',
+        hasimg: false
+    };
 
-  return (
-      
-    <div >
-        <MuiThemeProvider>
+    render() {
+        return (
             <div className="reg-rectangle">
-                <br/>
                 <h2 className="step-two-heading">Step Two</h2>
                 <h2 className="pro-pic-heading">PROFILE PICTURE</h2>
-                <br/>
-                <form className="form-field" onSubmit={handleSubmit}>
-                <div className="pro-pic-placeholder">
-
-                    {!props.hasimg ? 
-                        <div className="upload-circle">
-                            <div className="plus-logo">
-                                <div className="plus-horizontal" />
-                                <div className="plus-vertical" />
+                <MuiThemeProvider>
+                <div className="pro-pic-placeholder" >
+                        {!this.state.hasimg ?
+                            <div className="upload-circle">
+                                <div className="plus-logo">
+                                    <div className="plus-horizontal" />
+                                    <div className="plus-vertical" />
+                                </div>
+                                <input
+                                    type="file"
+                                    onChange={e => {
+                                        this.changeImg(e);
+                                    }}
+                                    style={inputimg}
+                                />
                             </div>
-                            <input
-                                type="file"
-                                onChange={e => {
-                                    changeImg(e);
-                                }}
-                                style={inputimg}
+                            :
+                            <img
+                                src={this.state.profilephoto}
+                                className="pro-pic-jpg"
+                                alt="Profile"
                             />
-                        </div>
-                     : 
-                        <img
-                            src={props.profilephoto}
-                            className="pro-pic-jpg"
-                            alt="Profile"
-                        />
-                    }
-                </div>
-                <br/>
-                <RaisedButton
-                    label="Next Step"
-                    primary={true}
-                    type="submit" />
-                <br/></form>
-                <h6 className="skip-for-now">Skip for now</h6>
+                        }
 
+                    </div>
+                </MuiThemeProvider>
+                <div className="nextBox">
+                    <Route render={({ history }) => (
+                        <FlatButton {...this.props} onClick={() => {
+                            this.setState({ logged: false })
+                            history.push('/StepThree')
+                        }}
+                            className="next-button"
+                            label="Next Step" />
+                    )} />
+                </div>
+                <h2 className="skip-for-now "> Skip for now</h2>
             </div>
-        </MuiThemeProvider>
-    </div>
-);
+        );
+    }
 }
 const inputimg = {
     opacity: 0,
@@ -83,9 +80,4 @@ const inputimg = {
     right: 0,
     width: '100%'
 };
-
-export default reduxForm({
-  form: 'wizard',              // <------ same form name
-  destroyOnUnmount: false,     // <------ preserve form data
- 
-})(StepTwo)
+export default StepTwo

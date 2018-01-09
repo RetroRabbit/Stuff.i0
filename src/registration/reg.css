@@ -1,21 +1,26 @@
-.space {
-    height: 70px;
+.pageContainer {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #004853;
 }
+
 .body style {
-	display: block;
-	background: #FFFFFF;
-	color: white;
-	font: 13px/1.8 Monaco, Mono-Space;
-	padding: 20px;
-	white-space: pre;
+    display: block;
+    background: #FFFFFF;
+    color: white;
+    font: 13px/1.8 Monaco, Mono-Space;
+    padding: 20px;
+    white-space: pre;
 }
+
 .reg-rectangle {
-    height: 500px;
-    width: 420px;
+    height: 82vh;
+    width: 32vw;
     border-radius: 12px;
     background-color: #01B9BD;
-    align-content: center;
     margin: auto;
+    padding-top: 2%;
 }
 
 .form-field {
@@ -26,15 +31,23 @@
     padding-left: 80px;
     color: #F3F3F3 !important;
 }
+.nextBox {
+    height: 38px;
+    width: 390px;
+    align-content: center;
+    margin: auto;
+    padding-left: 100px;
+    color: #F3F3F3 !important;
+}
+
 
 .input {
-    height: 30px ;
-    width: 201px ;
+    height: 30px;
+    width: 201px;
     color: #FFFFFF !important;
     font-family: "Helvetica" !important;
     font-size: 15px !important;
-    line-height: 27px ;
-    
+    line-height: 27px;
 }
 
 .line {
@@ -42,7 +55,6 @@
     height: 3px;
     width: 390px;
     border: 1px solid #FFFFFF;
-
 }
 
 .step-one {
@@ -70,13 +82,135 @@
     margin: auto;
 }
 
+
 .next-button {
-    height: 14px;
-    width: 14px;
-    align-self: center;
-    text-align: center;
+    top: 240px;
+    font-family: Helvetica !important;
+    font-size: 22px !important;
+    font-weight: 500 !important;
+    height: 55px !important;
+    width: 195px !important;
+    line-height: 30px !important;
+    min-width: 197px !important;
+    color: #FFFFFF !important;
+    border-radius: 5px !important;
+    background-color: #0DABAF !important;
+    text-align: center !important;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    position: relative !important;
+    padding-left: 80px;
+}
+
+.next-step-btn {
+    height: 57px;
+    width: 197px;
     border-radius: 5px;
-    background-color: rgb(0, 0, 0);
-    padding-left: 20px;
     font-family: "Helvetica";
+    background-color: #0DABAF;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin: auto;
+}
+
+.next-step-lbl {
+    height: 30px;
+    width: 173px;
+    color: #FFFFFF;
+    font-family: "Helvetica";
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: center;
+    margin: auto;
+    padding: 15px;
+}
+
+.step-two-heading {
+    height: 67px;
+    width: 424px;
+    color: #FFFFFF;
+    font-family: "Helvetica";
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 41px;
+    text-align: center;
+    margin: auto;
+}
+
+.pro-pic-jpg {
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    margin: auto;
+    padding: 13px;
+}
+
+.pro-pic-heading {
+    height: 67px;
+    width: 424px;
+    color: #FFFFFF;
+    font-family: "Helvetica";
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 49px;
+    text-align: center;
+    margin: auto;
+}
+
+.skip-for-now {
+    height: 27px;
+    width: 200px;
+    color: #FFFFFF;
+    font-family: "Helvetica";
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+    margin: auto;
+}
+
+.pro-pic-placeholder {
+    height: 200px;
+    width: 200px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+    margin: 0 auto;
+    border-radius: 50%;
+    align-content: center;
+}
+
+.upload-circle {
+    height: 60px;
+    width: 60px;
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    margin: 0 auto;
+    top: 70px;
+    position: relative;
+}
+
+.plus-horizontal {
+    box-sizing: border-box;
+    height: 3px;
+    width: 24px;
+    border: 3px solid #979797;
+    top: 5.25px;
+    position: relative
+}
+
+.plus-vertical {
+    box-sizing: border-box;
+    height: 3px;
+    width: 24px;
+    border: 3px solid #979797;
+    transform: rotate(90deg);
+    margin: auto;
+}
+
+.plus-logo {
+    height: 25px;
+    width: 24px;
+    margin: auto;
+    top: 28px;
+    position: relative
 }

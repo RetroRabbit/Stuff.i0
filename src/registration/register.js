@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import StepOne from './StepOne'
 import StepTwo from './StepTwo'
 import StepThree from './StepThree'
-
+import './reg.css';
 
 class Register extends Component {
   constructor(props) {
@@ -16,10 +16,7 @@ class Register extends Component {
     }
     
   }
-  state = {
-    profilephoto: '',
-    hasimg: false
-  };
+  
  
   nextPage() {
     this.setState({ page: this.state.page + 1 })
@@ -28,9 +25,9 @@ class Register extends Component {
   render() {
     const { onSubmit } = this.props
     const { page } = this.state
-    return (<div>
+    return (<div className="background">
         {page === 1 && <StepOne onSubmit={this.nextPage}/>}
-        {page === 2 && <StepTwo profilepic={this.state.profilephoto} hasimg={this.state.hasimg} onSubmit={this.nextPage}/>}
+        {page === 2 && <StepTwo onSubmit={this.nextPage}/>}
         {page === 3 && <StepThree onSubmit={onSubmit}/>}
       </div>
     )

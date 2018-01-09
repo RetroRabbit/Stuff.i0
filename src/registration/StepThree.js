@@ -4,33 +4,55 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { white } from 'material-ui/styles/colors';
+import { Route, Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css'
 import './register'
 
-const StepThree = (props) => {
-  const { handleSubmit } = props
-  return (
-    <MuiThemeProvider>
+class StepThree extends React.Component {
+
+  render() {
+    return (
       <div className="reg-rectangle">
-      <div className="space"></div>
         <h2 className="step-one">Last Step</h2>
         <h2 className="the-basics">YOUR FIRST CHAT</h2>
-        <form className="form-field" onSubmit={handleSubmit}>
-          <TextField
-            hintText="Fiends' Email"
-            floatingLabelText="Friends' Email"
-            floatingLabelStyle={{color:white}}
-          />
-          <br />
-          <RaisedButton label="Submit" primary={true} type="submit" />
-        </form>
-      </div>
-    </MuiThemeProvider>
-  );
 
+        <MuiThemeProvider>
+          <div className="form-field" >
+            <TextField
+              hintText="Fiends' Email"
+              floatingLabelText="Friends' Email"
+              floatingLabelStyle={{ color: white }}
+            />
+            <br />
+
+          </div>
+
+        </MuiThemeProvider>
+        <div className="nextBox">
+        <Route render={({ history }) => (
+          <FlatButton {...this.props} onClick={() => {
+            this.setState({ logged: false })
+            history.push('/')
+          }}
+            className="next-button"
+            label="Next Step" />
+        )} />
+        </div>
+
+      </div>
+    );
+  }
 }
-export default reduxForm({
-  form: 'wizard',              // <------ same form name
-  destroyOnUnmount: false,     // <------ preserve form data
-})(StepThree)
+const inputimg = {
+  opacity: 0,
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  width: '100%'
+};
+export default StepThree
+
 

@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Link } from 'react-router-dom'
+import './css/index.css';
+
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+//Import Material-UI
+
+// TODO : Import all the components
+import home from './components/home'
+
+import settings from './components/settings'
+
+import headerNav from './components/headerNav'
+import StepOne from './registration/StepOne';
+import StepTwo from './registration/StepTwo';
+import StepThree from './registration/StepThree';
+
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div>
+        <MuiThemeProvider>
+        <header>
+          
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <main>
+            <Route exact path="/" component={home} />
+            <Route exact path="/nav" component={headerNav} />
+            <Route exact path="/settings" component={settings} />
+            <Route exact path="/StepOne" component={StepOne} />
+            <Route exact path="/StepTwo" component={StepTwo} />
+            <Route exact path="/StepThree" component={StepThree} />
+          </main>
+        </MuiThemeProvider>
       </div>
     );
   }
