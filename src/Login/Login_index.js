@@ -44,13 +44,19 @@ const App = props => {
 					<div className="loginboxpos">
 						<form onSubmit={handleSubmit}>
 							<div >
-								<Field 
+								<TextField 
+									className="loginbox"
+									hintText='Email'
+									floatingLabelText='Email'
 									label="Email"
 									type="email"
 									component={renderTextField}
 								/>
 								<br></br>
-								<Field
+								<TextField
+									className="loginbox"
+									hintText='Password'
+									floatingLabelText='Password'
 									label="Password"
 									type="password"
 									component={renderTextField}

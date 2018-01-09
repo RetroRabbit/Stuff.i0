@@ -3,8 +3,8 @@ import history from "./history";
 export default function(values) {
     const errors = {};
     const requiredFields = [
-      'email', 
-      'password',
+      'Email', 
+      'Password',
     ];
     requiredFields.forEach(field => {
       if (!values[field]) {
