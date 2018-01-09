@@ -31,7 +31,7 @@ const home = props => (
           </p>
           <p>
             <a href="#!" onClick={()=> { props.getMsgs(2,4) }}>GetMsgs</a><br/>
-            <a href="#!" onClick={()=> { props.addMsg("New msg",2,4) }}>Add MSG</a><br/>
+            <a href="#!" onClick={()=> { props.addMsg("New msg from me",2,4) }}>Add MSG</a><br/>
             <a href="#!" onClick={()=> { props.addMsg("New msg other",0,4) }}>Add MSG other</a><br/>
 
             <h4>Msgs length = { props.msgs.length }</h4>
