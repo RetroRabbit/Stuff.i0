@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import './Login_index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import history from './history';
+
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined
+
 
 class App extends Component {
 
@@ -53,7 +59,8 @@ class App extends Component {
 								floatingLabelText="Email"
 								type="email"
 								onChange = {(event,newValue) => this.setState({email:newValue})}
-							/>
+        						validate={email}
+      						/>
 							<br></br>
 							<TextField className="loginbox"
 								hintText="Password"
