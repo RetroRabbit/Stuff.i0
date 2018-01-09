@@ -56,7 +56,9 @@
 	line-height: 27px;
 	text-align: center !important;
 	display: inline-block !important;
-	margin-left: 1120px !important;
+	margin-left: 1080px !important;
+	top: 37px;
+	position: absolute;
 }
 
 .mini-img-placeholder {
@@ -65,14 +67,25 @@
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
 	border-radius: 50%;
-	display: inline-block !important;
-	margin-right: 50px !important;
+	float: right;
+	position: absolute;
+	top: -55px ;
+	right: 105px;
+
+	
 }
+
+
 
 .mini-pro-image {
 	height: 54px;
 	width: 54px;
 	border-radius: 50%;
+	display: inline-block !important;
+	right: 5px;
+	position: relative;
+	bottom: 5px;
+
 }
 
 .logo-border {
@@ -83,8 +96,9 @@
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
 	border-radius: 50%;
 	display: inline-block !important;
-	margin-left: 1352px !important;
-	margin-top: 2px !important;
+	top: 18px ;
+	right: 61px;
+	position: absolute;
 }
 
 .side-right{

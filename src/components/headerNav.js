@@ -16,6 +16,9 @@ class HeaderNav extends Component {
     state = {
         props: '',
         logged: true,
+        logo: {
+          img: 'https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png'
+         },
         user: {
             img:
                 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1',
@@ -38,7 +41,6 @@ class HeaderNav extends Component {
 
     render() {
         return (
-            <div>
                 <div className="nav-bar">
                     <div>
                         <div className="new-chat" primary={true} onClick={() => {}}>
@@ -48,11 +50,10 @@ class HeaderNav extends Component {
                             <label className="new-group-lbl">NEW GROUP </label>
                         </div>
                     </div>
-                    <div>
-                        <div>
                             <label className="name-lbl">{this.state.user.name + ' ' + this.state.user.surname}</label>                             
                             <div>
                                 <IconMenu
+                                className="mini-img-placeholder"
                                     iconButtonElement={
                                         <IconButton>
                                             <img
@@ -85,13 +86,12 @@ class HeaderNav extends Component {
                                 </IconMenu>
                                 <div
                                     className="logo-border"
-                                    src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"
+                                    src={this.state.logo.img}
                                 />
                             </div>
-                        </div>
-                    </div>
+                        
+                    
                 </div>
-            </div>
         );
     }
 }
