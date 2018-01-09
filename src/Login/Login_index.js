@@ -1,85 +1,132 @@
-import React, { Component } from 'react';
-import './Login_index.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+
+import {Route} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import history from './history';
+import validate from './validate';
+import './Login_index.css';
+import history from '../store'
 
-class App extends Component {
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-	onSubmit(e) {
-		e.preventDefault();
-	
-		const { email, password } = this.state;
-		const { history } = this.props;
-	
-		this.setState({ error: false });
-	
-		if (!(email === '123@123.co.za' && password === '123')) {
-			return this.setState({ error: true });
-		}
-		history.push('/accountScreen');
-	}
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser
+} from '../reducers/Account'
 
-	onRegister(e) {
-		history.push('registration');
-	}
+import {
+  addMsg,
+  getMsgs,
+  getChats
+} from '../reducers/Chat'
 
-	render() {
-		return (
-			<div className="backbox">
 
-				<div className="welcome-to-the">
-				Welcome to the
-				</div>
+	let email =  ""
+	let password = ""
 
-				<div className="logo">
-				<img src={require('./Full_Logo.png')} />
-				</div>
-				<MuiThemeProvider >
-				<div className="bottombox">
-					<div>
-						<FlatButton className="no-account-yet-get"
-							label="No account yet? Get setup now >"
-							onClick={(event) => this.onRegister(event)}
-						/>
+const Login = props => (
+	<div className="back">
+				<div className="backbox">
+					<div className="welcome-to-the">
+					Welcome to the
+					</div>
+					<div className="logo">
+						<img src={require('./Full_Logo.png')} />
+					</div>
+					<div className="bottombox">
+						<div>
+							<Route render={({ history}) => (
+								<FlatButton className="no-account-yet-get"
+									label="No account yet? Get setup now >"
+								 onClick={()=>{
+									 history.push('/StepOne');
+								 }}
+							 />
+							)} />
+						</div>
+					</div>
+					<div className="loginboxpos">
+						<form>
+							<div >
+								<TextField
+									className="loginbox"
+									hintText='Email'
+									floatingLabelText='Email'
+									label="Email"
+									type="email"
+									onChange={(e)=>{
+										email = e.target.value;
+									}}
+								/>
+								<br></br>
+								<TextField
+									className="loginbox"
+									hintText='Password'
+									floatingLabelText='Password'
+									label="Password"
+									onChange={(e)=>{
+										password = e.target.value;
+									}}
+									type="password"
+								/>
+							</div>
+							<div >
+								{
+									!props.currentUser ?
+									<FlatButton className="loginbtn"
+										label="Login"
+										onClick={()=>{
+
+											props.loginUser({userEmail:email,userPassword:password});
+											props.getCurrentUser();
+
+										}}
+									/>
+									:
+									<Route render={({ history}) => (
+										<FlatButton className="loginbtn"
+	 									 label="My Account"
+	 									 onClick={()=>{
+	 										 history.push('/settings');
+	 									 }}
+	 								 />
+               		)} />
+
+								}
+
+							</div>
+						</form>
 					</div>
 				</div>
-				</MuiThemeProvider >
-				<div className="loginboxpos">
-				<MuiThemeProvider >
-					<div >
-						<TextField className="loginbox"
-							hintText="Email"
-							floatingLabelText="Email"
-							type="email"
-							onChange = {(event,newValue) => this.setState({email:newValue})}
-						/>
-						<br></br>
-						<TextField className="loginbox"
-							hintText="Password"
-							floatingLabelText="Password"
-							type="password"
-							onChange = {(event,newValue) => this.setState({password:newValue})}
-						/>
-					</div>
-				</MuiThemeProvider>
-				</div>
-
-				<MuiThemeProvider >
-					<div >
-						<FlatButton className="loginbtn"
-							label="Login"
-							type="submit"
-							onClick={(event) => this.onSubmit(event)}
-						/>
-					</div>
-				</MuiThemeProvider>
 			</div>
-			
-		);
-	}
-}
+		)
 
-export default App;
+	const mapStateToProps = state => ({
+	  chats:state.Chat.chats,
+	  msgs:state.Chat.msgs,
+	  currentUser: state.Account.currentUser,
+	  users: state.Account.users,
+	})
 
+	const mapDispatchToProps = dispatch => bindActionCreators({
+	  getUser,
+	  getCurrentUser,
+	  changeUser,
+	  addMsg,
+	  getMsgs,
+	  registerUser,
+	  loginUser,
+	  getChats
+	}, dispatch)
+
+	const reduxform = () => reduxForm({
+		form: 'App',
+		validate,
+	});
+
+	export default connect(mapStateToProps, mapDispatchToProps)(Login);

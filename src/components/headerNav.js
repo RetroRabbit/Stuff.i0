@@ -34,7 +34,7 @@ class HeaderNav extends Component {
     'padding-bottom': '2px'
   }
 
-    render() {
+  render() {
       return (
         <div>
           <AppBar

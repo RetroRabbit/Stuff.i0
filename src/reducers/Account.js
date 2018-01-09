@@ -5,15 +5,24 @@ export const CURRENT_USER_ACCOUNT = 'Account/CURRENT_USER_ACCOUNT'
 export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 
 const initialState = {
-  currentUser: {
-    userID: 0,
-    userName: 'Joseph',
-    userSurname: 'Sirwali',
+  currentUser: null,
+  receiver: {
+    userID: 10,
+    userName: 'Takie',
+    userSurname: 'Ndou',
     userEmail: 'mulavhe@gmail.com',
     userPassword: 'joseph',
     userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
   },
   users: [
+    {
+      userID: 20,
+      userName: 'Joseph',
+      userSurname: 'Sirwali',
+      userEmail: 'mulavhe@gmail.com',
+      userPassword: 'joseph',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    },
     {
       userID: 5,
       userName: 'Joe',
@@ -37,6 +46,12 @@ const initialState = {
       userID: 0,
       userName: 'Joseph',
       userSurname: 'Sirwali',
+      userEmail: 'mulavhe@gmail.com',
+      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+    },{
+      userID: 10,
+      userName: 'Victim',
+      userSurname: 'That',
       userEmail: 'mulavhe@gmail.com',
       userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
     }
@@ -72,6 +87,7 @@ export default(state = initialState, action) => {
       }
 
     case USER_ACCOUNT:
+    alert("We are in")
       user = null;
       for (let i = 0; i < state.users.length; i++) {
         if (state.users[i].userID === action.ID) {
