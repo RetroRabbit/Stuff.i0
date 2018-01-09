@@ -43,9 +43,12 @@ class HeaderNav extends Component {
         return (
                 <div className="nav-bar">
                     <div>
-                        <div className="new-chat" primary={true} onClick={() => {}}>
+                      <Route render={({ history }) => (
+                        <div className="new-chat" primary={true} onClick={() => { history.push('/accountScreen')}}>
                             <label className="new-chat-lbl"> NEW CHAT </label>
                         </div>
+                      )} />
+
                         <div className="new-group" primary={true} onClick={() => {}}>
                             <label className="new-group-lbl">NEW GROUP </label>
                         </div>

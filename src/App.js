@@ -32,7 +32,7 @@ class App extends Component {
 
         <main>
             <Route exact path="/Login" component={Login}/>
-            <Route exact path="/" component={home} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/nav" component={headerNav} />
             <Route exact path="/settings" component={settings} />
             <Route exact path="/StepOne" component={StepOne} />

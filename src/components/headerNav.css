@@ -56,7 +56,7 @@
 	line-height: 27px;
 	text-align: center !important;
 	display: inline-block !important;
-	margin-left: 1080px !important;
+	margin-left: 1650px !important;
 	top: 37px;
 	position: absolute;
 }
@@ -70,9 +70,9 @@
 	float: right;
 	position: absolute;
 	top: -55px ;
-	right: 105px;
+	right: 150px;
 
-	
+
 }
 
 
@@ -160,7 +160,7 @@
 
 .nav-bar {
 	height: 103px;
-	width: 1440px;
+	width: 100%;
 	background-color: #01B9BD !important;
 	margin: auto;
 }
