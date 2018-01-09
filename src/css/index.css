@@ -50,7 +50,7 @@ body {
   border: 3px solid #004853;
 }
 
-.addie-hogan-addiehog {
+.userTitleText {
   height: 108px;
   width: 224px;
   color: #004853;
@@ -74,15 +74,6 @@ body {
   font-weight: 500;
   line-height: 25px;
   text-align: center;
-}
-
-.addie-hogan {
-  height: 30px;
-  width: 201px;
-  color: #F3F3F3;
-  font-family: "Avenir Next";
-  font-size: 20px;
-  line-height: 27px;
 }
 
 .oval-3 {
