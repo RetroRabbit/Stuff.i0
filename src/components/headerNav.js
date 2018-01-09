@@ -11,7 +11,6 @@ import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 
 import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
 
 class HeaderNav extends Component{
   state = {
@@ -57,39 +56,29 @@ class HeaderNav extends Component{
                     <label className="new-group-lbl">NEW GROUP </label>
                   </div>
               </div>}
-            iconElementRight={this.state.logged ?
+            iconElementRight={
               <div>
                 <Route render={({ history}) => (
                   <label className="name-lbl">{this.state.user.userName}</label>
-                  )} />
-                <IconMenu
-                  iconButtonElement={
-                    <IconButton>
-                      <div className="pro-img-boarder">
-                        <div clasName="mini-pro-img" src={ this.state.user.img }> </div>
-                      </div>
-                  </IconButton>
-                  }
-                  targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                  anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-                  <Route render={({ history}) => (
-                      <MenuItem primaryText="Settings" onClick={() => { history.push('/settings') }} />
-                  )} />
-                  <MenuItem primaryText="Log out" onClick={()=>{ this.setState({ logged:false })}}  />
-                </IconMenu>
-                <IconButton>
-                  <Avatar src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
-                </IconButton>
-              </div>
-              :
-              <div>
-                <Route render={({ history}) => (
-                  <FlatButton {...this.props} onClick={()=>{
-                      this.setState({ logged:true })
-
-                      history.push('/')
-                    }} label="Login" />
-                )} />
+                  )} ></Route>
+                <div>
+                  <IconMenu
+                    iconButtonElement={
+                      <IconButton>
+                        <div className="pro-img-boarder">
+                          <div className="mini-pro-img" src={ this.state.user.img }> </div>
+                        </div>
+                      </IconButton>
+                    }
+                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+                    <Route render={({ history}) => (
+                        <MenuItem primaryText="Settings" onClick={() => { history.push('/settings') }} />
+                    )}> </Route>
+                    <MenuItem primaryText="Log out" onClick={()=>{ this.setState({ logged:false })}}  />
+                  </IconMenu>
+                    <div className="logo-border" src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
+                </div> 
               </div>
             }
           />
