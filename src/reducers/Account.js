@@ -3,14 +3,15 @@ export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT'
 export const LOGIN_USER_ACCOUNT = 'Account/LOGIN_USER_ACCOUNT'
 export const CURRENT_USER_ACCOUNT = 'Account/CURRENT_USER_ACCOUNT'
 export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
+export const LOGOUT_USER_ACCOUNT = 'Account/LOGOUT_USER_ACCOUNT'
 
 const initialState = {
-  currentUser: {
+  currentUser:{
     userID: 20,
-    userName: 'Joseph',
+    userName: 'Joe',
     userSurname: 'Sirwali',
-    userEmail: 'mulavhe@gmail.com',
-    userPassword: 'joseph',
+    userPassword:'joe',
+    userEmail: 'joe@gmail.com',
     userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
   },
   receiver: {
@@ -23,7 +24,7 @@ const initialState = {
   },
   users: [
     {
-      userID: 5,
+      userID: 20,
       userName: 'Joe',
       userSurname: 'Sirwali',
       userPassword:'joe',
@@ -100,7 +101,16 @@ export default(state = initialState, action) => {
       }
 
     case CHANGE_USER_ACCOUNT:
-      state.currentUser.userName = action.new;
+      state.currentUser.userName = action.new.userName;
+
+      state.currentUser.userSurname = action.new.userSurname;
+      return {
+        ...state,
+        currentUser:state.currentUser
+      }
+
+    case LOGOUT_USER_ACCOUNT:
+      state.currentUser = null;
       return {
         ...state
       }
@@ -119,6 +129,12 @@ export const getUser = (userID) => {
 export const getCurrentUser = () => {
   return dispatch => {
     dispatch({type: CURRENT_USER_ACCOUNT})
+  }
+}
+
+export const logOut = () => {
+  return dispatch => {
+    dispatch({type: LOGOUT_USER_ACCOUNT})
   }
 }
 

@@ -8,7 +8,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import HeaderNav from './headerNav';
+
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser,
+  logOut
+} from '../reducers/Account';
+
+import {addMsg, getMsgs, getChats} from '../reducers/Chat';
 
 const styles = {
   gridList: {
@@ -17,32 +30,33 @@ const styles = {
   }
 };
 
-class settings extends Component{
+class settings extends Component {
 
-  saveChanges(){
-    // TODO : 'saving changes';
+  constructor(props){
+      super(props);
+      props.getCurrentUser();
+  }
+
+  saveChanges() {
+    alert("about to change " );
+    this.props.changeUser({userName:this.state.user.name,userSurname:this.state.user.surname});
+    this.props.getCurrentUser()
+    alert("done changing");
   }
 
   state = {
     editingEmail: false,
     editingNames: false,
-    props: '',
-    logged: false,
-    user: {
-      img: "https://images.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F-MjluFiP9tPk%2FUkInFfUONuI%2FAAAAAAAABNg%2FGTBZ2kxMKvU%2Fs1600%2FFacebook-Anonymous.jpg&f=1",
-      surname: "Hogan",
-      name: "Addie",
-      email: "Hogan.Addie@gmail.com"
-    }
+    user:''
   };
 
   render() {
     return (<div>
-      <HeaderNav/>
+      <HeaderNav { ...this.props }></HeaderNav>
       <GridList cols={1} cellHeight={80} style={styles.gridList}>
         <GridTile className="text-center" cols={1} rows={4}>
           <Paper className="oval text-center" size="50" zDepth={4} circle={true}>
-            <Avatar size="60" className="oval" src={this.state.user.img}/>
+            <Avatar size="60" className="oval" src={this.props.currentUser.userImg}/>
           </Paper>
         </GridTile>
 
@@ -52,12 +66,13 @@ class settings extends Component{
               this.state.editingNames
                 ? <div>
                     <TextField onChange={(e) => {
-                        var newSelected = this.state.user;
+                        var newSelected = this.props.currentUser;
                         newSelected.surname = e.target.value.split(' ')[0]
                         newSelected.name = e.target.value.split(' ')[1]
                         this.setState({user: newSelected})
                       }} hintText="Surname Name"/>
                     <IconButton onClick={() => {
+                        this.saveChanges();
                         this.setState({editingNames: false})
                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
                       <ActionDone/>
@@ -65,7 +80,7 @@ class settings extends Component{
                   </div>
                 : <div>
                     <label className="userTitleText">
-                      {this.state.user.surname} {this.state.user.name}
+                      {this.props.currentUser.userSurname} {this.props.currentUser.userName}
                     </label>
                     <IconButton onClick={() => {
                         this.setState({editingNames: true})
@@ -84,11 +99,12 @@ class settings extends Component{
               this.state.editingEmail
                 ? <div>
                     <TextField onChange={(e) => {
-                        var newSelected = this.state.user;
+                        var newSelected = this.props.currentUser;
                         newSelected.email = e.target.value
                         this.setState({user: newSelected})
                       }} hintText="Email Address"/>
                     <IconButton onClick={() => {
+                        this.saveChanges();
                         this.setState({editingEmail: false})
                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
                       <ActionDone/>
@@ -96,7 +112,7 @@ class settings extends Component{
                   </div>
                 : <div>
                     <label className="userTitleText">
-                      {this.state.user.email}
+                      {this.props.currentUser.userEmail}
                     </label>
                     <IconButton onClick={() => {
                         this.setState({editingEmail: true})
@@ -116,4 +132,20 @@ class settings extends Component{
   }
 }
 
-export default settings;
+const mapStateToProps = state => {
+  return {chats: state.Chat.chats, msgs: state.Chat.msgs, currentUser: state.Account.currentUser, users: state.Account.users, receiver: state.Account.receiver};
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getUser,
+  getCurrentUser,
+  changeUser,
+  addMsg,
+  getMsgs,
+  registerUser,
+  loginUser,
+  getChats,
+  logOut
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(settings);

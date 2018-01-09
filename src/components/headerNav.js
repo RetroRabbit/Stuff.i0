@@ -12,21 +12,17 @@ import FlatButton from 'material-ui/FlatButton';
 
 import Avatar from 'material-ui/Avatar';
 
-class HeaderNav extends Component {
-    state = {
-        props: '',
-        logged: true,
-        logo: {
-          img: 'https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png'
-         },
-        user: {
-            img:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1',
-            surname: 'Hogan',
-            name: 'Addie'
-        }
-    };
+import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
 
+import { addMsg, getMsgs, getChats } from '../reducers/Chat';
+
+
+class HeaderNav extends Component {
+
+    constructor(props){
+      super(props);
+      this.props = props;
+    }
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
     };
@@ -53,63 +49,98 @@ class HeaderNav extends Component {
                             <label className="new-group-lbl">NEW GROUP </label>
                         </div>
                     </div>
-                            <label className="name-lbl">{this.state.user.name + ' ' + this.state.user.surname}</label>
-                            <div>
-                                <IconMenu
-                                className="mini-img-placeholder"
-                                    iconButtonElement={
-                                        <IconButton>
-                                            <img
-                                                className="mini-pro-image"
-                                                src={this.state.user.img}
-                                            ></img>
-                                        </IconButton>
-                                    }
-                                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                >
-                                    <Route
-                                        render={({ history }) => (
-                                            <MenuItem
-                                                primaryText="Settings"
-                                                onClick={() => {
-                                                    history.push('/settings');
-                                                }}
-                                            />
-                                        )}
-                                    >
-                                        {' '}
-                                    </Route>
-                                    <MenuItem
-                                        primaryText="Log out"
-                                        onClick={() => {
-                                            this.setState({ logged: false });
-                                        }}
-                                    />
-                                </IconMenu>
-                                <div
-                                    className="logo-border"
-                                    src={this.state.logo.img}
-                                />
-                            </div>
 
+                    {
+                      this.props.currentUser ?
+                      <label className="name-lbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>
+                      :
+                      <label className="name-lbl">No Logged in</label>
+                    }
 
-                </div>
+                    {
+                      !this.props.currentUser ?
+                      <Route render={({ history }) => (
+                        <div className="new-chat" primary={true} onClick={() => { history.push('/')}}>
+                            <label className="new-chat-lbl"> LOG IN </label>
+                        </div>
+                      )} />
+
+                      :
+                      <div>
+                          <IconMenu
+                          className="mini-img-placeholder"
+                              iconButtonElement={
+                                  <IconButton>
+                                      <img
+                                          className="mini-pro-image"
+                                          src={this.props.currentUser.userImg}
+                                      ></img>
+                                  </IconButton>
+                              }
+                              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                          >
+                              <Route
+                                  render={({ history }) => (
+                                      <MenuItem
+                                          primaryText="Settings"
+                                          onClick={() => {
+                                              history.push('/settings');
+                                          }}
+                                      />
+                                  )}>
+                              </Route>
+                              <Route
+                                  render={({ history }) => (
+
+                                      <MenuItem
+                                          primaryText="Log out"
+                                          onClick={() => {
+                                              this.props.logOut()
+                                              history.push('/');
+                                          }}
+                                      />
+                                  )}>
+                          </Route>
+                          </IconMenu>
+                          <div
+                              className="logo-border"
+                              src="https://files.slack.com/files-pri/T02LJS8M9-F6F8J3988/logo-01.png"
+                          />
+                      </div>
+                    }
+
+                          </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    user: state.user,
-    logged: state.logged
-});
+
+const mapStateToProps = state => {
+    return {
+        chats: state.Chat.chats,
+        msgs: state.Chat.msgs,
+        currentUser: state.Account.currentUser,
+        users: state.Account.users,
+        receiver: state.Account.receiver
+    };
+};
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            changePage: () => console.log('/settings')
+            getUser,
+            getCurrentUser,
+            changeUser,
+            addMsg,
+            getMsgs,
+            registerUser,
+            loginUser,
+            getChats,
+            logOut
         },
         dispatch
     );
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
