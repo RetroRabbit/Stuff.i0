@@ -1,27 +1,101 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Helvetica;
 }
 
+.right {
+  overflow: hidden;
+  white-space: nowrap;
+  float: right;
+  display: inline-block;
+  border: 1px solid red;
+}
+
+.left {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.ul-inline {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: inline-block;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.text-center {
+  margin: auto;
+  text-align: center;
+}
+
+.oval {
+  height: 269px;
+  width: 269px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+}
+
+.rectangle {
+  height: 45px;
+  width: 45px;
+  border: 3px solid #004853;
+}
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> a73a321e42c5f2651f61ebe196ad5badb61e4e47
+.userTitleText {
+  height: 108px;
+  width: 224px;
+  color: #004853;
+  font-family: "Avenir Next";
+  font-size: 20px;
+  line-height: 54px;
+  text-align: center;
+}
 .rectangle-3 {
   height: 103px;
   width: 100%;
   background-color: #01B9BD;
 }
 
-.rectangle-2 {
-  height: 54px;	width: 166px;	border-radius: 5px;	background-color: #0DABAF;	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-}
-
 .login {
-  height: 25px;	width: 146px;	color: #FFFFFF;	font-family: "Avenir Next";	font-size: 18px;	font-weight: 500;	line-height: 25px;	text-align: center;
-}
-
-.addie-hogan {
-  height: 30px;	width: 201px;	color: #F3F3F3;	font-family: "Avenir Next";	font-size: 20px;	line-height: 27px;
+  height: 25px;
+  width: 146px;
+  color: #FFFFFF;
+  font-family: "Avenir Next";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 25px;
+  text-align: center;
 }
 
 .oval-3 {
-  height: 67px;	width: 67px;	background-color: #FFFFFF;	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
+  height: 67px;
+  width: 67px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+}
+
+.oval-3-copy-2 {
+  height: 54px;
+  width: 54px;
+}
+
+.oval-3-copy-3 {
+  height: 67px;
+  width: 67px;
+  border: 6px solid #FFFFFF;
+  background-color: #E6E3E3;
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
 }
