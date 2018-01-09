@@ -240,31 +240,28 @@ class AccountScreen extends Component {
         {
           this.props.msgs.map((chat)=>{
             if(chat.senderID == this.props.currentUser.userID && chat.recieverID == this.props.receiver.userID){
-              return <div>
+              return <div className='bubbleContainer'>
                           <ChatBubbleRight text={getShort(chat.text)}/>
                           <MessageTimeRight text={getShortTime(chat.timeSent)}/>
                     </div>
             }
             else if(chat.senderID == this.props.receiver.userID && chat.recieverID == this.props.currentUser.userID){
-              return <div>
+              return <div className='bubbleContainer'>
                           <ChatBubbleLeft text={getShort(chat.text)}/>
                           <MessageTimeLeft text={getShortTime(chat.timeSent)}/>
                     </div>
             }
-            return "..."
+            return ""
           })
         }
 
-        <ChatBubbleLeft text={getShort(longText)}/>
-        <MessageTimeLeft text="7:28"/>
-
-        <ChatBubbleRight text="I understand this and it makes sence"/>
-        <MessageTimeRight text="7:30"/>
-
-        <Plus/>
+        
+      </div>
+      <div className='inputBubbleContainer'>
+            <Plus/>
 
         <NewText/>
-      </div>
+        </div>
     </div>);
   }
 }
