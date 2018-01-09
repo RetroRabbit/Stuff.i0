@@ -26,12 +26,7 @@ class HeaderNav extends Component {
     this.setState({logged: logged});
   };
 
-<<<<<<< HEAD
   changePage(value){
-=======
-  changePage(value) {
-    alert('in');
->>>>>>> origin/develop
     push('/' + value)
   }
 
@@ -39,8 +34,7 @@ class HeaderNav extends Component {
     'padding-bottom': '2px'
   }
 
-<<<<<<< HEAD
-    render() {
+  render() {
       return (
         <div>
           <AppBar
@@ -87,48 +81,6 @@ class HeaderNav extends Component {
         </div>
       );
     }
-=======
-  render() {
-    return (<div>
-      <AppBar className="pad-top-20px" iconElementLeft={<div > <RaisedButton label="New chat" primary={true} onClick={() => {
-            alert(" TODO - Start a new chat")
-          }}></RaisedButton>
-        <RaisedButton label="New Group" primary={true} onClick={() => {
-            alert(" TODO - Start a new group")
-          }}></RaisedButton>
-      </div>} iconElementRight={this.state.logged
-          ? <div>
-              <Route render={({history}) => (<FlatButton {...this.props} onClick={() => {
-                    alert(" TODO - Send the user his/her to the Profile Page")
-                  }} label={this.state.user.surname + " " + this.state.user.name}/>)}/>
-              <IconMenu iconButtonElement={<IconButton > <Avatar src={this.state.user.img}/>
-              </IconButton>} targetOrigin={{
-                  horizontal: 'right',
-                  vertical: 'top'
-                }} anchorOrigin={{
-                  horizontal: 'right',
-                  vertical: 'top'
-                }}>
-                <Route render={({history}) => (<MenuItem primaryText="Settings" onClick={() => {
-                      history.push('/settings')
-                    }}/>)}/>
-                <MenuItem primaryText="Log out" onClick={() => {
-                    this.setState({logged: false})
-                  }}/>
-              </IconMenu>
-              <IconButton>
-                <Avatar src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
-              </IconButton>
-            </div>
-          : <div>
-            <Route render={({history}) => (<FlatButton {...this.props} onClick={() => {
-                  this.setState({logged: true})
-                  history.push('./Login')
-                }} label="Login"/>)}/>
-          </div>}/>
-    </div>);
-  }
->>>>>>> origin/develop
 }
 const mapStateToProps = state => ({user: state.user, logged: state.logged})
 
