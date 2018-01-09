@@ -57,14 +57,13 @@
 }
 
 .mini-img-placeholder {
-	height: 269px;
-	width: 269px;
+	height: 67px;
+	width: 67px;
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
-	margin-right: 105px;
-	position: relative;
+	border-radius: 50%;
 	display: inline-block !important;
-
+	margin-right: 111px !important;
 }
 
 .mini-pro-image {
@@ -74,21 +73,16 @@
 }
 
 .logo-border {
-	height: 60px;
-	width: 60px;
+	height: 54px;
+	width: 54px;
 	border: 6px solid #FFFFFF;
 	background-color: #E6E3E3;
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
 	border-radius: 50%;
+	display: inline-block !important;
+	margin-right: 21px !important;
 }
 
-.logo{
-	height: 45px;
-	width: 45px;
-	border: 3px solid #004853;
-	border-radius: 50%;
-	display: inline-block !important;
-}
 
 .done-lbl {
 	height: 25px;
@@ -114,13 +108,17 @@
 	width: 143px;
 }
 
-.pro-img-boarder {
-	height: 67px;
-	width: 67px;
+
+
+.pro-img-placeholder{
+	height: 269px;
+	width: 269px;
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
-	border-radius: 50%;
-	display: inline-block;
+	margin-right: 105px;
+	position: relative;
+	display: inline-block !important;
+
 }
 
 .pro-img {
@@ -142,6 +140,7 @@
 	height: 103px;
 	width: 1440px;
 	background-color: #01B9BD !important;
+	margin: auto;
 }
 
 .pencil-img {

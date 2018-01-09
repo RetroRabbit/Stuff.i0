@@ -4,13 +4,11 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Route } from 'react-router-dom'
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 
-import Avatar from 'material-ui/Avatar';
 
 class HeaderNav extends Component{
   state = {
@@ -38,25 +36,26 @@ class HeaderNav extends Component{
 
     render() {
       return (
-        <div>
-          <AppBar
-            className="nav-bar"
-            iconElementLeft={
-              <div>
-                  <div 
+        <div> // page div  
+          <div // nav bar div
+            className="nav-bar">
+            <div>
+              <div> // left buttons
+                  <div //button new chat
                     className="new-chat"  
                     primary={true} 
                     onClick={() => {  }}>
                       <label className="new-chat-lbl"> NEW CHAT </label>
-                  </div>
-                  <div 
+                  </div> 
+                  <div //button new group
                     className="new-group" 
                     primary={true} 
                     onClick={() => {  }}>
                     <label className="new-group-lbl">NEW GROUP </label>
-                  </div>
-              </div>}
-            iconElementRight={
+                  </div> // end button new group
+              </div> // end of left buttons
+            </div>
+            <div>
               <div>
                 <Route render={({ history}) => (
                   <label className="name-lbl">{this.state.user.userName}</label>
@@ -65,7 +64,7 @@ class HeaderNav extends Component{
                   <IconMenu
                     iconButtonElement={
                       <IconButton>
-                        <div className="pro-img-boarder">
+                        <div className="">
                           <div className="mini-pro-img" src={ this.state.user.img }> </div>
                         </div>
                       </IconButton>
@@ -80,8 +79,8 @@ class HeaderNav extends Component{
                     <div className="logo-border" src="https://files.slack.com/files-pri/T02LJS8M9-F8PK0UGEB/icon.png"/>
                 </div> 
               </div>
-            }
-          />
+            </div>
+          </div>
         </div>
       );
     }
