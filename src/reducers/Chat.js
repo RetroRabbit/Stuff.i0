@@ -10,12 +10,94 @@ const initialState = {
     allMsgs:[{}],
     msgs:[
       {
-        senderID:0,
-        recieverID:0,
+        senderID:20,
+        recieverID:10,
         sender:'',
         receiver:'',
         timeSent:new Date(),
-        text:''
+        text:'This is from me to him'
+      },
+      {
+        senderID:20,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from me to him'
+      },
+      {
+        senderID:20,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from me to him'
+      },
+      {
+        senderID:20,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from me to him'
+      },
+      {
+        senderID:20,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from me to him'
+      },
+      {
+        senderID:2,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to someone'
+      },{
+        senderID:2,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to someone'
+      },{
+        senderID:2,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to someone'
+      },{
+        senderID:2,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to someone'
+      },{
+        senderID:2,
+        recieverID:10,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to someone'
+      },{
+        senderID:10,
+        recieverID:20,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from him to me'
+      },{
+        senderID:10,
+        recieverID:1,
+        sender:'',
+        receiver:'',
+        timeSent:new Date(),
+        text:'This is from me to someone'
       }
     ],
     currentChat:[],
