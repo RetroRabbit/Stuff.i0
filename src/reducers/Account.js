@@ -5,7 +5,14 @@ export const CURRENT_USER_ACCOUNT = 'Account/CURRENT_USER_ACCOUNT'
 export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 
 const initialState = {
-  currentUser: null,
+  currentUser: {
+    userID: 20,
+    userName: 'Joseph',
+    userSurname: 'Sirwali',
+    userEmail: 'mulavhe@gmail.com',
+    userPassword: 'joseph',
+    userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
+  },
   receiver: {
     userID: 10,
     userName: 'Takie',
@@ -15,14 +22,6 @@ const initialState = {
     userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
   },
   users: [
-    {
-      userID: 20,
-      userName: 'Joseph',
-      userSurname: 'Sirwali',
-      userEmail: 'mulavhe@gmail.com',
-      userPassword: 'joseph',
-      userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-    },
     {
       userID: 5,
       userName: 'Joe',

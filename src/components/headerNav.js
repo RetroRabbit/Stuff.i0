@@ -50,7 +50,7 @@ class HeaderNav extends Component {
                             <label className="new-group-lbl">NEW GROUP </label>
                         </div>
                     </div>
-                            <label className="name-lbl">{this.state.user.name + ' ' + this.state.user.surname}</label>                             
+                            <label className="name-lbl">{this.state.user.name + ' ' + this.state.user.surname}</label>
                             <div>
                                 <IconMenu
                                 className="mini-img-placeholder"
@@ -89,21 +89,17 @@ class HeaderNav extends Component {
                                     src={this.state.logo.img}
                                 />
                             </div>
-                        
-                    
+
+
                 </div>
         );
     }
 }
-<<<<<<< HEAD
 
-const mapStateToProps = state => ({user: state.user, logged: state.logged})
-=======
 const mapStateToProps = state => ({
     user: state.user,
     logged: state.logged
 });
->>>>>>> a73a321e42c5f2651f61ebe196ad5badb61e4e47
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(

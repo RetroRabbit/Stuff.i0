@@ -12,12 +12,13 @@ class StepOne extends React.Component {
 
   render() {
     return (
+      <div className="pageContainer">
       <div className="reg-rectangle">
         <h2 className="step-one">Step One</h2>
         <h2 className="the-basics">THE BASICS</h2>
         <MuiThemeProvider>
           <div className="form-field" >
-            
+
               <TextField
                 className="input"
                 type="text"
@@ -43,8 +44,8 @@ class StepOne extends React.Component {
                 floatingLabelStyle={{ color: white }}
                 onChange={(event, newValue) => this.setState({ password: newValue })}
               />
-           
-           
+
+
 
           </div>
         </MuiThemeProvider>
@@ -60,6 +61,7 @@ class StepOne extends React.Component {
         )} />
         </div>
       </div>
+    </div>
     )
   }
 
