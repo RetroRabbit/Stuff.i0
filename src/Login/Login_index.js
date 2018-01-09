@@ -27,12 +27,11 @@ class App extends Component {
 
 	render() {
 		return (
+			<div className="back">
 			<div className="backbox">
-
 				<div className="welcome-to-the">
 				Welcome to the
 				</div>
-
 				<div className="logo">
 				<img src={require('./Full_Logo.png')} />
 				</div>
@@ -65,7 +64,6 @@ class App extends Component {
 					</div>
 				</MuiThemeProvider>
 				</div>
-
 				<MuiThemeProvider >
 					<div >
 						<FlatButton className="loginbtn"
@@ -76,7 +74,7 @@ class App extends Component {
 					</div>
 				</MuiThemeProvider>
 			</div>
-			
+			</div>
 		);
 	}
 }
