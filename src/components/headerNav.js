@@ -1,58 +1,73 @@
-import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import {push} from 'react-router-redux'
-import {Route} from 'react-router-dom'
+import "./headerNav.css"
+import React,{ Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import { Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
+
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class HeaderNav extends Component {
+class HeaderNav extends Component{
   state = {
-    props: '',
-    logged: false,
-    user: {
-      img: "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1",
-      surname: "Hogan",
-      name: "Addie"
-    }
-  };
+      props:'',
+      logged: false,
+      user:{
+        img:"https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.idyllwildarts.org%2Fwp-content%2Fuploads%2F2016%2F09%2Fblank-profile-picture.jpg&f=1",
+        surname:"Hogan",
+        name:"Addie"
+      }
+    };
 
-  handleChange = (event, logged) => {
-    this.setState({logged: logged});
-  };
+
+    handleChange = (event, logged) => {
+      this.setState({logged: logged});
+    };
 
   changePage(value){
     push('/' + value)
   }
 
-  styles = {
-    'padding-bottom': '2px'
-  }
+    styles ={
+        'padding-bottom':'2px'
+    }
 
-  render() {
+    render() {
       return (
         <div>
           <AppBar
-            className=""
+            className="nav-bar"
             iconElementLeft={
               <div>
-                  <RaisedButton label="New chat" primary={true} onClick={() => {  }}></RaisedButton>
-                  <RaisedButton label="New Group" primary={true} onClick={() => {  }}></RaisedButton>
-                </div>}
+                  <div 
+                    className="new-chat"  
+                    primary={true} 
+                    onClick={() => {  }}>
+                      <label className="new-chat-lbl"> NEW CHAT </label>
+                  </div>
+                  <div 
+                    className="new-group" 
+                    primary={true} 
+                    onClick={() => {  }}>
+                    <label className="new-group-lbl">NEW GROUP </label>
+                  </div>
+              </div>}
             iconElementRight={this.state.logged ?
               <div>
                 <Route render={({ history}) => (
-                  <FlatButton {...this.props} onClick={() => {  }}  label={this.state.user.surname + " " + this.state.user.name} />
+                  <label className="name-lbl">{this.state.user.userName}</label>
                   )} />
                 <IconMenu
                   iconButtonElement={
                     <IconButton>
-                      <Avatar src={ this.state.user.img } />
+                      <div className="pro-img-boarder">
+                        <div clasName="mini-pro-img" src={ this.state.user.img }> </div>
+                      </div>
                   </IconButton>
                   }
                   targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -82,10 +97,16 @@ class HeaderNav extends Component {
       );
     }
 }
-const mapStateToProps = state => ({user: state.user, logged: state.logged})
+const mapStateToProps = state => ({
+  user: state.user,
+  logged : state.logged
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => console.log('/settings')
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HeaderNav)
