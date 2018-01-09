@@ -4,6 +4,7 @@
     width: 411px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+    overflow-y: auto;
 }
 
 .searchContainer{
@@ -43,7 +44,7 @@
     width: 59%;
     display: inline-grid;
     height: 65%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .addDoc {
@@ -130,6 +131,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    padding-bottom: 5vh;
 }
 
 .bubbleContainer{
