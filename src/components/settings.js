@@ -17,25 +17,10 @@ const styles = {
   }
 };
 
-<<<<<<< HEAD
 class settings extends Component{
 
   saveChanges(){
     // TODO : 'saving changes';
-=======
-const style = {
-  height: 100,
-  width: 100,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block'
-};
-
-class settings extends Component {
-
-  saveChanges() {
-    alert('saving changes');
->>>>>>> origin/develop
   }
 
   state = {
