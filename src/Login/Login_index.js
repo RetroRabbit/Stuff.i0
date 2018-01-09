@@ -1,85 +1,83 @@
-import React, { Component } from 'react';
-import './Login_index.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import asyncValidate from './asyncValidate';
+import validate from './validate';
+import './Login_index.css';
 import history from './history';
 
-class App extends Component {
 
-	onSubmit(e) {
-		e.preventDefault();
-	
-		const { email, password } = this.state;
-		const { history } = this.props;
-	
-		this.setState({ error: false });
-	
-		if (!(email === '123@123.co.za' && password === '123')) {
-			return this.setState({ error: true });
-		}
-		history.push('/accountScreen');
-	}
 
-	onRegister(e) {
-		history.push('registration');
-	}
+const renderTextField = (
+{ input, label, meta: { touched, error }, ...custom },
+) => (
+	<TextField
+		className="loginbox"
+		hintText={label}
+		floatingLabelText={label}
+		errorText={touched && error}
+		{...input}
+		{...custom}
+	/>
+);
 
-	render() {
+const App = props => {
+	const { handleSubmit, pristine, reset, submitting } = props;
 		return (
-			<div className="backbox">
-
-				<div className="welcome-to-the">
-				Welcome to the
-				</div>
-
-				<div className="logo">
-				<img src={require('./Full_Logo.png')} />
-				</div>
-				<MuiThemeProvider >
-				<div className="bottombox">
-					<div>
-						<FlatButton className="no-account-yet-get"
-							label="No account yet? Get setup now >"
-							onClick={(event) => this.onRegister(event)}
-						/>
+			<div className="back">
+				<div className="backbox">
+					<div className="welcome-to-the">
+					Welcome to the
+					</div>
+					<div className="logo">
+						<img src={require('./Full_Logo.png')} />
+					</div>
+					<div className="bottombox">
+						<div>
+							<FlatButton className="no-account-yet-get"
+								label="No account yet? Get setup now >"
+								onClick={history.push('registration')}
+							/>
+						</div>
+					</div>
+					<div className="loginboxpos">
+						<form onSubmit={handleSubmit}>
+							<div >
+								<TextField 
+									className="loginbox"
+									hintText='Email'
+									floatingLabelText='Email'
+									label="Email"
+									type="email"
+									component={renderTextField}
+								/>
+								<br></br>
+								<TextField
+									className="loginbox"
+									hintText='Password'
+									floatingLabelText='Password'
+									label="Password"
+									type="password"
+									component={renderTextField}
+								/>
+							</div>
+							<div >
+								<FlatButton className="loginbtn"
+									label="Login"
+									type="submit"
+								/>
+							</div>
+						</form>
 					</div>
 				</div>
-				</MuiThemeProvider >
-				<div className="loginboxpos">
-				<MuiThemeProvider >
-					<div >
-						<TextField className="loginbox"
-							hintText="Email"
-							floatingLabelText="Email"
-							type="email"
-							onChange = {(event,newValue) => this.setState({email:newValue})}
-						/>
-						<br></br>
-						<TextField className="loginbox"
-							hintText="Password"
-							floatingLabelText="Password"
-							type="password"
-							onChange = {(event,newValue) => this.setState({password:newValue})}
-						/>
-					</div>
-				</MuiThemeProvider>
-				</div>
-
-				<MuiThemeProvider >
-					<div >
-						<FlatButton className="loginbtn"
-							label="Login"
-							type="submit"
-							onClick={(event) => this.onSubmit(event)}
-						/>
-					</div>
-				</MuiThemeProvider>
 			</div>
-			
 		);
-	}
-}
+};
 
-export default App;
+export default reduxForm({
+	form: 'App',
+	validate,
+	asyncValidate,
+  })(App);
 

@@ -31,6 +31,7 @@ class App extends Component {
         </header>
 
         <main>
+            <Route exact path="/Login" component={Login}/>
             <Route exact path="/" component={home} />
             <Route exact path="/nav" component={headerNav} />
             <Route exact path="/settings" component={settings} />
@@ -38,7 +39,7 @@ class App extends Component {
             <Route exact path="/StepTwo" component={StepTwo} />
             <Route exact path="/StepThree" component={StepThree} />
             <Route exact path="/AccountScreen" component={AccountScreen} />
-            <Route exact path="/Login" component={Login}/>
+
           </main>
         </MuiThemeProvider>
       </div>
