@@ -17,6 +17,12 @@ const styles = {
   }
 };
 
+<<<<<<< HEAD
+class settings extends Component{
+
+  saveChanges(){
+    // TODO : 'saving changes';
+=======
 const style = {
   height: 100,
   width: 100,
@@ -29,6 +35,7 @@ class settings extends Component {
 
   saveChanges() {
     alert('saving changes');
+>>>>>>> origin/develop
   }
 
   state = {
