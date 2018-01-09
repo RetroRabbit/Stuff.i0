@@ -7,7 +7,6 @@ import { white } from 'material-ui/styles/colors';
 import { Route, Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css'
-import './register'
 
 class StepThree extends React.Component {
 

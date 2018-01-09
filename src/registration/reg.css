@@ -15,12 +15,13 @@
 }
 
 .reg-rectangle {
-    height: 82vh;
-    width: 32vw;
+    height: 80vh;
+    width: 33vw;
     border-radius: 12px;
     background-color: #01B9BD;
     margin: auto;
-    padding-top: 2%;
+    padding-top: 4%;
+    margin-top: 100px
 }
 
 .form-field {
