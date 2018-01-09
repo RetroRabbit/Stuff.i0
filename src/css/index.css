@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Helvetica;
 }
 
 .right {
@@ -50,7 +50,11 @@ body {
   border: 3px solid #004853;
 }
 
+<<<<<<< HEAD
 .addie-hogan-addiehog {
+=======
+.userTitleText {
+>>>>>>> origin/develop
   height: 108px;
   width: 224px;
   color: #004853;
@@ -59,7 +63,6 @@ body {
   line-height: 54px;
   text-align: center;
 }
-
 .rectangle-3 {
   height: 103px;
   width: 100%;
@@ -75,6 +78,7 @@ body {
   font-weight: 500;
   line-height: 25px;
   text-align: center;
+<<<<<<< HEAD
 }
 
 .addie-hogan {
@@ -84,6 +88,8 @@ body {
   font-family: "Avenir Next";
   font-size: 20px;
   line-height: 27px;
+=======
+>>>>>>> origin/develop
 }
 
 .oval-3 {

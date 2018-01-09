@@ -13,20 +13,27 @@ import settings from './components/settings'
 
 import headerNav from './components/headerNav'
 
+import AccountScreen from './accountScreen/accountScreen';
+import Login from './Login/Login_index';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+  }
+
   render() {
     return (
       <div>
         <MuiThemeProvider>
         <header>
-
         </header>
 
         <main>
             <Route exact path="/" component={home} />
             <Route exact path="/nav" component={headerNav} />
             <Route exact path="/settings" component={settings} />
+            <Route exact path="/AccountScreen" component={AccountScreen} />
+            <Route exact path="/Login" component={Login}/>
           </main>
         </MuiThemeProvider>
       </div>

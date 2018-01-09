@@ -58,6 +58,7 @@ const home = props => (
           </p>
         </div>
     </div>
+<<<<<<< HEAD
 )
 
 const mapStateToProps = state => ({
@@ -77,8 +78,20 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   loginUser,
   getChats
 }, dispatch)
+=======
+);
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(home)
+const mapStateToProps = state => ({
+    text: state.reducers1.text
+});
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            alert
+        },
+        dispatch
+    );
+>>>>>>> origin/develop
+
+export default connect(mapStateToProps, mapDispatchToProps)(home);
