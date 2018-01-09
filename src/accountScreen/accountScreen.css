@@ -123,3 +123,9 @@
     margin-right: 1%;
     padding-top: 1%;
 }
+
+.defaultList{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
