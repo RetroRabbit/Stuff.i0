@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import Avatar from 'material-ui/Avatar';
+
 
 import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
 
@@ -70,6 +70,7 @@ class HeaderNav extends Component {
                                       <img
                                           className="miniProImage"
                                           src={this.props.currentUser.userImg}
+                                          alt=" "
                                       ></img>
                                   </IconButton>
                               }
@@ -99,15 +100,18 @@ class HeaderNav extends Component {
                                   )}>
                           </Route>
                           </IconMenu>
-                          <div
-                              className="logoBorder"
-                              src="https://files.slack.com/files-pri/T02LJS8M9-F6F8J3988/logo-01.png"
-                          />
+                          <div>
+                              <img className="logoImg"
+                                src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
+                                alt=""
+                              ></img>
+                            </div>
+                          
                       </div>
                     }
 
                 </div>
-        );
+        )
     }
 }
 

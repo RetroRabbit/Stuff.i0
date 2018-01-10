@@ -97,6 +97,16 @@
 	position: absolute;
 }
 
+.logoImg {
+	height: 13%;
+	width: 7%;
+	border-radius: 50%;
+	display: inline-block !important;
+	top: 1% ;
+	right: 3%;
+	position: absolute;
+}
+
 .sideRight{
 	margin-right: 0px;
 }
