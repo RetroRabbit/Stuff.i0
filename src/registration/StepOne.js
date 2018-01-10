@@ -29,7 +29,6 @@ import {
 class StepOne extends React.Component {
   constructor(props) {
     super(props);
-
     var username
     var email
     var password
@@ -80,11 +79,11 @@ class StepOne extends React.Component {
           </div>
         </MuiThemeProvider>
         <div className="nextBox">
-       
+
         <Route render={({ history }) => (
           <FlatButton {...this.props}
             onClick={() => {
-              registerUser({userName:this.username, userEmail:this.email, userPassword:this.password})
+              this.props.registerUser({userName:this.username, userEmail:this.email, userPassword:this.password})
               this.setState({ logged: false })
               history.push('/StepTwo')
             }}
@@ -98,4 +97,22 @@ class StepOne extends React.Component {
   }
 
 }
-export default StepOne
+const mapStateToProps = state => ({
+  chats:state.Chat.chats,
+  msgs:state.Chat.msgs,
+  currentUser: state.Account.currentUser,
+  users: state.Account.users,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getUser,
+  getCurrentUser,
+  changeUser,
+  addMsg,
+  getMsgs,
+  registerUser,
+  loginUser,
+  getChats
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(StepOne);

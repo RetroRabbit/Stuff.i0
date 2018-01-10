@@ -6,7 +6,7 @@ export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 export const LOGOUT_USER_ACCOUNT = 'Account/LOGOUT_USER_ACCOUNT'
 
 const initialState = {
-  
+
   receiver: {
     userID: 10,
     userName: 'Takie',
@@ -55,6 +55,7 @@ export default(state = initialState, action) => {
   switch (action.type) {
 
     case REGISTER_USER_ACCOUNT:
+      action.user.userID = Math.round(Math.random() * 99999);
       state.users.push(action.user);
       return {
         ...state,
