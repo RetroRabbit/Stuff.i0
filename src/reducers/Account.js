@@ -6,14 +6,7 @@ export const CHANGE_USER_ACCOUNT = 'Account/CHANGE_USER_ACCOUNT'
 export const LOGOUT_USER_ACCOUNT = 'Account/LOGOUT_USER_ACCOUNT'
 
 const initialState = {
-  currentUser:{
-    userID: 20,
-    userName: 'Joe',
-    userSurname: 'Sirwali',
-    userPassword:'joe',
-    userEmail: 'joe@gmail.com',
-    userImg: 'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-  },
+  
   receiver: {
     userID: 10,
     userName: 'Takie',

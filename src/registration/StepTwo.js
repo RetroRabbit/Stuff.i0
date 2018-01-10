@@ -27,9 +27,10 @@ class StepTwo extends React.Component {
 
     render() {
         return (
+            <div className="pageContainer">
             <div className="reg-rectangle">
-                <h2 className="step-two-heading">Step Two</h2>
-                <h2 className="pro-pic-heading">PROFILE PICTURE</h2>
+                <h2 className="step-one">Step Two</h2>
+                <h2 className="the-basics">PROFILE PICTURE</h2>
                 <MuiThemeProvider>
                 <div className="pro-pic-placeholder" >
                         {!this.state.hasimg ?
@@ -62,11 +63,22 @@ class StepTwo extends React.Component {
                             this.setState({ logged: false })
                             history.push('/StepThree')
                         }}
-                            className="next-button"
+                            className="next-button-2"
                             label="Next Step" />
                     )} />
                 </div>
-                <h2 className="skip-for-now "> Skip for now</h2>
+                <div className="skip-2">
+                <Route render={({ history }) => (
+                        <p {...this.props} onClick={() => {
+                            this.setState({ logged: false })
+                            history.push('/StepThree')
+                        }}
+                        className="skip-for-now "
+                            label="Next Step" >Skip for now</p>
+                    )} />
+                
+                </div>
+            </div>
             </div>
         );
     }
