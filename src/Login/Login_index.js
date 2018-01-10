@@ -52,7 +52,9 @@ const Login = props => (
 					</div>
 					<div className="loginBoxPos">
 						<form>
-							<div >
+						{
+									!props.currentUser ?
+							<div>
 								<TextField
 									className="loginBox"
 									hintText='Email'
@@ -75,6 +77,9 @@ const Login = props => (
 									type="password"
 								/>
 							</div>
+							:
+							<p></p>
+						}
 							<div >
 								{
 									!props.currentUser ?

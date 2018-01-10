@@ -12,15 +12,7 @@ export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
 const initialState = {
     currentUserChats: [],
     filteredChats: [],
-    currentUser: {
-        userID: 20,
-        userName: 'Joe',
-        userSurname: 'Sirwali',
-        userPassword: 'joe',
-        userEmail: 'joe@gmail.com',
-        userImg:
-            'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-    },
+    currentUser:null,
     receiver: {
         userID: 10,
         userName: 'Takie',
@@ -142,7 +134,6 @@ export default (state = initialState, action) => {
                 user.userImg =action.new.userImg;
             }
 
-            alert(user.userImg);
             return {
                 ...state,
                 currentUser: user

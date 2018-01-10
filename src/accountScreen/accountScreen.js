@@ -6,6 +6,9 @@ import TextField from 'material-ui/TextField';
 import HeaderNav from '../components/headerNav';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import { Route } from 'react-router-dom'
+
 import {
     getUser,
     changeUser,
@@ -204,12 +207,20 @@ const List = function(props) {
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
-        props.getCurrentUser();
+        try{
+            props.getCurrentUser();
+            props.currentUser.userID
+        }
+        catch(exc){
+                window.location.href = '/';
+        }
+        
         props.getUserChats(this.props.allMsgs);
         props.getMsgs(props.currentUser.userID, props.receiver.userID);
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
+        
     }
 
     componentWillReceiveProps(newProps) {

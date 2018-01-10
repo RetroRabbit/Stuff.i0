@@ -58,6 +58,14 @@ class settings extends Component {
   constructor(props){
       super(props);
       props.getCurrentUser();
+      try{
+        props.getCurrentUser();
+        props.currentUser.userID
+        }
+        catch(exc){
+                window.location.href = '/';
+        }
+    
   }
 
   saveChanges() {
