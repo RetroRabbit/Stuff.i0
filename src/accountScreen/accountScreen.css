@@ -1,8 +1,13 @@
 .leftPanelContainer {
-    position: fixed;
-    height: 100vh;
-    width: 411px;
-    background-color: #FFFFFF ;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 86vh;
+    width: 26.5vw;
+    min-width: 26.5vw;
+    max-width: 26.5vw;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
     box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
     overflow-y: auto;
  }
@@ -63,7 +68,8 @@
     width: 24px;
     border: 3px solid #979797 ;
     top: 5.25px;
-    position: relative
+    position: relative;
+    background-color: #979797;
  } /*Horizontal line*/
  
  .line-copy {
@@ -73,6 +79,7 @@
     border: 3px solid #979797 ;
     transform: rotate(90deg);
     margin: auto;
+    background-color: #979797;
  } /*vertical line*/
  
  .plus {
@@ -148,3 +155,19 @@
     width: 55%;
     display: inline-grid;
  }
+ 
+ @media screen and (max-width: 480px) {
+    .leftPanelContainer {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 86vh;
+        width: 41.5vw;
+        min-width: 41.5vw;
+        max-width: 41.5vw;
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+        box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14);
+        overflow-y: auto;
+    }
+}
