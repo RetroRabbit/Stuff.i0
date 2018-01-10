@@ -117,7 +117,6 @@ export default (state = initialState, action) => {
             };
 
         case USER_ACCOUNT:
-            alert('We are in');
             user = null;
             for (let i = 0; i < state.users.length; i++) {
                 if (state.users[i].userID === action.ID) {
@@ -131,12 +130,19 @@ export default (state = initialState, action) => {
             };
 
         case CHANGE_USER_ACCOUNT:
-            state.currentUser.userName = action.new.userName;
-            state.currentUser.userSurname = action.new.userSurname;
-            alert('New user ' + state.currentUser.userName);
+            var user = state.currentUser;
+            if(action.new.userName){
+                user.userName = action.new.userName;
+                user.userSurname = action.new.userSurname;
+            }
+            
+            if(action.new.userImg){
+                user.userImg =action.new.userImg;
+            }
+
             return {
                 ...state,
-                currentUser: state.currentUser
+                currentUser: user
             };
 
         case LOGOUT_USER_ACCOUNT:

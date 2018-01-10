@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
+import { Route } from 'react-router-dom'
+
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import HeaderNav from './headerNav';
@@ -47,6 +49,10 @@ class settings extends Component {
 
     }
     this.setState({ hasimg: true });
+    this.props.changeUser({userImg:this.state.profilephoto});
+
+    this.props.getCurrentUser();
+    this.forceUpdate();
 }
 
   constructor(props){
@@ -56,27 +62,29 @@ class settings extends Component {
 
   saveChanges() {
     this.props.changeUser({userName:this.state.user.name, userSurname:this.state.user.surname});
+    
+    this.forceUpdate();
     this.props.getCurrentUser();
   }
 
   state = {
     editingEmail: false,
     editingNames: false,
+    profilephoto:'',
     user:'',
-    hasimg: true
+    hasimg: true,
   };
 
   render() {
     return (
     <div>
-
-      <HeaderNav changeProps={ this.props } { ...this.props }></HeaderNav>
+        <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } { ...this.props }></HeaderNav>
       <GridList cols={1} cellHeight={80} style={styles.gridList}>
         <GridTile className="text-center" cols={1} rows={4}>
         <div className="proImgPlaceholder" >
                         <div>
                               <img
-                              src={this.props.currentUser.userImg}
+                              src={ this.props.currentUser.userImg }
                               className="proImg"
                               alt="Profile"
                           ></img>
@@ -171,9 +179,14 @@ class settings extends Component {
         </GridTile>
 
         <GridTile className="text-center" cols={1} rows={2}>
-          <div className="doneBtn" onClick={() => this.saveChanges()} label="Done" secondary={true}> 
+        <Route render={({ history }) => (
+          <div className="doneBtn" onClick={() => {
+            history.push('/accountScreen')
+            }} label="Done" secondary={true}> 
             <label className="doneLbl">DONE</label> 
           </div>
+        )} />
+          
         </GridTile>
       </GridList>
     </div>);

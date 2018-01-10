@@ -263,7 +263,7 @@ class AccountScreen extends Component {
     render() {
         return (
             <div>
-                <HeaderNav />
+                <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } />
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar

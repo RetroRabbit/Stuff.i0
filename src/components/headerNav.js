@@ -8,7 +8,6 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-
 import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
 
 import { addMsg, getMsgs, getChats } from '../reducers/Chat';
@@ -18,7 +17,8 @@ class HeaderNav extends Component {
 
     constructor(props){
       super(props);
-    }
+  }
+
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
     };
@@ -49,7 +49,7 @@ class HeaderNav extends Component {
 
                     {
                       this.props.getCurrentUser ?(
-                      <label className="nameLbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>)
+                      <label className="nameLbl">{ this.props.name } { this.props.surname }</label>)
                       :
                       (<label className="nameLbl">No Logged in</label>)
                     }
@@ -70,7 +70,7 @@ class HeaderNav extends Component {
                                   <IconButton>
                                       <img
                                           className="miniProImage"
-                                          src={this.props.currentUser.userImg}
+                                          src={this.props.pic}
                                           alt=" "
                                       ></img>
                                   </IconButton>
