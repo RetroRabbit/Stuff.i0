@@ -2,29 +2,30 @@
     background-color: #004853;
     height: 100vh;
     width: 100vw;
-    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.backbox {
+.backBox {
     height: 644px;
     width: 533px;
     border-radius: 12px;
     background-color: #FDFDFD;
     position: relative;
-    top: 3%;
-    left: 31%;
+    justify-content: center;
 }
 
-.bottombox {
+.bottomBox {
     height: 103px;
     width: 533px;
     border-radius: 0 0 12px 12px;
     background-color: #01B9BD;
     position: relative;
     top: 415px;
-    left: 0px;
+    justify-self: center;
 }
 
-.welcome-to-the {
+.welcomeToThe {
     height: 67px;
     width: 424px;
     color: #004853;
@@ -46,13 +47,13 @@
     left: 107px;
 }
 
-.loginboxpos {
+.loginBoxPos {
     top: 54;
     left: 71;
     position: relative;
 }
 
-.loginbox {
+.loginBox {
     font-size: 20px !important;
     line-height: 24px !important;
     width: 390px !important;
@@ -65,7 +66,7 @@
     left: 71px;
 }
 
-.loginbtn {
+.loginBtn {
     margin: 0px !important;
     top: 76px;
     left: 168px;
@@ -82,7 +83,7 @@
     text-align: center !important;
 }
 
-.no-account-yet-get {
+.noAccountYetGet {
 	height: 27px !important;
 	width: 300px !important;
 	color: #FFFFFF !important;
@@ -95,7 +96,7 @@
     left: 107.5px;
 }
 
-.path-2 {
+.path2 {
     top: 38px;
     right: 107.5px;
 	box-sizing: border-box;
