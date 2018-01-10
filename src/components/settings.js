@@ -12,6 +12,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import HeaderNav from './headerNav';
 
+import './headerNav.css';
+
 import {
   getUser,
   changeUser,
@@ -73,21 +75,28 @@ class settings extends Component {
                       }} hintText="Surname Name"/>
                     <IconButton onClick={() => {
                         this.saveChanges();
-                        this.setState({editingNames: false})
+                        this.setState({editingNames: false});
                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
                       <ActionDone/>
                     </IconButton>
                   </div>
-                : <div>
+                : <div> 
+                  
                     <label className="userTitleText">
                       {this.props.currentUser.userSurname} {this.props.currentUser.userName}
                     </label>
+                    <label className="nameLbl">
+                      {this.props.currentUser.userName} {this.props.currentUser.userSurname}
+                    </label>
+
                     <IconButton onClick={() => {
                         this.setState({editingNames: true})
                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
                       <EditorModeEdit/>
                     </IconButton>
                   </div>
+                  
+                
             }
           </div>
 
@@ -125,15 +134,23 @@ class settings extends Component {
         </GridTile>
 
         <GridTile className="text-center" cols={1} rows={2}>
-          <RaisedButton onClick={() => this.saveChanges()} label="Done" secondary={true}></RaisedButton>
+          <div className="doneBtn" onClick={() => this.saveChanges()} label="Done" secondary={true}> 
+            <label className="doneLbl">DONE</label> 
+          </div>
         </GridTile>
       </GridList>
     </div>);
   }
 }
 
-const mapStateToProps = state => {
-  return {chats: state.Chat.chats, msgs: state.Chat.msgs, currentUser: state.Account.currentUser, users: state.Account.users, receiver: state.Account.receiver};
+const mapStateToProps = state => 
+{
+  return {chats: state.Chat.chats, 
+    msgs: state.Chat.msgs, 
+    currentUser: state.Account.currentUser, 
+    users: state.Account.users, 
+    receiver: state.Account.receiver
+  };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({

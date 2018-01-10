@@ -4,11 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Route } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
 
 import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
@@ -44,15 +42,15 @@ class HeaderNav extends Component {
                       )} />
 
                         <div className="newGroup" primary={true} onClick={() => {}}>
-                            <label className="newGroupLbl">NEW GROUP </label>
+                            <label className="newGroupLbl"> NEW GROUP </label>
                         </div>
                     </div>
 
                     {
-                      this.props.getCurrentUser ?
-                      <label className="nameLbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>
+                      this.props.getCurrentUser ?(
+                      <label className="nameLbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>)
                       :
-                      <label className="nameLbl">No Logged in</label>
+                      (<label className="nameLbl">No Logged in</label>)
                     }
 
                     {
@@ -114,31 +112,27 @@ class HeaderNav extends Component {
 }
 
 
-const mapStateToProps = state => {
-    return {
-        chats: state.Chat.chats,
-        msgs: state.Chat.msgs,
-        currentUser: state.Account.currentUser,
-        users: state.Account.users,
-        receiver: state.Account.receiver
-    };
+const mapStateToProps = state => 
+{
+  return {chats: state.Chat.chats, 
+    msgs: state.Chat.msgs, 
+    currentUser: state.Account.currentUser, 
+    users: state.Account.users, 
+    receiver: state.Account.receiver
+  };
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getUser,
-            getCurrentUser,
-            changeUser,
-            addMsg,
-            getMsgs,
-            registerUser,
-            loginUser,
-            getChats,
-            logOut
-        },
-        dispatch
-    );
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getUser,
+    getCurrentUser,
+    changeUser,
+    addMsg,
+    getMsgs,
+    registerUser,
+    loginUser,
+    getChats,
+    logOut
+  }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
