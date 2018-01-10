@@ -6,7 +6,17 @@ import TextField from 'material-ui/TextField';
 import HeaderNav from '../components/headerNav';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUser, changeUser, getCurrentUser, registerUser, loginUser } from '../reducers/Account';
+import {
+    getUser,
+    changeUser,
+    getCurrentUser,
+    registerUser,
+    loginUser,
+    getUserChats,
+    filterUserChats,
+    changeSelectedChat,
+    changeReciever
+} from '../reducers/Account';
 
 import { addMsg, getMsgs, getChats } from '../reducers/Chat';
 
@@ -32,8 +42,8 @@ const getShort = str => {
 
 const getShortTime = str => {
     var value = str.getMinutes().toString();
-    if(value.length == 1){
-      value += "0";
+    if (value.length == 1) {
+        value += '0';
     }
     return str.getHours() + ':' + value;
 };
@@ -137,11 +147,15 @@ const NewText = function(props) {
             <div className="newText">
                 <TextField
                     hintText="Insert Text Message Here"
-                    onKeyDown={(e)=>{
-                      if(e.key == 'Enter' && e.target.value.length > 0){
-                        props.addMsg(e.target.value, props.currentUser.userID , props.receiver.userID);
-                        e.target.value = "";
-                      }
+                    onKeyDown={e => {
+                        if (e.key == 'Enter' && e.target.value.length > 0) {
+                            props.addMsg(
+                                e.target.value,
+                                props.currentUser.userID,
+                                props.receiver.userID
+                            );
+                            e.target.value = '';
+                        }
                     }}
                     style={{
                         padding: '1px 0px 1px 25px',
@@ -187,64 +201,48 @@ const List = function(props) {
     return <ul className="defaultList">{listItems}</ul>;
 };
 
-const initialItems = [
-    {
-        title: 'Lloyd Jimenez',
-        avatar:
-            'http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png',
-        text:
-            'The practice of cigar smoking has been on the rise in the U.S. since the early 90’s.',
-        selected: true
-    },
-    {
-        title: 'Jeffrey Thomas',
-        avatar:
-            'http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png',
-        text: 'When you type the website name on your address bar, a simple yet classy homepage',
-        selected: false
-    },
-    {
-        title: 'Catherine Sanders',
-        avatar:
-            'http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png',
-        text:
-            'It is not always possible to jet off half way around the world when you and your significant other',
-        selected: false
-    },
-    {
-        title: 'Terry Gordon',
-        avatar:
-            'http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png',
-        text:
-            'Here, I focus on a range of items and features that we use in life without giving them a second thought such as Coca Cola',
-        selected: false
-    },
-    {
-        title: 'Terry Gordon',
-        avatar:
-            'http://cliparting.com/wp-content/uploads/2016/10/Person-people-icon-clipart-kid.png',
-        text:
-            'Here, I focus on a range of items and features that we use in life without giving them a second thought such as Coca Cola',
-        selected: false
-    }
-];
-
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
         props.getCurrentUser();
+        props.getUserChats(this.props.allMsgs);
+        props.getMsgs(props.currentUser.userID, props.receiver.userID);
 
-        props.getMsgs(props.currentUser.userID,props.receiver.userID);
-        
         this.filterList = this.filterList.bind(this);
-        this.state = { initialItems: initialItems, items: initialItems };
+        //this.state = { initialItems: initialItems, items: initialItems };
     }
+
+    componentWillReceiveProps(newProps) {
+        console.log(newProps);
+    }
+
     filterList = function(text) {
-        var updatedList = this.state.initialItems;
+        var updatedList = this.props.currentUserChats;
         updatedList = updatedList.filter(function(item) {
-            return item.title.toLowerCase().search(text.toLowerCase()) !== -1;
+            return item.userName.toLowerCase().search(text.toLowerCase()) !== -1;
         });
-        this.setState({ items: updatedList });
+        this.props.filterUserChats(updatedList);
+    };
+
+    changeSelected = function(chat) {
+        let userID = chat.userID;
+        let tempChats = this.props.filteredChats;
+
+        for (let i = 0; i < tempChats.length; i++) {
+            tempChats[i].selected = false;
+        }
+
+        for (let i = 0; i < tempChats.length; i++) {
+            if (tempChats[i].userID === userID) {
+                tempChats[i].selected = true;
+            }
+        }
+
+        this.props.changeSelectedChat(tempChats);
+
+        this.forceUpdate();
+        this.props.changeReciever(chat);
+        this.props.getMsgs(this.props.currentUser.userID, userID);
     };
 
     loadChats() {
@@ -262,46 +260,6 @@ class AccountScreen extends Component {
         return chats;
     }
 
-    getChatDetails = () => {
-        let msgs = this.props.msgs;
-        let users = this.props.users;
-        var usersDetails = [];
- 
-        for(let msg of msgs){
- 
-            if (msg.recieverID === this.props.currentUser.userID){
- 
-                for(let user of users){
-                    if(msg.senderID === user.userID){
- 
-                        if(usersDetails.length === 0){
-                            user.latestMessage = msg.text;
-                            usersDetails.push(user);
-                        }
-                        else{
-                            let duplicatefound = false;
-                            for(let userDet of usersDetails){
-                                if (userDet.userID === user.userID){
-                                    userDet = user;
-                                    userDet.latestMessage = msg.text;
-                                    duplicatefound = true;
-                                }
-                            }
-                            if(!duplicatefound){
-                                user.latestMessage = msg.text;
-                                usersDetails.push(user);
-                            }
-                        }
-                        
-                    }
-                }
-            }
-            
-        }
-        
-        return usersDetails;
-    };
-
     render() {
         return (
             <div>
@@ -315,12 +273,26 @@ class AccountScreen extends Component {
                         />
                     </div>
 
-                    <List chatList={this.state.items} />
+                    <ul className="defaultList">
+                        {this.props.filteredChats.map(chat => (
+                            <li
+                                data-category={chat}
+                                key={chat}
+                                onClick={() => this.changeSelected(chat)}
+                            >
+                                <ChatCard
+                                    title={chat.userName}
+                                    avatar={chat.userImg}
+                                    text={chat.latestMessage}
+                                    selected={chat.selected}
+                                />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
 
                 <div className="mainBubbleContainer">
-                    {
-                      this.props.msgs.map(chat => {
+                    {this.props.msgs.map(chat => {
                         if (
                             chat.senderID == this.props.currentUser.userID &&
                             chat.receiverID == this.props.receiver.userID
@@ -358,9 +330,12 @@ const mapStateToProps = state => {
     return {
         chats: state.Chat.chats,
         msgs: state.Chat.msgs,
+        allMsgs: state.Chat.allMsgs,
         currentUser: state.Account.currentUser,
         users: state.Account.users,
-        receiver: state.Account.receiver
+        receiver: state.Account.receiver,
+        currentUserChats: state.Account.currentUserChats,
+        filteredChats: state.Account.filteredChats
     };
 };
 
@@ -374,7 +349,11 @@ const mapDispatchToProps = dispatch =>
             getMsgs,
             registerUser,
             loginUser,
-            getChats
+            getChats,
+            getUserChats,
+            filterUserChats,
+            changeSelectedChat,
+            changeReciever
         },
         dispatch
     );
