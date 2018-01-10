@@ -31,17 +31,17 @@ import {
 
 const Login = props => (
 	<div className="back">
-				<div className="backbox">
-					<div className="welcome-to-the">
+				<div className="backBox">
+					<div className="welcomeToThe">
 					Welcome to the
 					</div>
 					<div className="logo">
 						<img src={require('./Full_Logo.png')} />
 					</div>
-					<div className="bottombox">
+					<div className="bottomBox">
 						<div>
 							<Route render={({ history}) => (
-								<FlatButton className="no-account-yet-get"
+								<FlatButton className="noAccountYetGet"
 									label="No account yet? Get setup now >"
 								 onClick={()=>{
 									 history.push('/StepOne');
@@ -50,11 +50,11 @@ const Login = props => (
 							)} />
 						</div>
 					</div>
-					<div className="loginboxpos">
+					<div className="loginBoxPos">
 						<form>
 							<div >
 								<TextField
-									className="loginbox"
+									className="loginBox"
 									hintText='Email'
 									floatingLabelText='Email'
 									label="Email"
@@ -65,7 +65,7 @@ const Login = props => (
 								/>
 								<br></br>
 								<TextField
-									className="loginbox"
+									className="loginBox"
 									hintText='Password'
 									floatingLabelText='Password'
 									label="Password"
@@ -78,7 +78,7 @@ const Login = props => (
 							<div >
 								{
 									!props.currentUser ?
-									<FlatButton className="loginbtn"
+									<FlatButton className="loginBtn"
 										label="Login"
 										onClick={()=>{
 
@@ -89,7 +89,7 @@ const Login = props => (
 									/>
 									:
 									<Route render={({ history}) => (
-										<FlatButton className="loginbtn"
+										<FlatButton className="loginBtn"
 	 									 label="My Account"
 	 									 onClick={()=>{
 	 										 history.push('/settings');

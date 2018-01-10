@@ -1,16 +1,28 @@
-.new-chat {
-	height: 54px;
-	width: 143px;
+.newChat {
+	height: 5%;
+	width: 10%;
 	border-radius: 5px;
 	background-color: #0DABAF;
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	margin-top: 20px;
-	margin-left: 40px;
+	margin-top: 1.5%;
+	margin-left: 3%;
 	display: inline-block !important;
 	text-align: center;
 }
 
-.new-chat-lbl {
+.newGroup {
+	height: 5%;
+	width: 11%;
+	border-radius: 5px;
+	background-color: #0DABAF;
+	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
+	margin-top: 1.5%;
+	margin-left: 2%;
+	display: inline-block !important;
+	text-align: center;
+}
+
+.newChatLbl {
 	height: 25px;
 	width: 126px;
 	color: #FFFFFF;
@@ -21,7 +33,7 @@
 	text-align: center !important;
 }
 
-.new-group-lbl {
+.newGroupLbl {
 	height: 25px;
 	width: 146px;
 	color: #FFFFFF;
@@ -30,38 +42,24 @@
 	font-weight: 500;
 	line-height: 3em;
 	text-align: center !important;
-	display: inline-block !important;
 }
 
-.new-group {
-	height: 54px;
-	width: 166px;
-	border-radius: 5px;
-	background-color: #0DABAF;
-	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	display: inline-block;
-	align-items: center;
-	margin-top: 20px;
-	margin-left: 24px;
-	display: inline-block !important;
-	text-align: center;
-}
-
-.name-lbl {
+.nameLbl {
 	height: 30px;
 	width: 201px;
-	color: #F3F3F3;
+	color: #f3f3f3;
 	font-family: "Helvetica";
 	font-size: 20px;
 	line-height: 27px;
 	text-align: center !important;
 	display: inline-block !important;
-	margin-left: 1650px !important;
-	top: 37px;
-	position: absolute;
+	display: flex;
+	margin-left: 72% !important;
+	top: 6%;
+	position: absolute !important;
 }
 
-.mini-img-placeholder {
+.miniImgPlaceholder {
 	height: 67px;
 	width: 67px;
 	background-color: #FFFFFF;
@@ -75,9 +73,7 @@
 
 }
 
-
-
-.mini-pro-image {
+.miniProImage {
 	height: 54px;
 	width: 54px;
 	border-radius: 50%;
@@ -88,7 +84,7 @@
 
 }
 
-.logo-border {
+.logoBorder {
 	height: 54px;
 	width: 54px;
 	border: 6px solid #FFFFFF;
@@ -101,12 +97,12 @@
 	position: absolute;
 }
 
-.side-right{
+.sideRight{
 	margin-right: 0px;
 }
 
 
-.done-lbl {
+.doneLbl {
 	height: 25px;
 	width: 126px;
 	color: #FFFFFF;
@@ -117,7 +113,7 @@
 	text-align: center;
 }
 
-.done-rectangle {
+.doneRectangle {
 	height: 54px;
 	width: 143px;
 	border-radius: 5px;
@@ -125,14 +121,14 @@
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
 }
 
-.done-button {
+.doneButton {
 	height: 54px;
 	width: 143px;
 }
 
 
 
-.pro-img-placeholder{
+.proImgPlaceholder{
 	height: 269px;
 	width: 269px;
 	background-color: #FFFFFF;
@@ -143,12 +139,12 @@
 
 }
 
-.pro-img {
+.proImg {
 	height: 236px;
 	width: 236px;
 }
 
-.settings-input{
+.settingsInput{
 	height: 108px;
 	width: 224px;
 	color: #004853;
@@ -158,14 +154,14 @@
 	text-align: center;
 }
 
-.nav-bar {
+.navBar {
 	height: 103px;
 	width: 100%;
 	background-color: #01B9BD !important;
 	margin: auto;
 }
 
-.pencil-img {
+.pencilmg {
 	height: 36px;
 	width: 31px;
 }

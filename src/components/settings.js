@@ -38,7 +38,7 @@ class settings extends Component {
   }
 
   saveChanges() {
-    this.props.changeUser({userName:this.state.user.name,userSurname:this.state.user.surname});
+    this.props.changeUser({userName:this.state.user.name, userSurname:this.state.user.surname});
     this.props.getCurrentUser();
   }
 
