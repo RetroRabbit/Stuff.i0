@@ -4,7 +4,28 @@ import { Route, Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css';
 
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser
+} from '../reducers/Account'
+
+import {
+  addMsg,
+  getMsgs,
+  getChats
+} from '../reducers/Chat'
+
 class StepTwo extends React.Component {
+    constructor(props) {
+        super(props);    
+    }
 
     changeImg = (e) => {
         console.log(e.target);
@@ -18,12 +39,20 @@ class StepTwo extends React.Component {
             reader.readAsDataURL(e.target.files[0]);
 
         }
+
         this.setState({ hasimg: true });
     }
     state = {
         profilephoto: '',
         hasimg: false
     };
+
+    saveImg = () =>{
+        this.props.changeUser({userImg:this.state.profilephoto});
+    
+        this.props.getCurrentUser();
+        this.forceUpdate();
+    }
 
     render() {
         return (
@@ -60,7 +89,7 @@ class StepTwo extends React.Component {
                 <div className="nextBox">
                     <Route render={({ history }) => (
                         <FlatButton {...this.props} onClick={() => {
-                            this.setState({ logged: false })
+                            this.saveImg()
                             history.push('/StepThree')
                         }}
                             className="next-button-2"
@@ -92,4 +121,23 @@ const inputimg = {
     right: 0,
     width: '100%'
 };
-export default StepTwo
+const mapStateToProps = state => ({
+    chats:state.Chat.chats,
+    msgs:state.Chat.msgs,
+    currentUser: state.Account.currentUser,
+    users: state.Account.users,
+  })
+  
+  const mapDispatchToProps = dispatch => bindActionCreators({
+    getUser,
+    getCurrentUser,
+    changeUser,
+    addMsg,
+    getMsgs,
+    registerUser,
+    loginUser,
+    getChats
+  }, dispatch)
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);
+  

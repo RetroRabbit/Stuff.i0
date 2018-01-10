@@ -79,7 +79,7 @@ class settings extends Component {
     return (
     <div>
         <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } { ...this.props }></HeaderNav>
-      <GridList cols={1} cellHeight={80} style={styles.gridList}>
+         <GridList cols={1} cellHeight={80} style={styles.gridList}>
         <GridTile className="text-center" cols={1} rows={4}>
         <div className="proImgPlaceholder" >
                         <div>

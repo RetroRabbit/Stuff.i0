@@ -88,11 +88,13 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case REGISTER_USER_ACCOUNT:
-            action.user.userID = Math.round(Math.random() * 99999);
-            state.users.push(action.user);
+            var user = null;
+            user = action.user;
+            user.userID = Math.round(Math.random() * 99999);
+            state.users.push(user);
             return {
                 ...state,
-                currentUser: action.user
+                currentUser: user
             };
 
         case LOGIN_USER_ACCOUNT:
@@ -140,6 +142,7 @@ export default (state = initialState, action) => {
                 user.userImg =action.new.userImg;
             }
 
+            alert(user.userImg);
             return {
                 ...state,
                 currentUser: user
