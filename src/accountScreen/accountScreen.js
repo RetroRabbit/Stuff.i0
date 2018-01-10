@@ -138,7 +138,7 @@ const NewText = function(props) {
                 <TextField
                     hintText="Insert Text Message Here"
                     onKeyDown={(e)=>{
-                      if(e.key == 'Enter' && e.target.value.length > 2){
+                      if(e.key == 'Enter' && e.target.value.length > 0){
                         props.addMsg(e.target.value, props.currentUser.userID , props.receiver.userID);
                         e.target.value = "";
                       }
