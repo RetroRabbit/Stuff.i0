@@ -30,6 +30,7 @@ class HeaderNav extends Component {
     styles = {
         'padding-bottom': '2px'
     };
+    
 
     render() {
         return (
