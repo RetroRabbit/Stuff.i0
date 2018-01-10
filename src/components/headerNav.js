@@ -4,13 +4,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Route } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
 
-import Avatar from 'material-ui/Avatar';
 
 import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
 
@@ -33,46 +30,48 @@ class HeaderNav extends Component {
     styles = {
         'padding-bottom': '2px'
     };
+    
 
     render() {
         return (
-                <div className="nav-bar">
+                <div className="navBar">
                     <div>
                       <Route render={({ history }) => (
-                        <div className="new-chat" primary={true} onClick={() => { history.push('/accountScreen')}}>
-                            <label className="new-chat-lbl"> NEW CHAT </label>
+                        <div className="newChat" primary={true} onClick={() => { history.push('/accountScreen')}}>
+                            <label className="newChatLbl"> NEW CHAT </label>
                         </div>
                       )} />
 
-                        <div className="new-group" primary={true} onClick={() => {}}>
-                            <label className="new-group-lbl">NEW GROUP </label>
+                        <div className="newGroup" primary={true} onClick={() => {}}>
+                            <label className="newGroupLbl"> NEW GROUP </label>
                         </div>
                     </div>
 
                     {
-                      this.props.currentUser ?
-                      <label className="name-lbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>
+                      this.props.getCurrentUser ?(
+                      <label className="nameLbl">{this.props.currentUser.userName + ' ' + this.props.currentUser.userSurname}</label>)
                       :
-                      <label className="name-lbl">No Logged in</label>
+                      (<label className="nameLbl">No Logged in</label>)
                     }
 
                     {
                       !this.props.currentUser ?
                       <Route render={({ history }) => (
-                        <div className="new-chat" primary={true} onClick={() => { history.push('/')}}>
-                            <label className="new-chat-lbl"> LOG IN </label>
+                        <div className="newChat" primary={true} onClick={() => { history.push('/')}}>
+                            <label className="newChatLbl"> LOG IN </label>
                         </div>
                       )} />
 
                       :
                       <div>
                           <IconMenu
-                          className="mini-img-placeholder"
+                          className="miniImgPlaceholder"
                               iconButtonElement={
                                   <IconButton>
                                       <img
-                                          className="mini-pro-image"
+                                          className="miniProImage"
                                           src={this.props.currentUser.userImg}
+                                          alt=" "
                                       ></img>
                                   </IconButton>
                               }
@@ -102,44 +101,43 @@ class HeaderNav extends Component {
                                   )}>
                           </Route>
                           </IconMenu>
-                          <div
-                              className="logo-border"
-                              src="https://files.slack.com/files-pri/T02LJS8M9-F6F8J3988/logo-01.png"
-                          />
+                          <div>
+                              <img className="logoImg"
+                                src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
+                                alt=""
+                              ></img>
+                            </div>
+                          
                       </div>
                     }
 
-                          </div>
-        );
+                </div>
+        )
     }
 }
 
 
-const mapStateToProps = state => {
-    return {
-        chats: state.Chat.chats,
-        msgs: state.Chat.msgs,
-        currentUser: state.Account.currentUser,
-        users: state.Account.users,
-        receiver: state.Account.receiver
-    };
+const mapStateToProps = state => 
+{
+  return {chats: state.Chat.chats, 
+    msgs: state.Chat.msgs, 
+    currentUser: state.Account.currentUser, 
+    users: state.Account.users, 
+    receiver: state.Account.receiver
+  };
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getUser,
-            getCurrentUser,
-            changeUser,
-            addMsg,
-            getMsgs,
-            registerUser,
-            loginUser,
-            getChats,
-            logOut
-        },
-        dispatch
-    );
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getUser,
+    getCurrentUser,
+    changeUser,
+    addMsg,
+    getMsgs,
+    registerUser,
+    loginUser,
+    getChats,
+    logOut
+  }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
