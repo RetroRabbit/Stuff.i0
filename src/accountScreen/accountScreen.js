@@ -262,6 +262,46 @@ class AccountScreen extends Component {
         return chats;
     }
 
+    getChatDetails = () => {
+        let msgs = this.props.msgs;
+        let users = this.props.users;
+        var usersDetails = [];
+ 
+        for(let msg of msgs){
+ 
+            if (msg.recieverID === this.props.currentUser.userID){
+ 
+                for(let user of users){
+                    if(msg.senderID === user.userID){
+ 
+                        if(usersDetails.length === 0){
+                            user.latestMessage = msg.text;
+                            usersDetails.push(user);
+                        }
+                        else{
+                            let duplicatefound = false;
+                            for(let userDet of usersDetails){
+                                if (userDet.userID === user.userID){
+                                    userDet = user;
+                                    userDet.latestMessage = msg.text;
+                                    duplicatefound = true;
+                                }
+                            }
+                            if(!duplicatefound){
+                                user.latestMessage = msg.text;
+                                usersDetails.push(user);
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
+        
+        return usersDetails;
+    };
+
     render() {
         return (
             <div>
