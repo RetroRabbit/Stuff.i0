@@ -1,31 +1,36 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+
+import {Route} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import asyncValidate from './asyncValidate';
 import validate from './validate';
 import './Login_index.css';
-import history from './history';
+import history from '../store'
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser
+} from '../reducers/Account'
+
+import {
+  addMsg,
+  getMsgs,
+  getChats
+} from '../reducers/Chat'
 
 
+	let email =  ""
+	let password = ""
 
-const renderTextField = (
-{ input, label, meta: { touched, error }, ...custom },
-) => (
-	<TextField
-		className="loginbox"
-		hintText={label}
-		floatingLabelText={label}
-		errorText={touched && error}
-		{...input}
-		{...custom}
-	/>
-);
-
-const App = props => {
-	const { handleSubmit, pristine, reset, submitting } = props;
-		return (
-			<div className="back">
+const Login = props => (
+	<div className="back">
 				<div className="backbox">
 					<div className="welcome-to-the">
 					Welcome to the
@@ -35,22 +40,28 @@ const App = props => {
 					</div>
 					<div className="bottombox">
 						<div>
-							<FlatButton className="no-account-yet-get"
-								label="No account yet? Get setup now >"
-								onClick={history.push('registration')}
-							/>
+							<Route render={({ history}) => (
+								<FlatButton className="no-account-yet-get"
+									label="No account yet? Get setup now >"
+								 onClick={()=>{
+									 history.push('/StepOne');
+								 }}
+							 />
+							)} />
 						</div>
 					</div>
 					<div className="loginboxpos">
-						<form onSubmit={handleSubmit}>
+						<form>
 							<div >
-								<TextField 
+								<TextField
 									className="loginbox"
 									hintText='Email'
 									floatingLabelText='Email'
 									label="Email"
 									type="email"
-									component={renderTextField}
+									onChange={(e)=>{
+										email = e.target.value;
+									}}
 								/>
 								<br></br>
 								<TextField
@@ -58,26 +69,64 @@ const App = props => {
 									hintText='Password'
 									floatingLabelText='Password'
 									label="Password"
+									onChange={(e)=>{
+										password = e.target.value;
+									}}
 									type="password"
-									component={renderTextField}
 								/>
 							</div>
 							<div >
-								<FlatButton className="loginbtn"
-									label="Login"
-									type="submit"
-								/>
+								{
+									!props.currentUser ?
+									<FlatButton className="loginbtn"
+										label="Login"
+										onClick={()=>{
+
+											props.loginUser({userEmail:email,userPassword:password});
+											props.getCurrentUser();
+
+										}}
+									/>
+									:
+									<Route render={({ history}) => (
+										<FlatButton className="loginbtn"
+	 									 label="My Account"
+	 									 onClick={()=>{
+	 										 history.push('/settings');
+	 									 }}
+	 								 />
+               		)} />
+
+								}
+
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-		);
-};
+		)
 
-export default reduxForm({
-	form: 'App',
-	validate,
-	asyncValidate,
-  })(App);
+	const mapStateToProps = state => ({
+	  chats:state.Chat.chats,
+	  msgs:state.Chat.msgs,
+	  currentUser: state.Account.currentUser,
+	  users: state.Account.users,
+	})
 
+	const mapDispatchToProps = dispatch => bindActionCreators({
+	  getUser,
+	  getCurrentUser,
+	  changeUser,
+	  addMsg,
+	  getMsgs,
+	  registerUser,
+	  loginUser,
+	  getChats
+	}, dispatch)
+
+	const reduxform = () => reduxForm({
+		form: 'App',
+		validate,
+	});
+
+	export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,9 +1,9 @@
-import history from "./history";
+import history from "../store";
 
 export default function(values) {
     const errors = {};
     const requiredFields = [
-      'Email', 
+      'Email',
       'Password',
     ];
     requiredFields.forEach(field => {

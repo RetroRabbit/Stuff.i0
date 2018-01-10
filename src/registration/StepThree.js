@@ -32,7 +32,7 @@ class StepThree extends React.Component {
         <Route render={({ history }) => (
           <FlatButton {...this.props} onClick={() => {
             this.setState({ logged: false })
-            history.push('/')
+            history.push('/login')
           }}
             className="next-button"
             label="Next Step" />
@@ -53,5 +53,3 @@ const inputimg = {
   width: '100%'
 };
 export default StepThree
-
-
