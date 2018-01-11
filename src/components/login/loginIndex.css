@@ -55,7 +55,7 @@
 }
 
 .loginEmail {
-    font-size: 4vmin !important;
+    font-size: 3vmin !important;
     line-height: 2.4vmin !important;
     width: 39.5vh !important;
     display: inline-block !important;
@@ -67,7 +67,7 @@
 }
 
 .loginPass {
-    font-size: 4vmin !important;
+    font-size: 3vmin !important;
     line-height: 2.4vmin !important;
     width: 39.5vh !important;
     display: inline-block !important;
