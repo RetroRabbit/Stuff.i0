@@ -49,24 +49,17 @@ class StepTwo extends React.Component {
     render() {
         return (
             <div className="pageContainer">
-                <div className="reg-rectangle">
-                    <h2 className="step-one">Step Two</h2>
-                    <h2 className="the-basics">PROFILE PICTURE</h2>
-                    <MuiThemeProvider>
-                        <div className="pro-pic-placeholder">
-                            {!this.state.hasimg ? (
-                                <div className="upload-circle">
-                                    <div className="plus-logo">
-                                        <div className="plus-horizontal" />
-                                        <div className="plus-vertical" />
-                                    </div>
-                                    <input
-                                        type="file"
-                                        onChange={e => {
-                                            this.changeImg(e);
-                                        }}
-                                        style={inputimg}
-                                    />
+
+            <div className="regRectangle">
+                <h2 className="stepHeading">Step Two</h2>
+                <h2 className="titleHeading">PROFILE PICTURE</h2>
+                <MuiThemeProvider>
+                <div className="proPicPlaceholder" >
+                        {!this.state.hasimg ?
+                            <div className="uploadCircle">
+                                <div className="plusLogo">
+                                    <div className="plusHorizontal" />
+                                    <div className="plusVertical" />
                                 </div>
                             ) : (
                                 <img
@@ -89,26 +82,38 @@ class StepTwo extends React.Component {
                                     className="next-button-2"
                                     label="Next Step"
                                 />
-                            )}
-                        />
+
+                            </div>
+                            :
+                            <img
+                                src={this.state.profilephoto}
+                                className="proPicJpg"
+                                alt="Profile"
+                            />
+                        }
+
                     </div>
-                    <div className="skip-2">
-                        <Route
-                            render={({ history }) => (
-                                <p
-                                    {...this.props}
-                                    onClick={() => {
-                                        this.setState({ logged: false });
-                                        history.push('/StepThree');
-                                    }}
-                                    className="skip-for-now "
-                                    label="Next Step"
-                                >
-                                    Skip for now
-                                </p>
-                            )}
-                        />
-                    </div>
+                </MuiThemeProvider>
+                <div className="nextBox">
+                    <Route render={({ history }) => (
+                        <FlatButton {...this.props} onClick={() => {
+                            this.saveImg()
+                            history.push('/StepThree')
+                        }}
+                            className="nextButton"
+                            label="Next Step" />
+                    )} />
+                </div>
+                <div className="skip2">
+                <Route render={({ history }) => (
+                        <p {...this.props} onClick={() => {
+                            this.setState({ logged: false })
+                            history.push('/StepThree')
+                        }}
+                        className="skipForNow "
+                            label="Next Step" >Skip for now</p>
+                    )} />
+
                 </div>
             </div>
         );
