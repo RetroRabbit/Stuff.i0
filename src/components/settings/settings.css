@@ -1,0 +1,9 @@
+.flex-container {
+  resize: horizontal;
+  overflow: hidden;
+  display: flex;
+  margin: 1em;
+}
+.auto{
+  flex:auto;
+}

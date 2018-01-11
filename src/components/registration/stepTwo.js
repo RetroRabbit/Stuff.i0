@@ -4,31 +4,23 @@ import { Route } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css';
 
-
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
-import {
-  getUser,
-  changeUser,
-  getCurrentUser,
-  registerUser,
-  loginUser
-} from '../../reducers/Account'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import {
-  addMsg,
-  getMsgs,
-  getChats
-} from '../../reducers/Chat'
+    getUser,
+    changeUser,
+    getCurrentUser,
+    registerUser,
+    loginUser
+} from '../../reducers/Account';
+
+import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
 class StepTwo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props = props;
-    }
+    
 
-    changeImg = (e) => {
+    changeImg = e => {
         console.log(e.target);
         console.log(e.target.files[0]);
 
@@ -38,26 +30,26 @@ class StepTwo extends React.Component {
                 this.setState({ profilephoto: event.target.result });
             };
             reader.readAsDataURL(e.target.files[0]);
-
         }
 
         this.setState({ hasimg: true });
-    }
+    };
     state = {
         profilephoto: '',
         hasimg: false
     };
 
-    saveImg = () =>{
-        this.props.changeUser({userImg:this.state.profilephoto});
+    saveImg = () => {
+        this.props.changeUser({ userImg: this.state.profilephoto });
 
         this.props.getCurrentUser();
         this.forceUpdate();
-    }
+    };
 
     render() {
         return (
             <div className="pageContainer">
+
             <div className="regRectangle">
                 <h2 className="stepHeading">Step Two</h2>
                 <h2 className="titleHeading">PROFILE PICTURE</h2>
@@ -69,13 +61,28 @@ class StepTwo extends React.Component {
                                     <div className="plusHorizontal" />
                                     <div className="plusVertical" />
                                 </div>
-                                <input
-                                    type="file"
-                                    onChange={e => {
-                                        this.changeImg(e);
-                                    }}
-                                    style={inputimg}
+                            ) : (
+                                <img
+                                    src={this.state.profilephoto}
+                                    className="pro-pic-jpg"
+                                    alt="Profile"
                                 />
+                            )}
+                        </div>
+                    </MuiThemeProvider>
+                    <div className="nextBox">
+                        <Route
+                            render={({ history }) => (
+                                <FlatButton
+                                    {...this.props}
+                                    onClick={() => {
+                                        this.saveImg();
+                                        history.push('/StepThree');
+                                    }}
+                                    className="next-button-2"
+                                    label="Next Step"
+                                />
+
                             </div>
                             :
                             <img
@@ -109,7 +116,6 @@ class StepTwo extends React.Component {
 
                 </div>
             </div>
-            </div>
         );
     }
 }
@@ -123,21 +129,25 @@ const inputimg = {
     width: '100%'
 };
 const mapStateToProps = state => ({
-    chats:state.Chat.chats,
-    msgs:state.Chat.msgs,
+    chats: state.Chat.chats,
+    msgs: state.Chat.msgs,
     currentUser: state.Account.currentUser,
-    users: state.Account.users,
-  })
+    users: state.Account.users
+});
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    getUser,
-    getCurrentUser,
-    changeUser,
-    addMsg,
-    getMsgs,
-    registerUser,
-    loginUser,
-    getChats
-  }, dispatch)
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getUser,
+            getCurrentUser,
+            changeUser,
+            addMsg,
+            getMsgs,
+            registerUser,
+            loginUser,
+            getChats
+        },
+        dispatch
+    );
 
-  export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);
+export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);

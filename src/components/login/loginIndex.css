@@ -1,3 +1,11 @@
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+
+}
+
 .back {
     background-color: #004853;
     height: 100vh;
@@ -7,100 +15,94 @@
     justify-content: center;
 }
 .backBox {
-    height: 644px;
-    width: 533px;
-    border-radius: 12px;
+    height: 65.2vh;
+    width: 53.9vh;
+    border-radius: 1.2vh;
     background-color: #FDFDFD;
-    position: relative;
-    justify-content: center;
 }
 
 .bottomBox {
-    height: 103px;
-    width: 533px;
-    border-radius: 0 0 12px 12px;
+    height: 10.4vh;
+    width: 53.9vh;
+    border-radius: 0 0 1.2vh 1.2vh;
     background-color: #01B9BD;
     position: relative;
-    top: 415px;
-    justify-self: center;
+    top: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .welcomeToThe {
-    height: 67px;
-    width: 424px;
+    height: 6.8vh;
+    width: 53.9vh;
     color: #004853;
     font-family: Helvetica;
-    font-size: 30px;
+    font-size: 3vh;
     font-weight: 500;
-    line-height: 41px;
+    line-height: 4.1vh;
     text-align: center;
     position: relative;
-    top: 60px;
-    left: 52px;
+    top: -4.3vh;
 }
 
 .logo {
-    height: 62px;
-    width: 318px;
+    height: 6.3vh !important;
+    width: 32.2vh !important;
     position: relative;
-    top: 27px;
-    left: 107px;
+    top: -7.7vh;
+    left: 10.8vh;
 }
 
-.loginBoxPos {
-    top: 54;
-    left: 71;
-    position: relative;
-}
-
-.loginBox {
-    font-size: 20px !important;
-    line-height: 24px !important;
-    width: 390px !important;
-    height: 72px !important;
+.loginEmail {
+    font-size: 4vmin !important;
+    line-height: 2.4vmin !important;
+    width: 39.5vh !important;
     display: inline-block !important;
     position: relative !important;
     background-color: transparent !important;
     font-family: Helvetica !important;
-    transition: height 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms !important;
-    left: 71px;
+    top: -6.9vh;
+    left: 7.1vh;
+}
+
+.loginPass {
+    font-size: 4vmin !important;
+    line-height: 2.4vmin !important;
+    width: 39.5vh !important;
+    display: inline-block !important;
+    position: relative !important;
+    background-color: transparent !important;
+    font-family: Helvetica !important;
+    top: -7.5vh;
+    left: 7.1vh;
 }
 
 .loginBtn {
-    margin: 0px !important;
-    top: 76px;
-    left: 168px;
+    top: -4.8vh;
+    left: 17vh;
     font-family: Helvetica !important;
-    font-size: 22px !important;
+    font-size: 2.2vh !important;
     font-weight: 500 !important;
-    height: 57px !important;
-    width: 197px !important;
-    line-height: 30px !important;
-    min-width: 197px !important;
+    height: 5.7vh !important;
+    width: 19.7vh !important;
+    line-height: 3vh !important;
+    min-width: 19.7vh !important;
     color: #FFFFFF !important;
-    border-radius: 5px !important;
+    border-radius: 0.5vh !important;
     background-color: #FB6902 !important;
     text-align: center !important;
+    position: relative !important;
 }
 
 .noAccountYetGet {
-	height: 27px !important;
-	width: 300px !important;
+	height: 10.4vh !important;
+	width: 53.9vh !important;
 	color: #FFFFFF !important;
 	font-family: Helvetica !important;
-	font-size: 20px !important;
-	line-height: 27px !important;
+	font-size: 2vmin !important;
+	line-height: 2.7vh !important;
     text-align: center !important;
     position: relative !important;
-    top: 38px;
-    left: 107.5px;
-}
-
-.path2 {
-    top: 38px;
-    right: 107.5px;
-	box-sizing: border-box;
-	height: 11.5px;
-	width: 18.19px;
-	border: 2px solid #FFFFFF;
+    border-radius: 0 0 1.2vh 1.2vh !important;
 }

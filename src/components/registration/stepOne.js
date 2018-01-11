@@ -1,28 +1,24 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router-dom';
 
 import './reg.css';
 import { white } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import {
-  getUser,
-  changeUser,
-  getCurrentUser,
-  registerUser,
-  loginUser
-} from '../../reducers/Account'
+    getUser,
+    changeUser,
+    getCurrentUser,
+    registerUser,
+    loginUser
+} from '../../reducers/Account';
 
-import {
-  addMsg,
-  getMsgs,
-  getChats
-} from '../../reducers/Chat'
+import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
 class StepOne extends React.Component {
   constructor(props) {
@@ -91,21 +87,25 @@ class StepOne extends React.Component {
 
 }
 const mapStateToProps = state => ({
-  chats:state.Chat.chats,
-  msgs:state.Chat.msgs,
-  currentUser: state.Account.currentUser,
-  users: state.Account.users,
-})
+    chats: state.Chat.chats,
+    msgs: state.Chat.msgs,
+    currentUser: state.Account.currentUser,
+    users: state.Account.users
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  getUser,
-  getCurrentUser,
-  changeUser,
-  addMsg,
-  getMsgs,
-  registerUser,
-  loginUser,
-  getChats
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getUser,
+            getCurrentUser,
+            changeUser,
+            addMsg,
+            getMsgs,
+            registerUser,
+            loginUser,
+            getChats
+        },
+        dispatch
+    );
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepOne);
