@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 import {Route} from 'react-router-dom'
@@ -29,12 +30,6 @@ import {
 const Login = props => (
 	<div className="back">
 				<div className="backBox">
-					<div className="welcomeToThe">
-					Welcome to the
-					</div>
-					<div className="logo">
-						<img alt="Logo" src={require('./Full_Logo.png')} />
-					</div>
 					<div className="bottomBox">
 						<div>
 							<Route render={({ history}) => (
@@ -47,63 +42,64 @@ const Login = props => (
 							)} />
 						</div>
 					</div>
-					<div className="loginBoxPos">
-						<form>
-						{
-									!props.currentUser ?
-							<div>
-								<TextField
-									className="loginBox"
-									hintText='Email'
-									floatingLabelText='Email'
-									label="Email"
-									type="email"
-									onChange={(e)=>{
-										email = e.target.value;
+					<div className="welcomeToThe">
+					Welcome to the
+					</div>
+					<img className="logo" alt="Logo" src={require('./Full_Logo.png')} />
+					
+					<form>
+					{
+						!props.currentUser ?
+						<div>
+							<TextField
+								className="loginEmail"
+								hintText='Email'
+								floatingLabelText='Email'
+								label="Email"
+								type="email"
+								onChange={(e)=>{
+									email = e.target.value;
+								}}
+							/>
+							<TextField
+								className="loginPass"
+								hintText='Password'
+								floatingLabelText='Password'
+								label="Password"
+								onChange={(e)=>{
+									password = e.target.value;
+								}}
+								type="password"
+							/>
+						</div>
+						:
+						<p></p>
+					}
+						<div >
+							{
+								!props.currentUser ?
+								<FlatButton className="loginBtn"
+									label="Login"
+									onClick={()=>{
+
+										props.loginUser({userEmail:email,userPassword:password});
+										props.getCurrentUser();
+
 									}}
 								/>
-								<br></br>
-								<TextField
-									className="loginBox"
-									hintText='Password'
-									floatingLabelText='Password'
-									label="Password"
-									onChange={(e)=>{
-										password = e.target.value;
-									}}
-									type="password"
-								/>
-							</div>
-							:
-							<p></p>
-						}
-							<div >
-								{
-									!props.currentUser ?
+								:
+								<Route render={({ history}) => (
 									<FlatButton className="loginBtn"
-										label="Login"
+										label="My Account"
 										onClick={()=>{
-
-											props.loginUser({userEmail:email,userPassword:password});
-											props.getCurrentUser();
-
+											history.push('/settings');
 										}}
 									/>
-									:
-									<Route render={({ history}) => (
-										<FlatButton className="loginBtn"
-	 									 label="My Account"
-	 									 onClick={()=>{
-	 										 history.push('/settings');
-	 									 }}
-	 								 />
-               		)} />
+				)} />
 
-								}
-
-							</div>
-						</form>
-					</div>
+							}
+						</div>
+					</form>
 				</div>
 			</div>
 		)
