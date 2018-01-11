@@ -1,74 +1,82 @@
 import './headerNav.css';
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { Route } from 'react-router-dom';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
+import {Route} from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../../reducers/Account';
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser,
+  logOut
+} from '../../reducers/Account';
 
-import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
-
+import {addMsg, getMsgs, getChats} from '../../reducers/Chat';
 
 class HeaderNav extends Component {
 
-    constructor(props){
-      super(props);
-      this.props = props;
-  }
-
-    handleChange = (event, logged) => {
-        this.setState({ logged: logged });
-    };
-
-    changePage(value) {
-        push('/' + value);
+  constructor(props) {
+    super(props);
+    this.props = props;
+    try{
+        props.getCurrentUser();
+    }
+    catch(exc){
+            window.location.href = '/';
     }
 
-    styles = {
-        'padding-bottom': '2px'
-    };
+  }
 
+  handleChange = (event, logged) => {
+    this.setState({logged: logged});
+  };
 
-    render() {
-        return (
-                <div className="navBar">
-                    <div>
-                      <Route render={({ history }) => (
-                        <div className="newChat" primary={true} onClick={() => { history.push('/accountScreen')}}>
-                            <label className="newChatLbl"> NEW CHAT </label>
-                        </div>
-                      )} />
+  changePage(value) {
+    push('/' + value);
+  }
 
-                        <div className="newGroup" primary={true} onClick={() => {}}>
-                            <label className="newGroupLbl"> NEW GROUP </label>
-                        </div>
-                    </div>
+  styles = {
+    'padding-bottom': '2px'
+  };
 
-                    {
-                      this.props.getCurrentUser ?(
-                      <label className="nameLbl">{ this.props.name } { this.props.surname }</label>)
+  render() {
+    return (
+      <div class="navBar">
+      <Route render={({history}) => (<div class="newChat initial" onClick={() => {
+            history.push('/accountScreen')
+          }}>
+          <label className="newChatLbl">
+            NEW CHAT
+          </label>
+        </div>)}/>
+      <div className="newGroup initial" primary={true} onClick={() => {}}>
+        <label className="newGroupLbl">
+          NEW GROUP
+        </label>
+      </div>
+      <div class="auto">
+
+      </div>
+
+      <div class="test initial">
+        {
+            this.props.getCurrentUser ?(
+                      <label className="newChatLbl" >{ this.props.name } { this.props.surname }</label>)
                       :
-                      (<label className="nameLbl">No Logged in</label>)
-                    }
+                      (<label  className="newChatLbl">No Logged in</label>)
+                    }</div>
+                  <div class="test initial">
 
-                    {
-                      !this.props.currentUser ?
-                      <Route render={({ history }) => (
-                        <div className="newChat" primary={true} onClick={() => { history.push('/')}}>
-                            <label className="newChatLbl"> LOG IN </label>
-                        </div>
-                      )} />
-
-                      :
-                      <div>
                           <IconMenu
                           className="miniImgPlaceholder"
                               iconButtonElement={
-                                  <IconButton>
+                                  <IconButton className="miniProImage">
                                       <img
                                           className="miniProImage"
                                           src={this.props.pic}
@@ -102,43 +110,28 @@ class HeaderNav extends Component {
                                   )}>
                           </Route>
                           </IconMenu>
-                          <div>
-                              <img className="logoImg"
-                                src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
-                                alt=""
-                              ></img>
-                            </div>
-
-                      </div>
-                    }
-
-                </div>
-        )
-    }
+      </div>
+      <div className="test initial">
+        <img className="logoImg " src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png" alt=""></img>
+      </div>
+    </div>)
+  }
 }
 
-
-const mapStateToProps = state =>
-{
-  return {chats: state.Chat.chats,
-    msgs: state.Chat.msgs,
-    currentUser: state.Account.currentUser,
-    users: state.Account.users,
-    receiver: state.Account.receiver
-  };
+const mapStateToProps = state => {
+  return {chats: state.Chat.chats, msgs: state.Chat.msgs, currentUser: state.Account.currentUser, users: state.Account.users, receiver: state.Account.receiver};
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    getUser,
-    getCurrentUser,
-    changeUser,
-    addMsg,
-    getMsgs,
-    registerUser,
-    loginUser,
-    getChats,
-    logOut
-  }, dispatch);
-
+  getUser,
+  getCurrentUser,
+  changeUser,
+  addMsg,
+  getMsgs,
+  registerUser,
+  loginUser,
+  getChats,
+  logOut
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);

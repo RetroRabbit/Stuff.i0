@@ -16,6 +16,8 @@ import StepThree from './components/registration/stepThree';
 
 import AccountScreen from './components/accountScreen/accountScreen';
 import Login from './components/login/loginIndex';
+
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -26,22 +28,22 @@ class App extends Component {
     return (
       <div>
         <MuiThemeProvider>
-        <header>
-        </header>
+               <header>
+               </header>
 
-        <main>
-            <Route exact path="/Login" component={Login}/>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/nav" component={headerNav} />
-            <Route exact path="/settings" component={settings} />
-            <Route exact path="/StepOne" component={StepOne} />
-            <Route exact path="/StepTwo" component={StepTwo} />
-            <Route exact path="/StepThree" component={StepThree} />
-            <Route exact path="/AccountScreen" component={AccountScreen} />
+               <main>
+                   <Route exact path="/Login" component={Login}/>
+                   <Route exact path="/" component={Login} />
+                   <Route exact path="/nav" component={headerNav} />
+                   <Route exact path="/settings" component={settings} />
+                   <Route exact path="/StepOne" component={StepOne} />
+                   <Route exact path="/StepTwo" component={StepTwo} />
+                   <Route exact path="/StepThree" component={StepThree} />
+                   <Route exact path="/AccountScreen" component={AccountScreen} />
 
-          </main>
-        </MuiThemeProvider>
-      </div>
+                 </main>
+               </MuiThemeProvider>
+ </div>
     );
   }
 }

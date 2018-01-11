@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Route} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -7,6 +6,8 @@ import './loginIndex.css';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+//import DesktopBreakpoint from '../responsiveUtilities/desktopBreakPoint';
+
 
 import {
   getUser,
@@ -106,7 +107,9 @@ const Login = props => (
 					</div>
 				</div>
 			</div>
+    
 		)
+
 
 	const mapStateToProps = state => ({
 	  chats:state.Chat.chats,

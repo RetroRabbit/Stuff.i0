@@ -171,3 +171,14 @@
         overflow-y: auto;
     }
 }
+.initial {
+  flex: initial;
+}
+
+.auto {
+  flex: auto;
+}
+
+.none {
+  flex: none;
+}
