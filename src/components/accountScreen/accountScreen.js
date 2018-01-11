@@ -67,6 +67,8 @@ const searchBarStyle = {
     borderRadius: '21.5px',
     height: '43px',
     width: '345px',
+    height: '6vh',
+    width: '19vw',
     border: '1px solid #979797',
     margin: '0px auto'
 };

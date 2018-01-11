@@ -136,9 +136,9 @@
 
 }
 
-
 .navBar {
 	height: 103px;
+	height: 14vh;
 	width: 100%;
 	background-color: #01B9BD !important;
 	margin: auto;
