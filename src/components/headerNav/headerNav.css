@@ -1,13 +1,30 @@
+.inputimg{
+  opacity: 0;
+  position: 'absolute';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+};
+.background{
+	resize: horizontal;
+ 	overflow: hidden;
+ 	display: flex;
+
+}
 .newChat {
 	height: 5%;
 	width: 10%;
 	border-radius: 5px;
 	background-color: #0DABAF;
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	margin-top: 1.5%;
+	margin-top: 1%;
+	margin-bottom: 1%;
 	margin-left: 3%;
 	display: inline-block !important;
 	text-align: center;
+  font-size: 2vmin !important;
 }
 
 .newGroup {
@@ -16,13 +33,20 @@
 	border-radius: 5px;
 	background-color: #0DABAF;
 	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	margin-top: 1.5%;
+	margin-top: 1%;
+	margin-bottom: 1%;
 	margin-left: 2%;
 	display: inline-block !important;
 	text-align: center;
 }
-
-.newChatLbl {
+.test {
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-left: 1%;
+	margin-right: 1%;
+	text-align: center;
+}
+.btnLabel {
 	height: 25px;
 	width: 126px;
 	color: #FFFFFF;
@@ -45,18 +69,15 @@
 }
 
 .nameLbl {
-	height: 30px;
-	width: 201px;
-	color: #f3f3f3;
+  height: 25px;
+	width: 126px;
+	color: #FFFFFF;
 	font-family: "Helvetica";
-	font-size: 20px;
-	line-height: 27px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 3em;
 	text-align: center !important;
-	display: inline-block !important;
-	display: flex;
-	margin-left: 72% !important;
-	top: 6%;
-	position: absolute !important;
+
 }
 
 .miniImgPlaceholder {
@@ -65,23 +86,14 @@
 	background-color: #FFFFFF;
 	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
 	border-radius: 50%;
-	float: right;
-	position: absolute;
-	top: -55px ;
-	right: 150px;
-
-
 }
 
 .miniProImage {
-	height: 54px;
-	width: 54px;
+	height: 50px;
+	width: 50px;
 	border-radius: 50%;
-	display: inline-block !important;
-	right: 5px;
-	position: relative;
-	bottom: 5px;
-
+	right: 18% !important;
+	bottom: 6% !important;
 }
 
 .logoBorder {
@@ -98,13 +110,12 @@
 }
 
 .logoImg {
-	height: 13%;
-	width: 7%;
+	height: 70px;
+	width: 70px;
+	background-color: #FFFFFF;
+	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
 	border-radius: 50%;
-	display: inline-block !important;
-	top: 1% ;
-	right: 3%;
-	position: absolute;
+
 }
 
 .sideRight{
@@ -137,11 +148,13 @@
 }
 
 .navBar {
-	height: 103px;
-	height: 14vh;
-	width: 100%;
+
 	background-color: #01B9BD !important;
 	margin: auto;
+	resize: horizontal;
+	overflow: hidden;
+	display: flex;
+
 }
 
 .pencilmg {
@@ -174,4 +187,39 @@
 	line-height: 3em;
     text-align: center !important;
     justify-self: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flex-container {
+  background-color: #F4F7F8;
+  resize: horizontal;
+  overflow: hidden;
+  display: flex;
+  margin: 1em;
+}
+
+.item {
+  margin: 1em;
+  padding: 0.5em;
+  width: 110px;
+  min-width: 0;
+  background-color: #1B5385;
+  color: white;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.initial {
+  flex: initial;
+}
+
+.auto {
+  flex: auto;
+}
+
+.none {
+  flex: none;
 }

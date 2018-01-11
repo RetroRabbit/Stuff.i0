@@ -15,6 +15,8 @@ import StepThree from './components/registration/stepThree';
 
 import AccountScreen from './components/accountScreen/accountScreen';
 import Login from './components/login/loginIndex';
+
+
 class App extends Component {
     render() {
         return (
@@ -36,6 +38,7 @@ class App extends Component {
             </div>
         );
     }
+
 }
 
 export default App;
