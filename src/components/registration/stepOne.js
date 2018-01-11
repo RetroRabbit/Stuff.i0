@@ -34,8 +34,8 @@ class StepOne extends React.Component {
     return (
       <div className="pageContainer">
       <div className="regRectangle">
-        <h2 className="stepOne">Step One</h2>
-        <h2 className="theBasics">THE BASICS</h2>
+        <h2 className="stepHeading">Step One</h2>
+        <h2 className="titleHeading">THE BASICS</h2>
         <MuiThemeProvider>
           <div className="formField" >
             <form>

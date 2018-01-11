@@ -58,16 +58,16 @@ class StepTwo extends React.Component {
     render() {
         return (
             <div className="pageContainer">
-            <div className="reg-rectangle">
-                <h2 className="step-one">Step Two</h2>
-                <h2 className="the-basics">PROFILE PICTURE</h2>
+            <div className="regRectangle">
+                <h2 className="stepHeading">Step Two</h2>
+                <h2 className="titleHeading">PROFILE PICTURE</h2>
                 <MuiThemeProvider>
-                <div className="pro-pic-placeholder" >
+                <div className="proPicPlaceholder" >
                         {!this.state.hasimg ?
-                            <div className="upload-circle">
-                                <div className="plus-logo">
-                                    <div className="plus-horizontal" />
-                                    <div className="plus-vertical" />
+                            <div className="uploadCircle">
+                                <div className="plusLogo">
+                                    <div className="plusHorizontal" />
+                                    <div className="plusVertical" />
                                 </div>
                                 <input
                                     type="file"
@@ -80,7 +80,7 @@ class StepTwo extends React.Component {
                             :
                             <img
                                 src={this.state.profilephoto}
-                                className="pro-pic-jpg"
+                                className="proPicJpg"
                                 alt="Profile"
                             />
                         }
@@ -93,17 +93,17 @@ class StepTwo extends React.Component {
                             this.saveImg()
                             history.push('/StepThree')
                         }}
-                            className="next-button-2"
+                            className="nextButton"
                             label="Next Step" />
                     )} />
                 </div>
-                <div className="skip-2">
+                <div className="skip2">
                 <Route render={({ history }) => (
                         <p {...this.props} onClick={() => {
                             this.setState({ logged: false })
                             history.push('/StepThree')
                         }}
-                        className="skip-for-now "
+                        className="skipForNow "
                             label="Next Step" >Skip for now</p>
                     )} />
 
