@@ -42,7 +42,6 @@ class StepOne extends React.Component {
               <TextField
                 className="input"
                 type="text"
-                hintText="Enter your Name"
                 floatingLabelText="Your Name"
                 floatingLabelStyle={{ color: white }}
                 onChange={(e)=>{
@@ -53,7 +52,6 @@ class StepOne extends React.Component {
               <TextField
                 className="input"
                 type="email"
-                hintText="Enter your Email"
                 floatingLabelText="Email"
                 floatingLabelStyle={{ color: white }}
                 onChange={(e)=>{
@@ -64,7 +62,6 @@ class StepOne extends React.Component {
               <TextField
                 className="input"
                 type="password"
-                hintText="Enter your Password"
                 floatingLabelText="Password"
                 floatingLabelStyle={{ color: white }}
                 onChange={(e)=>{
