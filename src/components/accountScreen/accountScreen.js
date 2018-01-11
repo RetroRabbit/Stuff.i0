@@ -44,7 +44,7 @@ const getShort = str => {
 const getShortTime = str => {
     var value = str.getMinutes().toString();
     if (value.length === 1) {
-        value += '0';
+        value += "0";
     }
     return str.getHours() + ':' + value;
 };
