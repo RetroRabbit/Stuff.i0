@@ -7,6 +7,14 @@ import { Route } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+
+import TextField from 'material-ui/TextField';
+
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../../reducers/Account';
 
@@ -18,7 +26,11 @@ class HeaderNav extends Component {
     constructor(props){
       super(props);
       this.props = props;
-  }
+    }
+
+    state = {
+      open:false
+    }
 
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
@@ -38,10 +50,41 @@ class HeaderNav extends Component {
                 <div className="navBar">
                     <div>
                       <Route render={({ history }) => (
-                        <div className="newChat" primary={true} onClick={() => { history.push('/accountScreen')}}>
+                        <div className="newChat" primary={true} onMouseEnter={(e) =>{
+                            this.setState({ open: true })
+                          }} onClick={() => { history.push('/accountScreen')}}>
                             <label className="newChatLbl"> NEW CHAT </label>
                         </div>
                       )} />
+
+                              <Popover
+                                open={this.state.open}
+                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                targetOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                onRequestClose={this.handleRequestClose}>
+                                  <Card>
+                                      <CardTitle title="Search for a user"/>
+                                      <CardText>
+                                        <div>
+                                          <FlatButton label="X" onClick={(e)=>{ this.setState({ open: false })}}>
+
+                                          </FlatButton>
+                                        </div>
+                                        <TextField
+                                            hintText="Friend's Email"
+                                            onKeyDown={e => {
+                                                if (e.key === 'Enter' && e.target.value.length > 0) {
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                            style={{
+                                                padding: '1px 0px 1px 25px',
+                                                width: '100%'
+                                            }}
+                                        />
+                                      </CardText>
+                                    </Card>
+                              </Popover>
 
                         <div className="newGroup" primary={true} onClick={() => {}}>
                             <label className="newGroupLbl"> NEW GROUP </label>

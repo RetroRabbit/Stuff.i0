@@ -1,3 +1,6 @@
+import axios from 'axios'
+
+
 export const USER_ACCOUNT = 'Account/USER_ACCOUNT';
 export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT';
 export const LOGIN_USER_ACCOUNT = 'Account/LOGIN_USER_ACCOUNT';
@@ -10,6 +13,10 @@ export const CHANGE_SELECTED_CHAT = 'Account/CHANGE_SELECTED_CHAT';
 export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
 
 const initialState = {
+    api:{
+      host:'http://192.168.0.20',
+      port:54980
+    },
     currentUserChats: [],
     filteredChats: [],
     currentUser:null,
@@ -106,6 +113,13 @@ export default (state = initialState, action) => {
             };
 
         case CURRENT_USER_ACCOUNT:
+            axios.get( state.api.host + ':'  + state.api.port + '/api/chats').then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                alert(error);
+                console.log(error);
+            });
+
             return {
                 ...state
             };
