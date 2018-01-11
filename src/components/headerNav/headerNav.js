@@ -8,15 +8,16 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
-import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../reducers/Account';
+import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../../reducers/Account';
 
-import { addMsg, getMsgs, getChats } from '../reducers/Chat';
+import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
 
 class HeaderNav extends Component {
 
     constructor(props){
       super(props);
+      this.props = props;
   }
 
     handleChange = (event, logged) => {
@@ -30,7 +31,7 @@ class HeaderNav extends Component {
     styles = {
         'padding-bottom': '2px'
     };
-    
+
 
     render() {
         return (
@@ -107,7 +108,7 @@ class HeaderNav extends Component {
                                 alt=""
                               ></img>
                             </div>
-                          
+
                       </div>
                     }
 
@@ -117,12 +118,12 @@ class HeaderNav extends Component {
 }
 
 
-const mapStateToProps = state => 
+const mapStateToProps = state =>
 {
-  return {chats: state.Chat.chats, 
-    msgs: state.Chat.msgs, 
-    currentUser: state.Account.currentUser, 
-    users: state.Account.users, 
+  return {chats: state.Chat.chats,
+    msgs: state.Chat.msgs,
+    currentUser: state.Account.currentUser,
+    users: state.Account.users,
     receiver: state.Account.receiver
   };
 };

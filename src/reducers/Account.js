@@ -90,7 +90,7 @@ export default (state = initialState, action) => {
             };
 
         case LOGIN_USER_ACCOUNT:
-            var user = null;
+            user = null;
             for (let i = 0; i < state.users.length; i++) {
                 if (
                     state.users[i].userEmail === action.user.userEmail &&
@@ -124,12 +124,12 @@ export default (state = initialState, action) => {
             };
 
         case CHANGE_USER_ACCOUNT:
-            var user = state.currentUser;
+            user = state.currentUser;
             if(action.new.userName){
                 user.userName = action.new.userName;
                 user.userSurname = action.new.userSurname;
             }
-            
+
             if(action.new.userImg){
                 user.userImg =action.new.userImg;
             }
@@ -148,7 +148,6 @@ export default (state = initialState, action) => {
         case CURRENT_USER_CHATS:
             console.log('dispatching CURRENT_USER_CHATS');
             let msgs = action.allMsgs;
-
             let userChats = [];
 
             for (let msg of msgs) {

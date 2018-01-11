@@ -1,5 +1,3 @@
-import history from "../store";
-
 export default function(values) {
     const errors = {};
     const requiredFields = [

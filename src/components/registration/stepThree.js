@@ -1,10 +1,8 @@
 import React from 'react';
-import { reduxForm } from 'redux-form'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import { white } from 'material-ui/styles/colors';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css'
 
@@ -58,13 +56,5 @@ class StepThree extends React.Component {
     );
   }
 }
-const inputimg = {
-  opacity: 0,
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
-  width: '100%'
-};
+
 export default StepThree

@@ -1,6 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css';
 
@@ -14,17 +14,18 @@ import {
   getCurrentUser,
   registerUser,
   loginUser
-} from '../reducers/Account'
+} from '../../reducers/Account'
 
 import {
   addMsg,
   getMsgs,
   getChats
-} from '../reducers/Chat'
+} from '../../reducers/Chat'
 
 class StepTwo extends React.Component {
     constructor(props) {
-        super(props);    
+        super(props);
+        this.props = props;
     }
 
     changeImg = (e) => {
@@ -49,7 +50,7 @@ class StepTwo extends React.Component {
 
     saveImg = () =>{
         this.props.changeUser({userImg:this.state.profilephoto});
-    
+
         this.props.getCurrentUser();
         this.forceUpdate();
     }
@@ -105,7 +106,7 @@ class StepTwo extends React.Component {
                         className="skip-for-now "
                             label="Next Step" >Skip for now</p>
                     )} />
-                
+
                 </div>
             </div>
             </div>
@@ -127,7 +128,7 @@ const mapStateToProps = state => ({
     currentUser: state.Account.currentUser,
     users: state.Account.users,
   })
-  
+
   const mapDispatchToProps = dispatch => bindActionCreators({
     getUser,
     getCurrentUser,
@@ -138,6 +139,5 @@ const mapStateToProps = state => ({
     loginUser,
     getChats
   }, dispatch)
-  
+
   export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);
-  

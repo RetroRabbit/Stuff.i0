@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import './css/index.css';
 
 
@@ -7,20 +7,19 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //Import Material-UI
 
 // TODO : Import all the components
-import home from './components/home'
+import settings from './components/settings/settings'
 
-import settings from './components/settings'
+import headerNav from './components/headerNav/headerNav'
+import StepOne from './components/registration/stepOne';
+import StepTwo from './components/registration/stepTwo';
+import StepThree from './components/registration/stepThree';
 
-import headerNav from './components/headerNav'
-import StepOne from './registration/StepOne';
-import StepTwo from './registration/StepTwo';
-import StepThree from './registration/StepThree';
-
-import AccountScreen from './accountScreen/accountScreen';
-import Login from './Login/Login_index';
+import AccountScreen from './components/accountScreen/accountScreen';
+import Login from './components/login/loginIndex';
 class App extends Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.props = props;
   }
 
   render() {

@@ -1,13 +1,11 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
-import { reduxForm } from 'redux-form';
 import { Route } from 'react-router-dom'
 
 import './reg.css';
 import { white } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
-import history from '../store'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -18,22 +16,20 @@ import {
   getCurrentUser,
   registerUser,
   loginUser
-} from '../reducers/Account'
+} from '../../reducers/Account'
 
 import {
   addMsg,
   getMsgs,
   getChats
-} from '../reducers/Chat'
+} from '../../reducers/Chat'
 
 class StepOne extends React.Component {
   constructor(props) {
     super(props);
-    var username
-    var email
-    var password
+    this.props = props;
+  }
 
-}
   render() {
     return (
       <div className="pageContainer">

@@ -3,18 +3,15 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
 import { Route } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import HeaderNav from './headerNav';
+import HeaderNav from '../headerNav/headerNav';
 
-import './headerNav.css';
+import '../headerNav/headerNav.css';
 
 import {
   getUser,
@@ -23,9 +20,9 @@ import {
   registerUser,
   loginUser,
   logOut
-} from '../reducers/Account';
+} from '../../reducers/Account';
 
-import {addMsg, getMsgs, getChats} from '../reducers/Chat';
+import {addMsg, getMsgs, getChats} from '../../reducers/Chat';
 
 const styles = {
   gridList: {
@@ -60,17 +57,16 @@ class settings extends Component {
       props.getCurrentUser();
       try{
         props.getCurrentUser();
-        props.currentUser.userID
         }
         catch(exc){
                 window.location.href = '/';
         }
-    
+
   }
 
   saveChanges() {
     this.props.changeUser({userName:this.state.user.name, userSurname:this.state.user.surname});
-    
+
     this.forceUpdate();
     this.props.getCurrentUser();
   }
@@ -106,7 +102,7 @@ class settings extends Component {
                                 </div>
 
                     </div>
-            
+
 
          {/* <div className="proImgPlaceholder">
          <img className="proImg"
@@ -133,8 +129,8 @@ class settings extends Component {
                       <ActionDone/>
                     </IconButton>
                   </div>
-                : <div> 
-                  
+                : <div>
+
                     <label className="userTitleText">
                       {this.props.currentUser.userSurname} {this.props.currentUser.userName}
                     </label>
@@ -148,8 +144,8 @@ class settings extends Component {
                       <EditorModeEdit/>
                     </IconButton>
                   </div>
-                  
-                
+
+
             }
           </div>
 
@@ -190,11 +186,11 @@ class settings extends Component {
         <Route render={({ history }) => (
           <div className="doneBtn" onClick={() => {
             history.push('/accountScreen')
-            }} label="Done" secondary={true}> 
-            <label className="doneLbl">DONE</label> 
+            }} label="Done" secondary={true}>
+            <label className="doneLbl">DONE</label>
           </div>
         )} />
-          
+
         </GridTile>
       </GridList>
     </div>);
@@ -211,12 +207,12 @@ const inputimg = {
   width: '100%'
 };
 
-const mapStateToProps = state => 
+const mapStateToProps = state =>
 {
-  return {chats: state.Chat.chats, 
-    msgs: state.Chat.msgs, 
-    currentUser: state.Account.currentUser, 
-    users: state.Account.users, 
+  return {chats: state.Chat.chats,
+    msgs: state.Chat.msgs,
+    currentUser: state.Account.currentUser,
+    users: state.Account.users,
     receiver: state.Account.receiver
   };
 };
