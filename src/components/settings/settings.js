@@ -5,14 +5,14 @@ import ActionDone from 'material-ui/svg-icons/action/done';
 import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import TextField from 'material-ui/TextField';
 
-import { Route } from 'react-router-dom'
+import {Route} from 'react-router-dom'
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import HeaderNav from '../headerNav/headerNav';
 
 import '../headerNav/headerNav.css';
-
+import './settings.css'
 import {
   getUser,
   changeUser,
@@ -38,37 +38,36 @@ class settings extends Component {
     console.log(e.target.files[0]);
 
     if (e.target.files && e.target.files[0]) {
-        let reader = new FileReader();
-        reader.onload = event => {
-            this.setState({ profilephoto: event.target.result });
-        };
-        reader.readAsDataURL(e.target.files[0]);
+      let reader = new FileReader();
+      reader.onload = event => {
+        this.setState({profilephoto: event.target.result});
+      };
+      reader.readAsDataURL(e.target.files[0]);
 
     }
-    this.setState({ hasimg: true });
-    this.props.changeUser({userImg:this.state.profilephoto});
+    this.setState({hasimg: true});
+    this.props.changeUser({userImg: this.state.profilephoto});
 
     this.props.getCurrentUser();
     this.forceUpdate();
-}
+  }
 
-  constructor(props){
-      super(props);
-      try{
-        props.getCurrentUser();
+  constructor(props) {
+    super(props);
+    try {
+      props.getCurrentUser();
 
-var JIU =this.props.currentUser.userID;
+      var JIU = this.props.currentUser.userID;
 
-        }
-        catch(exc){
+    } catch (exc) {
 
-                window.location.href = '/';
-        }
+      window.location.href = '/';
+    }
 
   }
 
   saveChanges() {
-    this.props.changeUser({userName:this.state.user.name, userSurname:this.state.user.surname});
+    this.props.changeUser({userName: this.state.user.name, userSurname: this.state.user.surname});
 
     this.forceUpdate();
     this.props.getCurrentUser();
@@ -77,123 +76,110 @@ var JIU =this.props.currentUser.userID;
   state = {
     editingEmail: false,
     editingNames: false,
-    profilephoto:'',
-    user:'',
-    hasimg: true,
+    profilephoto: '',
+    user: '',
+    hasimg: true
   };
 
   render() {
     return (
-    <div className="background">
-        <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } { ...this.props }></HeaderNav>
-          <GridList cols={1} cellHeight={80} style={styles.gridList}>
-         <GridTile className="text-center" cols={1} rows={4}>
-         <div className="auto proImgPlaceholder" >
-                         <div>
-                               <img
-                               src={ this.props.currentUser.userImg }
-                               className="proImg"
-                               alt="Profile"
-                           ></img>
-                                 <input
-                                     type="file"
-                                     onChange={e => {
-                                         this.changeImg(e);
-                                     }}
-                                     style={inputimg}
-                                 />
-                                 </div>
+      <div >
+        <HeaderNav pic={this.props.currentUser.userImg} surname={this.props.currentUser.userSurname} name={this.props.currentUser.userName} { ...this.props }></HeaderNav>
+        <div className="flex-container">
+            <div className="auto"></div>
+            <div className="auto"><GridList cols={1} cellHeight={80} style={styles.gridList} className="auto">
+          <GridTile className="auto text-center" cols={1} rows={4}>
+            <div className="auto proImgPlaceholder">
+              <div>
+                <img src={this.props.currentUser.userImg} className="proImg" alt="Profile"></img>
+                <input type="file" onChange={e => {
+                    this.changeImg(e);
+                  }} style={inputimg}/>
+              </div>
 
-                     </div>
+            </div>
+          </GridTile>
 
+          <GridTile className="text-center" cols={1} rows={1}>
+            <div>
+              {
+                this.state.editingNames
+                  ? <div>
+                      <TextField onChange={(e) => {
+                          var newSelected = this.props.currentUser;
+                          newSelected.surname = e.target.value.split(' ')[0]
+                          newSelected.name = e.target.value.split(' ')[1]
+                          this.setState({user: newSelected})
+                        }} hintText="Surname Name"/>
+                      <IconButton onClick={() => {
+                          this.saveChanges();
+                          this.setState({editingNames: false});
+                        }} iconStyle={styles.mediumIcon} style={styles.medium}>
+                        <ActionDone/>
+                      </IconButton>
+                    </div>
+                  : <div>
 
-          {/* <div className="proImgPlaceholder">
-          <img className="proImg"
-              src={this.props.currentUser.userImg}/>
-             </div> */}
+                      <label className="userTitleText">
+                        {this.props.currentUser.userSurname}
+                        {this.props.currentUser.userName}
+                      </label>
 
-         </GridTile>
+                      <IconButton onClick={() => {
+                          this.setState({editingNames: true})
+                        }} iconStyle={styles.mediumIcon} style={styles.medium}>
+                        <EditorModeEdit/>
+                      </IconButton>
+                    </div>
+              }
+            </div>
 
-         <GridTile className="text-center" cols={1} rows={1}>
-           <div>
-             {
-               this.state.editingNames
-                 ? <div>
-                     <TextField onChange={(e) => {
-                         var newSelected = this.props.currentUser;
-                         newSelected.surname = e.target.value.split(' ')[0]
-                         newSelected.name = e.target.value.split(' ')[1]
-                         this.setState({user: newSelected})
-                       }} hintText="Surname Name"/>
-                     <IconButton onClick={() => {
-                         this.saveChanges();
-                         this.setState({editingNames: false});
-                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
-                       <ActionDone/>
-                     </IconButton>
-                   </div>
-                 : <div>
+          </GridTile>
 
-                     <label className="userTitleText">
-                       {this.props.currentUser.userSurname} {this.props.currentUser.userName}
-                     </label>
-                     
-                     <IconButton onClick={() => {
-                         this.setState({editingNames: true})
-                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
-                       <EditorModeEdit/>
-                     </IconButton>
-                   </div>
+          <GridTile className="text-center" cols={1} rows={1}>
+            <div>
+              {
+                this.state.editingEmail
+                  ? <div>
+                      <TextField onChange={(e) => {
+                          var newSelected = this.props.currentUser;
+                          newSelected.email = e.target.value
+                          this.setState({user: newSelected})
+                        }} hintText="Email Address"/>
+                      <IconButton onClick={() => {
+                          this.saveChanges();
+                          this.setState({editingEmail: false})
+                        }} iconStyle={styles.mediumIcon} style={styles.medium}>
+                        <ActionDone/>
+                      </IconButton>
+                    </div>
+                  : <div>
+                      <label className="userTitleText">
+                        {this.props.currentUser.userEmail}
+                      </label>
+                      <IconButton onClick={() => {
+                          this.setState({editingEmail: true})
+                        }} iconStyle={styles.mediumIcon} style={styles.medium}>
+                        <EditorModeEdit/>
+                      </IconButton>
+                    </div>
+              }
+            </div>
+          </GridTile>
 
+          <GridTile className="text-center" cols={1} rows={2}>
+            <Route render={({history}) => (<div className="doneBtn" onClick={() => {
+                  history.push('/accountScreen')
+                }} label="Done" secondary={true}>
+                <label className="doneLbl">DONE</label>
+              </div>)}/>
 
-             }
-           </div>
-
-         </GridTile>
-
-         <GridTile className="text-center" cols={1} rows={1}>
-           <div>
-             {
-               this.state.editingEmail
-                 ? <div>
-                     <TextField onChange={(e) => {
-                         var newSelected = this.props.currentUser;
-                         newSelected.email = e.target.value
-                         this.setState({user: newSelected})
-                       }} hintText="Email Address"/>
-                     <IconButton onClick={() => {
-                         this.saveChanges();
-                         this.setState({editingEmail: false})
-                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
-                       <ActionDone/>
-                     </IconButton>
-                   </div>
-                 : <div>
-                     <label className="userTitleText">
-                       {this.props.currentUser.userEmail}
-                     </label>
-                     <IconButton onClick={() => {
-                         this.setState({editingEmail: true})
-                       }} iconStyle={styles.mediumIcon} style={styles.medium}>
-                       <EditorModeEdit/>
-                     </IconButton>
-                   </div>
-             }
-           </div>
-         </GridTile>
-
-         <GridTile className="text-center" cols={1} rows={2}>
-         <Route render={({ history }) => (
-           <div className="doneBtn" onClick={() => {
-             history.push('/accountScreen')
-             }} label="Done" secondary={true}>
-             <label className="doneLbl">DONE</label>
-           </div>
-         )} />
-
-         </GridTile>
-       </GridList>
-     </div>);
+          </GridTile>
+        </GridList></div>
+            <div className="auto"></div>
+        </div>
+      </div>
+  );
 
   }
 }
@@ -208,14 +194,8 @@ const inputimg = {
   width: '100%'
 };
 
-const mapStateToProps = state =>
-{
-  return {chats: state.Chat.chats,
-    msgs: state.Chat.msgs,
-    currentUser: state.Account.currentUser,
-    users: state.Account.users,
-    receiver: state.Account.receiver
-  };
+const mapStateToProps = state => {
+  return {chats: state.Chat.chats, msgs: state.Chat.msgs, currentUser: state.Account.currentUser, users: state.Account.users, receiver: state.Account.receiver};
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({

@@ -51,11 +51,12 @@ class HeaderNav extends Component {
       <Route render={({history}) => (<div class="newChat initial" onClick={() => {
             history.push('/accountScreen')
           }}>
-          <label className="newChatLbl">
+          <label className="newGroupLbl">
             NEW CHAT
           </label>
         </div>)}/>
-      <div className="newGroup initial" primary={true} onClick={() => {}}>
+
+      <div className="newChat initial" primary={true} onClick={() => {}}>
         <label className="newGroupLbl">
           NEW GROUP
         </label>
@@ -67,9 +68,9 @@ class HeaderNav extends Component {
       <div class="test initial">
         {
             this.props.getCurrentUser ?(
-                      <label className="newChatLbl" >{ this.props.name } { this.props.surname }</label>)
+                      <label className="nameLbl" >{ this.props.name } { this.props.surname }</label>)
                       :
-                      (<label  className="newChatLbl">No Logged in</label>)
+                      (<label  className="nameLbl">No Logged in</label>)
                     }</div>
                   <div class="test initial">
 
