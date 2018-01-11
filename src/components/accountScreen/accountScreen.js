@@ -44,7 +44,7 @@ const getShort = str => {
 const getShortTime = str => {
     var value = str.getMinutes().toString();
     if (value.length === 1) {
-        value += "0";
+        value += '0';
     }
     return str.getHours() + ':' + value;
 };
@@ -65,8 +65,6 @@ const cardTextStyle = {
 
 const searchBarStyle = {
     borderRadius: '21.5px',
-    height: '43px',
-    width: '345px',
     height: '6vh',
     width: '19vw',
     border: '1px solid #979797',
@@ -189,11 +187,10 @@ const MessageTimeRight = function(props) {
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
-        try{
+        try {
             props.getCurrentUser();
-        }
-        catch(exc){
-                window.location.href = '/';
+        } catch (exc) {
+            window.location.href = '/';
         }
 
         props.getUserChats(this.props.allMsgs);
@@ -201,11 +198,6 @@ class AccountScreen extends Component {
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
-
-    }
-
-    componentWillReceiveProps(newProps) {
-        console.log(newProps);
     }
 
     filterList = function(text) {
@@ -239,8 +231,10 @@ class AccountScreen extends Component {
 
     render() {
         return (
+
             <div className="auto">
                 <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } />
+
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar
