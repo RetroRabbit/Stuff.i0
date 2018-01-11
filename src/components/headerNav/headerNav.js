@@ -10,6 +10,10 @@ import MenuItem from 'material-ui/MenuItem';
 import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 
+import Avatar from 'material-ui/Avatar';
+import {List, ListItem} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 
 import TextField from 'material-ui/TextField';
@@ -29,7 +33,8 @@ class HeaderNav extends Component {
     }
 
     state = {
-      open:false
+      open:false,
+      txtSearch:''
     }
 
     handleChange = (event, logged) => {
@@ -76,6 +81,8 @@ class HeaderNav extends Component {
                                                 if (e.key === 'Enter' && e.target.value.length > 0) {
                                                     e.target.value = '';
                                                 }
+                                                this.setState({txtSearch : e.target.value});
+
                                             }}
                                             style={{
                                                 padding: '1px 0px 1px 25px',
@@ -84,6 +91,42 @@ class HeaderNav extends Component {
                                         />
                                       </CardText>
                                     </Card>
+                                    <List>
+                                      <Subheader>Users that contains : { this.state.txtSearch } </Subheader>
+                                      <Route render={({ history }) => (
+                                           this.props.users.map(user =>(
+                                              (user.userEmail.indexOf(this.state.txtSearch) !== -1) ||
+                                              (user.userSurname.indexOf(this.state.txtSearch) !== -1) ||
+                                              (user.userName.indexOf(this.state.txtSearch) !== -1) ?
+
+                                                      <ListItem
+                                                        leftAvatar={
+                                                          <Avatar src={ user.userImg } />
+                                                        }
+                                                        primaryText={ user.userSurname + " " + user.userName}
+                                                        secondaryText={ user.userEmail }
+                                                        onClick={(e)=>{
+                                                          let found = false;
+                                                          for(let i=0;i<this.props.msgs.length;i++){
+                                                            if(this.props.msgs[i].senderID === this.props.currentUser.userID && this.props.msgs[i].receiverID === user.userID ||
+                                                               this.props.msgs[i].receiverID === this.props.currentUser.userID && this.props.msgs[i].senderID === user.userID){
+                                                              found = true;
+                                                            }
+                                                          }
+                                                          if(!found){
+                                                            this.props.addMsg("Hi",this.props.currentUser.userID,user.userID);
+                                                          }
+                                                          history.push('/accountScreen');
+                                                          this.setState({open:false});
+                                                        }}
+                                                      />
+                                          :
+
+                                          <p></p>
+
+                                          ))
+                                      )} />
+                                     </List>
                               </Popover>
 
                         <div className="newGroup" primary={true} onClick={() => {}}>
@@ -163,7 +206,8 @@ class HeaderNav extends Component {
 
 const mapStateToProps = state =>
 {
-  return {chats: state.Chat.chats,
+  return {
+    chats: state.Chat.chats,
     msgs: state.Chat.msgs,
     currentUser: state.Account.currentUser,
     users: state.Account.users,

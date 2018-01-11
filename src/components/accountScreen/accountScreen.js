@@ -249,10 +249,6 @@ class AccountScreen extends Component {
                             onChange={text => this.filterList(text)}
                         />
                     </div>
-                    <div className="searchContainer">
-                      <FlatButton>Start a new chat</FlatButton>
-                    </div>
-
                     <ul className="defaultList">
                         {this.props.filteredChats.map(chat => (
                             <li
