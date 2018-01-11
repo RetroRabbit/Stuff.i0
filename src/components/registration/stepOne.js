@@ -33,11 +33,11 @@ class StepOne extends React.Component {
   render() {
     return (
       <div className="pageContainer">
-      <div className="reg-rectangle">
-        <h2 className="step-one">Step One</h2>
-        <h2 className="the-basics">THE BASICS</h2>
+      <div className="regRectangle">
+        <h2 className="stepOne">Step One</h2>
+        <h2 className="theBasics">THE BASICS</h2>
         <MuiThemeProvider>
-          <div className="form-field" >
+          <div className="formField" >
             <form>
               <TextField
                 className="input"
@@ -83,7 +83,7 @@ class StepOne extends React.Component {
               this.setState({ logged: false })
               history.push('/StepTwo')
             }}
-            className="next-button"
+            className="nextButton"
             label="Next Step" />
         )} />
         </div>
