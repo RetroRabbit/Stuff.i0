@@ -1,10 +1,32 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css';
 
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import {
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser
+} from '../../reducers/Account'
+
+import {
+  addMsg,
+  getMsgs,
+  getChats
+} from '../../reducers/Chat'
+
 class StepTwo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.props = props;
+    }
 
     changeImg = (e) => {
         console.log(e.target);
@@ -18,6 +40,7 @@ class StepTwo extends React.Component {
             reader.readAsDataURL(e.target.files[0]);
 
         }
+
         this.setState({ hasimg: true });
     }
     state = {
@@ -25,11 +48,19 @@ class StepTwo extends React.Component {
         hasimg: false
     };
 
+    saveImg = () =>{
+        this.props.changeUser({userImg:this.state.profilephoto});
+
+        this.props.getCurrentUser();
+        this.forceUpdate();
+    }
+
     render() {
         return (
+            <div className="pageContainer">
             <div className="reg-rectangle">
-                <h2 className="step-two-heading">Step Two</h2>
-                <h2 className="pro-pic-heading">PROFILE PICTURE</h2>
+                <h2 className="step-one">Step Two</h2>
+                <h2 className="the-basics">PROFILE PICTURE</h2>
                 <MuiThemeProvider>
                 <div className="pro-pic-placeholder" >
                         {!this.state.hasimg ?
@@ -59,14 +90,25 @@ class StepTwo extends React.Component {
                 <div className="nextBox">
                     <Route render={({ history }) => (
                         <FlatButton {...this.props} onClick={() => {
-                            this.setState({ logged: false })
+                            this.saveImg()
                             history.push('/StepThree')
                         }}
-                            className="next-button"
+                            className="next-button-2"
                             label="Next Step" />
                     )} />
                 </div>
-                <h2 className="skip-for-now "> Skip for now</h2>
+                <div className="skip-2">
+                <Route render={({ history }) => (
+                        <p {...this.props} onClick={() => {
+                            this.setState({ logged: false })
+                            history.push('/StepThree')
+                        }}
+                        className="skip-for-now "
+                            label="Next Step" >Skip for now</p>
+                    )} />
+
+                </div>
+            </div>
             </div>
         );
     }
@@ -80,4 +122,22 @@ const inputimg = {
     right: 0,
     width: '100%'
 };
-export default StepTwo
+const mapStateToProps = state => ({
+    chats:state.Chat.chats,
+    msgs:state.Chat.msgs,
+    currentUser: state.Account.currentUser,
+    users: state.Account.users,
+  })
+
+  const mapDispatchToProps = dispatch => bindActionCreators({
+    getUser,
+    getCurrentUser,
+    changeUser,
+    addMsg,
+    getMsgs,
+    registerUser,
+    loginUser,
+    getChats
+  }, dispatch)
+
+  export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);

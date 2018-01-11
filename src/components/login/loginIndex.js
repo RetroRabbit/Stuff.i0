@@ -1,12 +1,9 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
 
 import {Route} from 'react-router-dom'
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import validate from './validate';
-import './Login_index.css';
-import history from '../store'
+import './loginIndex.css';
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -17,13 +14,13 @@ import {
   getCurrentUser,
   registerUser,
   loginUser
-} from '../reducers/Account'
+} from '../../reducers/Account'
 
 import {
   addMsg,
   getMsgs,
   getChats
-} from '../reducers/Chat'
+} from '../../reducers/Chat'
 
 
 	let email =  ""
@@ -36,7 +33,7 @@ const Login = props => (
 					Welcome to the
 					</div>
 					<div className="logo">
-						<img src={require('./Full_Logo.png')} />
+						<img alt="Logo" src={require('./Full_Logo.png')} />
 					</div>
 					<div className="bottomBox">
 						<div>
@@ -52,7 +49,9 @@ const Login = props => (
 					</div>
 					<div className="loginBoxPos">
 						<form>
-							<div >
+						{
+									!props.currentUser ?
+							<div>
 								<TextField
 									className="loginBox"
 									hintText='Email'
@@ -75,6 +74,9 @@ const Login = props => (
 									type="password"
 								/>
 							</div>
+							:
+							<p></p>
+						}
 							<div >
 								{
 									!props.currentUser ?
@@ -123,10 +125,5 @@ const Login = props => (
 	  loginUser,
 	  getChats
 	}, dispatch)
-
-	const reduxform = () => reduxForm({
-		form: 'App',
-		validate,
-	});
 
 	export default connect(mapStateToProps, mapDispatchToProps)(Login);

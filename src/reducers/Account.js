@@ -12,15 +12,7 @@ export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
 const initialState = {
     currentUserChats: [],
     filteredChats: [],
-    currentUser: {
-        userID: 20,
-        userName: 'Joe',
-        userSurname: 'Sirwali',
-        userPassword: 'joe',
-        userEmail: 'joe@gmail.com',
-        userImg:
-            'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-    },
+    currentUser:null,
     receiver: {
         userID: 10,
         userName: 'Takie',
@@ -88,14 +80,17 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case REGISTER_USER_ACCOUNT:
-            state.users.push(action.user);
+            var user = null;
+            user = action.user;
+            user.userID = Math.round(Math.random() * 99999);
+            state.users.push(user);
             return {
                 ...state,
-                currentUser: action.user
+                currentUser: user
             };
 
         case LOGIN_USER_ACCOUNT:
-            var user = null;
+            user = null;
             for (let i = 0; i < state.users.length; i++) {
                 if (
                     state.users[i].userEmail === action.user.userEmail &&
@@ -116,7 +111,6 @@ export default (state = initialState, action) => {
             };
 
         case USER_ACCOUNT:
-            alert('We are in');
             user = null;
             for (let i = 0; i < state.users.length; i++) {
                 if (state.users[i].userID === action.ID) {
@@ -130,12 +124,19 @@ export default (state = initialState, action) => {
             };
 
         case CHANGE_USER_ACCOUNT:
-            state.currentUser.userName = action.new.userName;
-            state.currentUser.userSurname = action.new.userSurname;
-            alert('New user ' + state.currentUser.userName);
+            user = state.currentUser;
+            if(action.new.userName){
+                user.userName = action.new.userName;
+                user.userSurname = action.new.userSurname;
+            }
+
+            if(action.new.userImg){
+                user.userImg =action.new.userImg;
+            }
+
             return {
                 ...state,
-                currentUser: state.currentUser
+                currentUser: user
             };
 
         case LOGOUT_USER_ACCOUNT:
@@ -147,7 +148,6 @@ export default (state = initialState, action) => {
         case CURRENT_USER_CHATS:
             console.log('dispatching CURRENT_USER_CHATS');
             let msgs = action.allMsgs;
-
             let userChats = [];
 
             for (let msg of msgs) {
