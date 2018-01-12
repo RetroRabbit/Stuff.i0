@@ -92,20 +92,22 @@ class settings extends Component {
                     <div className="auto" />
                     <div className="auto">
                         <GridList cols={1} cellHeight={80} style={styles.gridList} className="auto">
-                            <GridTile className="auto text-center" cols={1} rows={4}>
-                                <div className="auto proImgPlaceholder">
+                            <GridTile className="text-center" cols={1} rows={4}>
+                                <div className="proImgPlaceholder">
                                     <div>
-                                        <img
-                                            src={this.props.currentUser.userImg}
-                                            className="proImg"
-                                            alt="Profile"
-                                        />
+                                        
                                         <input
+                                             className="auto proImgPlaceholder"
                                             type="file"
                                             onChange={e => {
                                                 this.changeImg(e);
                                             }}
                                             style={inputimg}
+                                        />
+                                        <img
+                                            src={this.props.currentUser.userImg}
+                                            className="proImg"
+                                            alt="Profile"
                                         />
                                     </div>
                                 </div>

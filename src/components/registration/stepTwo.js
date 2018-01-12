@@ -80,7 +80,7 @@ class StepTwo extends React.Component {
                             )}
                         </div>
                     </MuiThemeProvider>
-                    <div className="nextBox">
+                    <div>
                         <Route
                             render={({ history }) => (
                                 <FlatButton

@@ -10,70 +10,67 @@
 .background{
 	resize: horizontal;
  	overflow: hidden;
- 	display: flex;
-
+	display: flex;
 }
 .newChat {
-	height: 5%;
-	width: 10%;
-	border-radius: 5px;
+	height: 5vh;
+	width: 12vh;
+	border-radius: 0.5vh;
 	background-color: #0DABAF;
-	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	margin-top: 1%;
-	margin-bottom: 1%;
-	margin-left: 3%;
+	box-shadow: 0 0.2vh 0.6vh 0 rgba(0,0,0,0.25);
+	margin-left: 3vh;
 	display: inline-block !important;
 	text-align: center;
   font-size: 2vmin !important;
 }
 
 .newGroup {
-	height: 5%;
-	width: 11%;
-	border-radius: 5px;
+	height: 5vh;
+	width: 10vh;
+	border-radius: 0.5vh;
 	background-color: #0DABAF;
-	box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
-	margin-top: 1%;
-	margin-bottom: 1%;
-	margin-left: 2%;
+	box-shadow: 0 0.2vh 0.6vh 0 rgba(0,0,0,0.25);
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	margin-left: 2vh;
 	display: inline-block !important;
 	text-align: center;
 }
 .test {
-	margin-top: 1%;
-	margin-bottom: 1%;
-	margin-left: 1%;
-	margin-right: 1%;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	margin-left: 1vh;
+	margin-right: 1vh;
 	text-align: center;
 }
 .btnLabel {
-	height: 25px;
-	width: 126px;
+	height: 2.5vh;
+	width: 12.6vh;
 	color: #FFFFFF;
 	font-family: "Helvetica";
-	font-size: 18px;
+	font-size: 1.8vh;
 	font-weight: 500;
 	line-height: 3em;
 	text-align: center !important;
 }
 
 .newGroupLbl {
-	height: 25px;
-	width: 146px;
+	height: 2.5vh;
+	width: 12.6vh;
 	color: #FFFFFF;
 	font-family: "Helvetica";
-	font-size: 18px;
+	font-size: 1.8vh;
 	font-weight: 500;
 	line-height: 3em;
 	text-align: center !important;
 }
 
 .nameLbl {
-  height: 25px;
-	width: 126px;
+  height: 2.5vh;
+	width: 12.6vh;
 	color: #FFFFFF;
 	font-family: "Helvetica";
-	font-size: 18px;
+	font-size: 1.8vh;
 	font-weight: 500;
 	line-height: 3em;
 	text-align: center !important;
@@ -81,41 +78,44 @@
 }
 
 .miniImgPlaceholder {
-	height: 67px;
-	width: 67px;
+	height: 6.7vh;
+	width: 6.7vh;
 	background-color: #FFFFFF;
-	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
+	box-shadow: 0 0.2vh 1.2vh 0.3vh rgba(0,0,0,0.14);
+	border-block-end-style: solid;
 	border-radius: 50%;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	padding: 0%;
 }
 
 .miniProImage {
-	height: 50px;
-	width: 50px;
+	height: 5vh !important;
+	width: 5vh !important;
 	border-radius: 50%;
-	right: 18% !important;
-	bottom: 6% !important;
+	padding: 0% !important;
 }
 
 .logoBorder {
-	height: 54px;
-	width: 54px;
-	border: 6px solid #FFFFFF;
+	height: 5.4vh;
+	width: 5.4vh;
+	border: 0.6vh solid #FFFFFF;
 	background-color: #E6E3E3;
-	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
+	box-shadow: 0 0.2vh 1.2vh 0.3vh rgba(0,0,0,0.14);
 	border-radius: 50%;
 	display: inline-block !important;
-	top: 18px ;
-	right: 61px;
+	top: 1.8vh;
+	right: 6.1vh;
 	position: absolute;
 }
 
 .logoImg {
-	height: 70px;
-	width: 70px;
+	height: 7vh;
+	width: 7vh;
 	background-color: #FFFFFF;
-	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
+	box-shadow: 0 0.2vh 1.2vh 0.3vh rgba(0,0,0,0.14);
 	border-radius: 50%;
-
 }
 
 .sideRight{
@@ -123,28 +123,23 @@
 }
 
 .proImgPlaceholder{
-	height: 269px;
-	width: 269px;
+	height: 26.9vh;
+	width: 26.9vh;
 	background-color: #FFFFFF;
-	box-shadow: 0 2px 12px 3px rgba(0,0,0,0.14);
+	box-shadow: 0 0.2vh 1.2vh 0.3vh rgba(0,0,0,0.14);
+	border-block-end-style: solid;
 	border-radius: 50%;
-	margin-right: 105px;
-	position: relative;
-	display: inline-block !important;
-	justify-content: center;
-	align-items: center;
-	margin: 1.5%;
-
+	position: absolute;
+	padding: 2vh;
+	align-self: center;
+    justify-self: center;
 }
 
 .proImg {
-	height: 236px;
-	width: 236px;
+	height: 26.6vhvh !important;
+	width: 26.6vh !important;
 	border-radius: 50%;
-	justify-self: center;
-	align-self: center;
-	margin: 6%;
-
+	padding: 0% !important;
 }
 
 .navBar {
@@ -154,20 +149,20 @@
 	resize: horizontal;
 	overflow: hidden;
 	display: flex;
-
+	align-items: center;
 }
 
 .pencilmg {
-	height: 36px;
-	width: 31px;
+	height: 3.6vh;
+	width: 3.1vh;
 }
 
 .doneBtn {
-	height: 54px;
-	width: 143px;
-	border-radius: 5px;
+	height: 5.4vh;
+	width: 14.3vh;
+	border-radius: 0.5vh;
 	background-color: #FB6902;
-    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.25);
+    box-shadow: 0 0.2vh 0.6vh 0 rgba(0,0,0,0.25);
     display: inline-block !important;
     display: flex;
     align-items: center;
@@ -178,19 +173,15 @@
 }
 
 .doneLbl {
-	height: 25px;
-	width: 126px;
+	height: 2.5vh;
+	width: 12.6vh;
 	color: #FFFFFF;
 	font-family: "Helvetica";
-	font-size: 18px;
+	font-size: 1.8vh;
 	font-weight: 500;
 	line-height: 3em;
     text-align: center !important;
     justify-self: center;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 .flex-container {
@@ -204,22 +195,10 @@
 .item {
   margin: 1em;
   padding: 0.5em;
-  width: 110px;
+  width: 11vh;
   min-width: 0;
   background-color: #1B5385;
   color: white;
   font-family: monospace;
-  font-size: 13px;
-}
-
-.initial {
-  flex: initial;
-}
-
-.auto {
-  flex: auto;
-}
-
-.none {
-  flex: none;
+  font-size: 1.3vh;
 }
