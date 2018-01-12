@@ -60,6 +60,10 @@ and (orientation: landscape) {
 .text-center {
   margin: auto;
   text-align: center;
+  position: relative;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
 
 .oval {
@@ -75,10 +79,6 @@ and (orientation: landscape) {
   border: 3px solid #004853;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> a73a321e42c5f2651f61ebe196ad5badb61e4e47
 .userTitleText {
   height: 108px;
   width: 224px;
