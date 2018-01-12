@@ -12,11 +12,9 @@ export const CHANGE_SELECTED_CHAT = 'Account/CHANGE_SELECTED_CHAT';
 export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
 export const ALL_USERS = 'Account/ALL_USERS';
 
+const link = 'http://192.168.0.20:54980';
+
 const initialState = {
-    api: {
-        host: 'http://192.168.0.20',
-        port: 54980
-    },
     currentUserChats: [],
     filteredChats: [],
     currentUser: null,
@@ -125,38 +123,8 @@ export default (state = initialState, action) => {
             let msgs = action.allMsgs;
             let userChats = [];
 
-            for (let msg of msgs) {
-                if (
-                    msg.recieverID === state.currentUser.userID ||
-                    msg.senderId === state.currentUser.userID
-                ) {
-                    for (let user of state.users) {
-                        if (msg.senderId === user.userID || msg.receiverId === user.userID) {
-                            if (userChats.length > 0) {
-                                let duplicatefound = false;
-                                for (let userDet of userChats) {
-                                    if (userDet.userID === user.userID) {
-                                        userDet = user;
-                                        userDet.latestMessage = msg.text;
-                                        userDet.selected = false;
-                                        duplicatefound = true;
-                                    }
-                                }
-                                if (!duplicatefound) {
-                                    user.latestMessage = msg.text;
-                                    user.selected = false;
-                                    userChats.push(user);
-                                }
-                            } else {
-                                user.latestMessage = msg.text;
-                                user.selected = false;
-                                userChats.push(user);
-                            }
-                        }
-                    }
-                }
-            }
 
+            alert("Current user chats " + )
             console.log(userChats);
             return {
                 ...state,
@@ -192,7 +160,7 @@ export default (state = initialState, action) => {
 export const getUser = userID => {
     return dispatch => {
         axios
-            .get(initialState.api.host + ':' + initialState.api.port + 'api/Users/' + userID)
+            .get(link + 'api/Users/' + userID)
             .then(function(response) {
                 dispatch({ type: USER_ACCOUNT, user: response.data });
             });
@@ -221,7 +189,7 @@ export const getUsers = () => {
     return dispatch => {
         alert('About to');
         axios
-            .get(initialState.api.host + ':' + initialState.api.port + '/api/Users/GetAllUsers')
+            .get(link + '/api/Users/GetAllUsers')
             .then(function(response) {
                 dispatch({ type: ALL_USERS, users: response.data });
             })
@@ -229,12 +197,42 @@ export const getUsers = () => {
     };
 };
 
-export const getUserChats = allMsgs => {
+export const getUserChats = (userID) => {
     return dispatch => {
         axios
-            .get(initialState.api.host + ':' + initialState.api.port + '/api/chats')
+            .get(link + '/api/Chats/GetBySender/' + userID)
             .then(function(response) {
-                dispatch({ type: CURRENT_USER_CHATS, allMsgs: response.data });
+
+
+              for (let msg of msgs) {
+              {
+                  for (let user of state.users) {
+                      if (msg.senderId === user.userID || msg.receiverId === user.userID) {
+                          if (userChats.length > 0) {
+                              let duplicatefound = false;
+                              for (let userDet of userChats) {
+                                  if (userDet.userID === user.userID) {
+                                      userDet = user;
+                                      userDet.latestMessage = msg.text;
+                                      userDet.selected = false;
+                                      duplicatefound = true;
+                                  }
+                              }
+                              if (!duplicatefound) {
+                                  user.latestMessage = msg.text;
+                                  user.selected = false;
+                                  userChats.push(user);
+                              }
+                          } else {
+                              user.latestMessage = msg.text;
+                              user.selected = false;
+                              userChats.push(user);
+                          }
+                      }
+                  }
+              }
+
+              dispatch({ type: CURRENT_USER_CHATS, allChats: response.data });
             })
             .catch(function(error) {});
     };

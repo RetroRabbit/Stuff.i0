@@ -5,11 +5,9 @@ export const GET_CHATS = 'Chat/GET_CHATS';
 export const GET_MSGS = 'Chat/GET_MSGS';
 export const ADD_MSG = 'Chat/ADD_MSG';
 
+const link = 'http://192.168.0.20:54980';
+
 const initialState = {
-    api: {
-        host: 'http://192.168.0.20',
-        port: 54980
-    },
     msgs: [{}],
     allMsgs: [{}],
     currentChat: [],
@@ -53,10 +51,7 @@ export const getChats = userID => {
     return dispatch => {
         var msgs = [];
         axios
-            .get(
-                initialState.api.host +
-                    ':' +
-                    initialState.api.port +
+            .get(link +
                     '/api/chats/getchatsforuser/' +
                     userID
             )
@@ -75,7 +70,7 @@ export const getMsgs = (senderId, receiverId) => {
     return dispatch => {
         var msgs = [];
         axios
-            .get(initialState.api.host + ':' + initialState.api.port + '/api/chats')
+            .get(link + '/api/chats')
             .then(function(response) {
                 dispatch({
                     type: GET_MSGS,
@@ -100,7 +95,7 @@ export const addMsg = (msg, senderId, receiverId) => {
         };
 
         axios
-            .post(initialState.api.host + ':' + initialState.api.port + '/api/chats', newMsg)
+            .post(link + '/api/chats', newMsg)
             .then(function(response) {
                 console.log(response);
                 alert('sent');

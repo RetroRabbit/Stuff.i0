@@ -4,18 +4,23 @@ import { Route } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 import './reg.css';
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
 import {
-    getUser,
-    changeUser,
-    getCurrentUser,
-    registerUser,
-    loginUser
-} from '../../reducers/Account';
+  getUser,
+  changeUser,
+  getCurrentUser,
+  registerUser,
+  loginUser
+} from '../../reducers/Account'
 
-import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
+import {
+  addMsg,
+  getMsgs,
+  getChats
+} from '../../reducers/Chat'
 
 class StepTwo extends React.Component {
     constructor(props) {
@@ -23,7 +28,7 @@ class StepTwo extends React.Component {
         this.props = props;
     }
 
-    changeImg = e => {
+    changeImg = (e) => {
         console.log(e.target);
         console.log(e.target.files[0]);
 
@@ -33,86 +38,77 @@ class StepTwo extends React.Component {
                 this.setState({ profilephoto: event.target.result });
             };
             reader.readAsDataURL(e.target.files[0]);
+
         }
 
         this.setState({ hasimg: true });
-    };
+    }
     state = {
         profilephoto: '',
         hasimg: false
     };
 
-    saveImg = () => {
-        this.props.changeUser({ userImg: this.state.profilephoto });
+    saveImg = () =>{
+        this.props.changeUser({userImg:this.state.profilephoto});
 
         this.props.getCurrentUser();
         this.forceUpdate();
-    };
+    }
 
     render() {
         return (
             <div className="pageContainer">
-                <div className="regRectangle">
-                    <h2 className="stepHeading">Step Two</h2>
-                    <h2 className="titleHeading">PROFILE PICTURE</h2>
-                    <MuiThemeProvider>
-                        <div className="proPicPlaceholder">
-                            {!this.state.hasimg ? (
-                                <div className="uploadCircle">
-                                    <div className="plusLogo">
-                                        <div className="plusHorizontal" />
-                                        <div className="plusVertical" />
-                                    </div>
-                                    <input
-                                        type="file"
-                                        onChange={e => {
-                                            this.changeImg(e);
-                                        }}
-                                        style={inputimg}
-                                    />
+            <div className="reg-rectangle">
+                <h2 className="step-one">Step Two</h2>
+                <h2 className="the-basics">PROFILE PICTURE</h2>
+                <MuiThemeProvider>
+                <div className="pro-pic-placeholder" >
+                        {!this.state.hasimg ?
+                            <div className="upload-circle">
+                                <div className="plus-logo">
+                                    <div className="plus-horizontal" />
+                                    <div className="plus-vertical" />
                                 </div>
-                            ) : (
-                                <img
-                                    src={this.state.profilephoto}
-                                    className="proPicJpg"
-                                    alt="Profile"
-                                />
-                            )}
-                        </div>
-                    </MuiThemeProvider>
-                    <div className="nextBox">
-                        <Route
-                            render={({ history }) => (
-                                <FlatButton
-                                    {...this.props}
-                                    onClick={() => {
-                                        this.saveImg();
-                                        history.push('/StepThree');
+                                <input
+                                    type="file"
+                                    onChange={e => {
+                                        this.changeImg(e);
                                     }}
-                                    className="nextButton"
-                                    label="Next Step"
+                                    style={inputimg}
                                 />
-                            )}
-                        />
+                            </div>
+                            :
+                            <img
+                                src={this.state.profilephoto}
+                                className="pro-pic-jpg"
+                                alt="Profile"
+                            />
+                        }
+
                     </div>
-                    <div className="skip2">
-                        <Route
-                            render={({ history }) => (
-                                <p
-                                    {...this.props}
-                                    onClick={() => {
-                                        this.setState({ logged: false });
-                                        history.push('/StepThree');
-                                    }}
-                                    className="skipForNow "
-                                    label="Next Step"
-                                >
-                                    Skip for now
-                                </p>
-                            )}
-                        />
-                    </div>
+                </MuiThemeProvider>
+                <div className="nextBox">
+                    <Route render={({ history }) => (
+                        <FlatButton {...this.props} onClick={() => {
+                            this.saveImg()
+                            history.push('/StepThree')
+                        }}
+                            className="next-button-2"
+                            label="Next Step" />
+                    )} />
                 </div>
+                <div className="skip-2">
+                <Route render={({ history }) => (
+                        <p {...this.props} onClick={() => {
+                            this.setState({ logged: false })
+                            history.push('/StepThree')
+                        }}
+                        className="skip-for-now "
+                            label="Next Step" >Skip for now</p>
+                    )} />
+
+                </div>
+            </div>
             </div>
         );
     }
@@ -127,25 +123,21 @@ const inputimg = {
     width: '100%'
 };
 const mapStateToProps = state => ({
-    chats: state.Chat.chats,
-    msgs: state.Chat.msgs,
+    chats:state.Chat.chats,
+    msgs:state.Chat.msgs,
     currentUser: state.Account.currentUser,
-    users: state.Account.users
-});
+    users: state.Account.users,
+  })
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getUser,
-            getCurrentUser,
-            changeUser,
-            addMsg,
-            getMsgs,
-            registerUser,
-            loginUser,
-            getChats
-        },
-        dispatch
-    );
+  const mapDispatchToProps = dispatch => bindActionCreators({
+    getUser,
+    getCurrentUser,
+    changeUser,
+    addMsg,
+    getMsgs,
+    registerUser,
+    loginUser,
+    getChats
+  }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);
+  export default connect(mapStateToProps, mapDispatchToProps)(StepTwo);
