@@ -3,42 +3,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using stuffioAPI.Models;
 using System;
 
 namespace stuffioAPI.Migrations
 {
     [DbContext(typeof(ChatContext))]
-    [Migration("20180111112406_SeedDatabase")]
-    partial class SeedDatabase
+    [Migration("20180111212628_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ChangeDetector.SkipDetectChanges", "true")
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("stuffioAPI.Models.Chat", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long>("ReceiverId");
-
-                    b.Property<long>("SenderId");
-
-                    b.Property<string>("Text")
-                        .IsRequired();
-
-                    b.Property<DateTime>("TimeSent");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chats");
-                });
 #pragma warning restore 612, 618
         }
     }

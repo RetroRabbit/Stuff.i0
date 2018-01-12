@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using stuffioAPI.Data;
 using stuffioAPI.Models;
 
 namespace stuffioAPI
@@ -27,8 +28,7 @@ namespace stuffioAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //services.AddDbContext<ChatContext>(opt => opt.UseInMemoryDatabase("ChatList"));
+           services.AddTransient<ChatInitializer>();
             // Add Cors
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -43,12 +43,13 @@ namespace stuffioAPI
             {
                 options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
             });
-            var connection = "Server=DESKTOP-TNAJN0P;Integrated Security=True;Database=stuffAPIdb;Trusted_Connection=True;MultipleActiveResultSets=true";
-            services.AddDbContext<ChatContext>(options => options.UseSqlServer(connection));
+
+            services.AddDbContext<ChatContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ChatDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ChatInitializer chatSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -57,11 +58,13 @@ namespace stuffioAPI
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // Enable Cors
+            // Enable Cors Globaly 
             app.UseCors("MyPolicy");
 
             //app.UseMvcWithDefaultRoute();
             app.UseMvc();
+
+            chatSeeder.Seed().Wait();
         }
     }
 }

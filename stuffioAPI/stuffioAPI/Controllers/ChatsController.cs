@@ -12,7 +12,6 @@ namespace stuffioAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Chats")]
-    [EnableCors("MyPolicy")]
     public class ChatsController : Controller
     {
         private readonly ChatContext _context;
@@ -31,13 +30,8 @@ namespace stuffioAPI.Controllers
 
         // GET: api/Chats/GetBySender/2
         [HttpGet("GetChatsForUser/{id}")]
-        public async Task<IActionResult> GetChatsForUser([FromRoute] long id)
+        public async Task<IActionResult> GetChatsForUser(long id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var chats = await _context.Chats.Where(m => m.SenderId == id || m.ReceiverId == id).ToListAsync();
 
             if (chats == null)
@@ -45,37 +39,32 @@ namespace stuffioAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(chats);
+            return Json(chats);
         }
 
         // GET: api/Chats/10/20
         [HttpGet("GetChatsBySR/{senderId}/{receiverId}")]
-        public async Task<IActionResult> GetChatsBySenderAndReceiver([FromRoute] long senderId, long receiverId)
+        public async Task<IActionResult> GetChatsBySenderAndReceiver(long senderId, long receiverId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var chats = await _context.Chats.Where(m => m.SenderId == senderId || m.ReceiverId == senderId && m.SenderId == receiverId || m.ReceiverId == receiverId).ToListAsync();
+            var chats = await _context.Chats.Where(m => (m.SenderId == receiverId && m.ReceiverId == senderId) 
+                || (m.SenderId == senderId && m.ReceiverId == receiverId)).ToListAsync();
 
             if (chats == null)
             {
                 return NotFound();
             }
 
-            return Ok(chats);
+            return Json(chats);
         }
 
-        // POST: api/Chats/20/10/'hi'
         [HttpPost]
-        public async Task<IActionResult> PostChat([FromBody] long receiverId, long senderId, string msg)
+        public async Task<IActionResult> PostChat([FromBody]Chat chat)
         {
-            Chat chat = new Chat { ReceiverId = receiverId, SenderId = senderId, Text = msg, TimeSent = DateTime.Now };
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            chat.TimeSent = DateTime.Now;
 
             _context.Chats.Add(chat);
             await _context.SaveChangesAsync();

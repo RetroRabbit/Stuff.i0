@@ -32,7 +32,7 @@ namespace stuffioAPI.Migrations
                     b.Property<string>("Text")
                         .IsRequired();
 
-                    b.Property<DateTime>("TimeSent");
+                    b.Property<DateTime?>("TimeSent");
 
                     b.HasKey("Id");
 

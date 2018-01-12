@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace stuffioAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class addedTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace stuffioAPI.Migrations
                     ReceiverId = table.Column<long>(nullable: false),
                     SenderId = table.Column<long>(nullable: false),
                     Text = table.Column<string>(nullable: false),
-                    TimeSent = table.Column<DateTime>(nullable: false)
+                    TimeSent = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

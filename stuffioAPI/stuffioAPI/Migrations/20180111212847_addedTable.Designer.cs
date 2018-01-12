@@ -11,8 +11,8 @@ using System;
 namespace stuffioAPI.Migrations
 {
     [DbContext(typeof(ChatContext))]
-    [Migration("20180111102239_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180111212847_addedTable")]
+    partial class addedTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,7 @@ namespace stuffioAPI.Migrations
                     b.Property<string>("Text")
                         .IsRequired();
 
-                    b.Property<DateTime>("TimeSent");
+                    b.Property<DateTime?>("TimeSent");
 
                     b.HasKey("Id");
 

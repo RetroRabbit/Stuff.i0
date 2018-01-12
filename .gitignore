@@ -21,6 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /stuffioAPI/.vs
-/stuffioAPI/stuffioAPI.sln
+/stuffioAPI/stuffioAPI/stuffioAPI.csproj.user
 /stuffioAPI/stuffioAPI/obj
 /stuffioAPI/stuffioAPI/bin
