@@ -7,8 +7,10 @@ import HeaderNav from '../headerNav/headerNav';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+
 import {
-    getUser,
+    getUsers,
     changeUser,
     getCurrentUser,
     registerUser,
@@ -19,7 +21,7 @@ import {
     changeReciever
 } from '../../reducers/Account';
 
-import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
+import { addMsg, getMsgs, getChats, updateMsgs } from '../../reducers/Chat';
 
 const ChatBubbleRightStyle = {
     backgroundColor: '#007D80',
@@ -42,11 +44,15 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-    var value = str.getMinutes().toString();
-    if (value.length === 1) {
-        value += '0';
+    try{
+      var fullTime = str.split('T')[1];
+      var hour = fullTime.split(':')[0];
+      var minute = fullTime.split(':')[1];
+      return hour + ":" + minute;
+    }catch(ex){
+      return "-----";
     }
-    return str.getHours() + ':' + value;
+
 };
 
 const cardHeaderStyle = {
@@ -150,12 +156,20 @@ const NewText = function(props) {
                     hintText="Insert Text Message Here"
                     onKeyDown={e => {
                         if (e.key === 'Enter' && e.target.value.length > 0) {
+
                             props.addMsg(
                                 e.target.value,
                                 props.currentUser.userID,
                                 props.receiver.userID
                             );
+
+                            props.getUserChats(props.currentUser.userID);
+
                             e.target.value = '';
+                            setTimeout(function () {
+                              var objDiv = document.getElementById("theChat");
+                              objDiv.scrollTop =  objDiv.scrollHeight;
+                            }, 1);
                         }
                     }}
                     style={{
@@ -187,17 +201,32 @@ const MessageTimeRight = function(props) {
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
-        try {
+        try{
             props.getCurrentUser();
-        } catch (exc) {
-            window.location.href = '/';
-        }
+            var id = props.currentUser.userID;
+            props.getUsers();
+            props.getUserChats(id);
 
-        props.getUserChats(this.props.allMsgs);
-        props.getMsgs(props.currentUser.userID, props.receiver.userID);
+            setInterval(()=>{
+              try{
+                props.getMsgs(props.currentUser.userID, props.receiver.userID);
+                props.updateMsgs(props.currentUser.userID,props.receiver.userID);
+              }catch(exc){
+
+              }
+            },500)
+        }
+        catch(exc){
+                window.location.href = '/';
+        }
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
+
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log(newProps);
     }
 
     filterList = function(text) {
@@ -211,6 +240,8 @@ class AccountScreen extends Component {
     changeSelected = function(chat) {
         let userID = chat.userID;
         let tempChats = this.props.filteredChats;
+
+        console.log(userID + " is thier ID")
 
         for (let i = 0; i < tempChats.length; i++) {
             tempChats[i].selected = false;
@@ -231,13 +262,8 @@ class AccountScreen extends Component {
 
     render() {
         return (
-            <div className="auto">
-                <HeaderNav
-                    pic={this.props.currentUser.userImg}
-                    surname={this.props.currentUser.userSurname}
-                    name={this.props.currentUser.userName}
-                />
-
+            <div>
+                <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } />
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar
@@ -246,14 +272,12 @@ class AccountScreen extends Component {
                             onChange={text => this.filterList(text)}
                         />
                     </div>
-
                     <ul className="defaultList">
                         {this.props.filteredChats.map(chat => (
                             <li
                                 data-category={chat}
                                 key={chat}
-                                onClick={() => this.changeSelected(chat)}
-                            >
+                                onClick={() => this.changeSelected(chat)}>
                                 <ChatCard
                                     title={chat.userName}
                                     avatar={chat.userImg}
@@ -265,11 +289,11 @@ class AccountScreen extends Component {
                     </ul>
                 </div>
 
-                <div className="mainBubbleContainer">
-                    {this.props.msgs.map(chat => {
+                <div id="theChat" className="mainBubbleContainer">
+                  {this.props.msgs.map(chat => {
                         if (
-                            chat.senderID === this.props.currentUser.userID &&
-                            chat.receiverID === this.props.receiver.userID
+                            chat.senderId === this.props.currentUser.userID &&
+                            chat.receiverId === this.props.receiver.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">
@@ -278,8 +302,8 @@ class AccountScreen extends Component {
                                 </div>
                             );
                         } else if (
-                            chat.senderID === this.props.receiver.userID &&
-                            chat.receiverID === this.props.currentUser.userID
+                            chat.senderId === this.props.receiver.userID &&
+                            chat.receiverId === this.props.currentUser.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">
@@ -316,7 +340,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            getUser,
+            getUsers,
             getCurrentUser,
             changeUser,
             addMsg,
@@ -327,7 +351,8 @@ const mapDispatchToProps = dispatch =>
             getUserChats,
             filterUserChats,
             changeSelectedChat,
-            changeReciever
+            changeReciever,
+            updateMsgs
         },
         dispatch
     );

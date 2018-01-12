@@ -1,125 +1,16 @@
 import { getUser } from './Account';
+import axios from 'axios';
 
 export const GET_CHATS = 'Chat/GET_CHATS';
 export const GET_MSGS = 'Chat/GET_MSGS';
 export const ADD_MSG = 'Chat/ADD_MSG';
+export const UPDATE_MSGS = 'Chat/UPDATE_MSGS'
+
+const link = 'http://192.168.0.20:52499';
 
 const initialState = {
     msgs: [{}],
-    allMsgs: [
-        {
-            senderID: 20,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to him'
-        },
-        {
-            senderID: 20,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to him'
-        },
-        {
-            senderID: 20,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to him'
-        },
-        {
-            senderID: 20,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to him'
-        },
-        {
-            senderID: 20,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to him'
-        },
-        {
-            senderID: 2,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to someone'
-        },
-        {
-            senderID: 2,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to someone'
-        },
-        {
-            senderID: 2,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to someone'
-        },
-        {
-            senderID: 2,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to someone'
-        },
-        {
-            senderID: 2,
-            receiverID: 10,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to someone'
-        },
-        {
-            senderID: 2,
-            recieverID: 20,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from her to me'
-        },
-        {
-            senderID: 10,
-            recieverID: 20,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to me'
-        },
-        {
-            senderID: 10,
-            recieverID: 20,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from him to me again'
-        },
-        {
-            senderID: 10,
-            receiverID: 1,
-            sender: '',
-            receiver: '',
-            timeSent: new Date(),
-            text: 'This is from me to someone'
-        }
-    ],
+    allMsgs: [{}],
     currentChat: [],
     chats: []
 };
@@ -127,49 +18,37 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case ADD_MSG:
-            var newMsg = {
-                senderID: action.senderID,
-                receiverID: action.receiverID,
-                sender: getUser(action.senderID),
-                receiver: getUser(action.receiverID),
-                timeSent: new Date(),
-                text: action.msg
-            };
-
-            state.allMsgs.push(newMsg);
-            var chat = state.allMsgs.filter(msg => {
-                return (
-                    (msg.senderID === action.senderID && msg.receiverID === action.receiverID) ||
-                    (msg.senderID === action.receiverID && msg.senderID === action.receiverID)
-                );
-            });
-
+            console.log('Check your log file');
             return {
-                ...state,
-                msgs: chat
+                ...state
             };
 
         case GET_CHATS:
-            var chats = state.allMsgs.filter(msg => {
-                return msg.senderID === action.senderID;
-            });
-
+            var chats = action.chats;
+            state.chats = chats;
+            console.log('got ' + chats.length);
             return {
                 ...state,
                 chats: chats
             };
 
+        case UPDATE_MSGS:
+        console.log(state.reciever.receiverId + " is their id")
+          state.msgs = action.msgs;
+          return {
+              ...state,
+              msgs:action.msgs
+          }
+
         case GET_MSGS:
-            var msgs = state.allMsgs.filter(msg => {
-                return (
-                    (msg.senderID === action.senderID && msg.receiverID === action.receiverID) ||
-                    (msg.senderID === action.receiverID && msg.senderID === action.receiverID)
-                );
-            });
+            //state.allMsgs = msgs;
+            state.allMsgs = action.msgs;
+            state.msgs = action.msgs;
 
             return {
                 ...state,
-                msgs: msgs
+                msgs: action.msgs,
+                allMsgs:action.msgs
             };
 
         default:
@@ -179,30 +58,86 @@ export default (state = initialState, action) => {
 
 export const getChats = userID => {
     return dispatch => {
-        dispatch({
-            type: GET_CHATS,
-            senderID: userID
-        });
+        var msgs = [];
+        axios
+            .get(link +
+                    '/api/chats/getchatsforuser/' +
+                    userID
+            )
+            .then(function(response) {
+                dispatch({
+                    type: GET_CHATS,
+                    senderId: userID,
+                    chats: response.data
+                });
+            })
+            .catch(function(error) {});
     };
 };
 
-export const getMsgs = (senderID, receiverID) => {
+export const getMsgs = (senderId, receiverId) => {
     return dispatch => {
-        dispatch({
-            type: GET_MSGS,
-            senderID: senderID,
-            receiverID: receiverID
-        });
+        var msgs = [];
+        axios
+            .get(link + '/api/chats')
+            .then(function(response) {
+                dispatch({
+                    type: GET_MSGS,
+                    senderId: senderId,
+                    receiverId: receiverId,
+                    msgs: response.data
+                });
+            })
+            .catch(function(error) {
+                console.log('Error : sasasaffnasjfnaskjfasf ');
+                console.log(error);
+            });
     };
 };
 
-export const addMsg = (msg, senderID, receiverID) => {
+export const updateMsgs = (senderID,receiverID) => {
+  return dispatch => {
+      var msgs = [];
+      axios.get(link + '/api/GetChatsBySR/' + senderID + '/' + receiverID )
+          .then(function(response) {
+              dispatch({
+                  type: UPDATE_MSGS,
+                  msgs: response.data
+              });
+          })
+          .catch(function(error) {
+              console.log('Error : sasasaffnasjfnaskjfasf ');
+              console.log(error);
+          });
+  };
+}
+
+export const addMsg = (msg, senderId, receiverId) => {
     return dispatch => {
-        dispatch({
-            type: ADD_MSG,
-            msg: msg,
-            senderID: senderID,
-            receiverID: receiverID
-        });
+        var newMsg = {
+            SenderId: senderId,
+            ReceiverId: receiverId,
+            Text: msg
+        };
+
+        if(receiverId != senderId){
+          axios.post(link + '/api/chats', newMsg).then(function(response) {
+                console.log(response);
+                console.log('sent');
+
+                dispatch({
+                    type: ADD_MSG,
+                    msg: msg,
+                    results: response.data
+                });
+
+                getMsgs(senderId, receiverId);
+            }).catch(function(error) {
+                console.log('Error : safnasjfnaskjfasf ');
+                console.log(error);
+            });
+          }else{
+
+          }
     };
 };

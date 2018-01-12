@@ -7,8 +7,21 @@ import { Route } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Popover from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+
+import Avatar from 'material-ui/Avatar';
+import { List, ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+
+import TextField from 'material-ui/TextField';
+
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 import {
+    getUsers,
     getUser,
     changeUser,
     getCurrentUser,
@@ -23,12 +36,18 @@ class HeaderNav extends Component {
     constructor(props) {
         super(props);
         this.props = props;
+        props.getUsers();
         try {
             props.getCurrentUser();
         } catch (exc) {
             window.location.href = '/';
         }
     }
+
+    state = {
+        open: false,
+        txtSearch: ''
+    };
 
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
@@ -49,6 +68,9 @@ class HeaderNav extends Component {
                     render={({ history }) => (
                         <div
                             class="newChat initial"
+                            onMouseEnter={e => {
+                                this.setState({ open: true });
+                            }}
                             onClick={() => {
                                 history.push('/accountScreen');
                             }}
@@ -57,6 +79,91 @@ class HeaderNav extends Component {
                         </div>
                     )}
                 />
+
+                <Popover
+                    open={this.state.open}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    onRequestClose={this.handleRequestClose}
+                >
+                    <Card>
+                        <CardTitle title="Search for a user" />
+                        <CardText>
+                            <div>
+                                <FlatButton
+                                    label="X"
+                                    onClick={e => {
+                                        this.setState({ open: false });
+                                    }}
+                                />
+                            </div>
+                            <TextField
+                                hintText="Friend's Email"
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter' && e.target.value.length > 0) {
+                                        e.target.value = '';
+                                    }
+                                    this.setState({ txtSearch: e.target.value });
+                                }}
+                                style={{
+                                    padding: '1px 0px 1px 25px',
+                                    width: '100%'
+                                }}
+                            />
+                        </CardText>
+                    </Card>
+                    <List>
+                        <Subheader>Users that contains : {this.state.txtSearch} </Subheader>
+                        <Route
+                            render={({ history }) =>
+                                this.props.users.map(
+                                    user =>
+                                        user.userEmail.indexOf(this.state.txtSearch) !== -1 ||
+                                        user.userSurname.indexOf(this.state.txtSearch) !== -1 ||
+                                        user.userName.indexOf(this.state.txtSearch) !== -1 ? (
+                                            <ListItem
+                                                leftAvatar={<Avatar src={user.userImg} />}
+                                                primaryText={user.userSurname + ' ' + user.userName}
+                                                secondaryText={user.userEmail}
+                                                onClick={e => {
+                                                    let found = false;
+                                                    for (
+                                                        let i = 0;
+                                                        i < this.props.msgs.length;
+                                                        i++
+                                                    ) {
+                                                        if (
+                                                            (this.props.msgs[i].senderID ===
+                                                                this.props.currentUser.userID &&
+                                                                this.props.msgs[i].receiverID ===
+                                                                    user.userID) ||
+                                                            (this.props.msgs[i].receiverID ===
+                                                                this.props.currentUser.userID &&
+                                                                this.props.msgs[i].senderID ===
+                                                                    user.userID)
+                                                        ) {
+                                                            found = true;
+                                                        }
+                                                    }
+                                                    if (!found) {
+                                                        this.props.addMsg(
+                                                            'Hi',
+                                                            this.props.currentUser.userID,
+                                                            user.userID
+                                                        );
+                                                    }
+                                                    history.push('/accountScreen');
+                                                    this.setState({ open: false });
+                                                }}
+                                            />
+                                        ) : (
+                                            <p />
+                                        )
+                                )
+                            }
+                        />
+                    </List>
+                </Popover>
 
                 <div className="newChat initial" primary={true} onClick={() => {}}>
                     <label className="newGroupLbl">NEW GROUP</label>
@@ -131,6 +238,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
+            getUsers,
             getUser,
             getCurrentUser,
             changeUser,

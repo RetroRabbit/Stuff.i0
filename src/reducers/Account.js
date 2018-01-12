@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const USER_ACCOUNT = 'Account/USER_ACCOUNT';
 export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT';
 export const LOGIN_USER_ACCOUNT = 'Account/LOGIN_USER_ACCOUNT';
@@ -8,6 +10,9 @@ export const CURRENT_USER_CHATS = 'Account/CURRENT_USER_CHATS';
 export const FILTER_USER_CHATS = 'Account/FILTER_USER_CHATS';
 export const CHANGE_SELECTED_CHAT = 'Account/CHANGE_SELECTED_CHAT';
 export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
+export const ALL_USERS = 'Account/ALL_USERS';
+
+const link = 'http://192.168.0.20:52499';
 
 const initialState = {
     currentUserChats: [],
@@ -22,63 +27,31 @@ const initialState = {
         userImg:
             'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
     },
-    users: [
-        {
-            userID: 20,
-            userName: 'Joe',
-            userSurname: 'Sirwali',
-            userPassword: 'joe',
-            userEmail: 'joe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 10,
-            userName: 'Takie',
-            userSurname: 'Ndou',
-            userEmail: 'mulavhe@gmail.com',
-            userPassword: 'joseph',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1',
-            latestMessage: ''
-        },
-        {
-            userID: 2,
-            userName: 'Rendani',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 4,
-            userName: 'Joseph',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 0,
-            userName: 'Joseph',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 10,
-            userName: 'Victim',
-            userSurname: 'That',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        }
-    ]
+    users: []
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ALL_USERS:
+            var users = [];
+
+            for (let i = 0; i < action.users.length; i++) {
+              users.push({
+                    userID: action.users[i].id,
+                    userName: action.users[i].name,
+                    userSurname: action.users[i].surname,
+                    userImg: action.users[i].image,
+                    userEmail: action.users[i].email
+                });
+            }
+
+            console.log(users.length + ' users in db');
+
+            return {
+                ...state,
+                users: users
+            };
+
         case REGISTER_USER_ACCOUNT:
             var user = null;
             user = action.user;
@@ -90,15 +63,15 @@ export default (state = initialState, action) => {
             };
 
         case LOGIN_USER_ACCOUNT:
-            user = null;
-            for (let i = 0; i < state.users.length; i++) {
-                if (
-                    state.users[i].userEmail === action.user.userEmail &&
-                    state.users[i].userPassword === action.user.userPassword
-                ) {
-                    user = state.users[i];
-                }
-            }
+            var user = null;
+            user = action.user;
+            user.userID = action.user.id;
+            user.userName = action.user.name;
+            user.userSurname = action.user.surname;
+            user.userEmail = action.user.email;
+            user.userImg = action.user.image;
+
+            state.currentUser = user;
 
             return {
                 ...state,
@@ -111,16 +84,12 @@ export default (state = initialState, action) => {
             };
 
         case USER_ACCOUNT:
-            user = null;
-            for (let i = 0; i < state.users.length; i++) {
-                if (state.users[i].userID === action.ID) {
-                    user = state.users[i];
-                }
-            }
-
+            console.log('here ....');
+            console.log('here ....');
+            console.log(action.user);
             return {
                 ...state,
-                currentUser: user
+                currentUser: action.user
             };
 
         case CHANGE_USER_ACCOUNT:
@@ -146,43 +115,37 @@ export default (state = initialState, action) => {
             };
 
         case CURRENT_USER_CHATS:
-            console.log('dispatching CURRENT_USER_CHATS');
-            let msgs = action.allMsgs;
-            let userChats = [];
+            console.log("Are you sure")
+            var users = state.users;
+              for(let i=0;i<action.userChats.length;i++){
+                      for(let j=0;j<state.users.length;j++){
+                          if(state.users[j].userID !== state.currentUser.userID && state.users[j].userID == action.userChats[i].senderId){
 
-            for (let msg of msgs) {
-                if (msg.recieverID === state.currentUser.userID) {
-                    for (let user of state.users) {
-                        if (msg.senderID === user.userID) {
-                            if (userChats.length > 0) {
-                                let duplicatefound = false;
-                                for (let userDet of userChats) {
-                                    if (userDet.userID === user.userID) {
-                                        userDet = user;
-                                        userDet.latestMessage = msg.text;
-                                        userDet.selected = false;
-                                        duplicatefound = true;
-                                    }
-                                }
-                                if (!duplicatefound) {
-                                    user.latestMessage = msg.text;
-                                    user.selected = false;
-                                    userChats.push(user);
-                                }
-                            } else {
-                                user.latestMessage = msg.text;
-                                user.selected = false;
-                                userChats.push(user);
-                            }
-                        }
-                    }
-                }
-            }
-            console.log(userChats);
+                            action.userChats[i].userID = state.users[j].userID;
+                            action.userChats[i].userName = state.users[j].userName;
+                            action.userChats[i].userImg = state.users[j].userImg;
+
+                          }else if(state.users[j].userID !== state.currentUser.userID && state.users[j].userID == action.userChats[i].receiverId){
+
+                              action.userChats[i].userID = state.users[j].userID;
+                              action.userChats[i].userName = state.users[j].userName;
+                              action.userChats[i].userImg = state.users[j].userImg;
+
+                          }
+                      }
+                      console.log(action.userChats.length+ " == " + i)
+              }
+
+            state.currentUserChats =  action.userChats;
+            state.filteredChats =  action.userChats;
+            console.log(state.filteredChats.length + " filteredChats");
+            console.log(action.userChats);
+            console.log("Done")
+
             return {
                 ...state,
-                currentUserChats: userChats,
-                filteredChats: userChats
+                currentUserChats: action.userChats,
+                filteredChats: action.userChats
             };
 
         case FILTER_USER_CHATS:
@@ -212,7 +175,11 @@ export default (state = initialState, action) => {
 
 export const getUser = userID => {
     return dispatch => {
-        dispatch({ type: USER_ACCOUNT, ID: userID });
+        axios
+            .get(link + 'api/Users/' + userID)
+            .then(function(response) {
+                dispatch({ type: USER_ACCOUNT, user: response.data });
+            });
     };
 };
 
@@ -234,10 +201,54 @@ export const changeSelectedChat = tempChats => {
     };
 };
 
-export const getUserChats = allMsgs => {
+export const getUsers = () => {
     return dispatch => {
-        dispatch({ type: CURRENT_USER_CHATS, allMsgs: allMsgs });
+        console.log('About to');
+        axios
+            .get(link + '/api/Users/GetAllUsers')
+            .then(function(response) {
+                dispatch({ type: ALL_USERS, users: response.data });
+            })
+            .catch(function(error) {});
     };
+};
+
+export const getUserChats = (userID) => {
+  return dispatch => {
+        axios
+            .get(link + '/api/Chats/getChatsforuser/' + userID)
+            .then(function(response) {
+                var userChats = []
+                var chat = response.data[0];
+                chat.latestMessage = response.data[0].text;
+                chat.selected = false;
+                userChats.push(chat);
+
+                for(let i=1;i<response.data.length;i++){
+                    let duplicatefound = false;
+                    for(let j=0;j<userChats.length;j++){
+                      if((response.data[i].senderId == userChats[j].senderId && response.data[i].receiverId == userChats[j].receiverId  || (response.data[i].senderId == userChats[j].receiverId && response.data[i].receiverId == userChats[j].senderId))){
+                        userChats[j].latestMessage = response.data[i].text;
+                        userChats[j].selected = false;
+                        duplicatefound = true;
+                      }
+                    }
+                    if(!duplicatefound){
+                      chat = response.data[i];
+                      chat.latestMessage = response.data[i].text;
+                      chat.selected = false;
+                      userChats.push(chat);
+                    }
+
+                  }
+
+                  dispatch({ type: CURRENT_USER_CHATS, userChats: userChats });
+            })
+            .catch(function(error) {
+                console.log(error)
+                console.log("Server not running")
+            });
+          }
 };
 
 export const getCurrentUser = () => {
@@ -259,9 +270,20 @@ export const registerUser = user => {
 };
 
 export const loginUser = user => {
-    return dispatch => {
-        dispatch({ type: LOGIN_USER_ACCOUNT, user: user });
-    };
+  return dispatch => {
+      console.log('About to');
+      axios
+          .get(link + '/api/Users/GetAllUsers')
+          .then(function(response) {
+            for(let i =0;i<response.data.length;i++){
+                if(user.userEmail == response.data[i].email && user.userPassword == response.data[i].password){
+                  dispatch({ type: LOGIN_USER_ACCOUNT, user: response.data[i] });
+                  return;
+                }
+              }
+          })
+          .catch(function(error) {});
+  };
 };
 
 export const changeUser = changes => {
