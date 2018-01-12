@@ -44,7 +44,7 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-    try{
+  try{
       var fullTime = str.split('T')[1];
       var hour = fullTime.split(':')[0];
       var minute = fullTime.split(':')[1];
@@ -200,7 +200,7 @@ const MessageTimeRight = function(props) {
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
-        try{
+        try {
             props.getCurrentUser();
             var id = props.currentUser.userID;
         }
@@ -213,11 +213,6 @@ class AccountScreen extends Component {
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
-
-    }
-
-    componentWillReceiveProps(newProps) {
-        console.log(newProps);
     }
 
     filterList = function(text) {
@@ -251,8 +246,13 @@ class AccountScreen extends Component {
 
     render() {
         return (
-            <div>
-                <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } />
+            <div className="auto">
+                <HeaderNav
+                    pic={this.props.currentUser.userImg}
+                    surname={this.props.currentUser.userSurname}
+                    name={this.props.currentUser.userName}
+                />
+
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar

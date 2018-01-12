@@ -27,9 +27,14 @@ import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
 class HeaderNav extends Component {
 
-    constructor(props){
-      super(props);
-      this.props = props;
+    constructor(props) {
+        super(props);
+        this.props = props;
+        try {
+            props.getCurrentUser();
+        } catch (exc) {
+            window.location.href = '/';
+        }
     }
 
     state = {
@@ -50,18 +55,26 @@ class HeaderNav extends Component {
     };
 
 
-    render() {
+render() {
         return (
-                <div className="navBar">
-                    <div>
-                      <Route render={({ history }) => (
-                        <div className="newChat" primary={true} onMouseEnter={(e) =>{
-                            this.setState({ open: true })
-                          }} onClick={() => { history.push('/accountScreen')}}>
-                            <label className="newChatLbl"> NEW CHAT </label>
+            <div class="navBar">
+                <Route
+                    render={({ history }) => (
+                        <div
+                            class="newChat initial"
+                            onMouseEnter={(e) =>{
+                                this.setState({ open: true })
+                            }}
+                            onClick={() => {
+                                history.push('/accountScreen');
+                            }}
+                        >
+                            <label className="newGroupLbl">NEW CHAT</label>
                         </div>
-                      )} />
+                    )}
+                />
 
+                    
                               <Popover
                                 open={this.state.open}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
@@ -129,77 +142,64 @@ class HeaderNav extends Component {
                                      </List>
                               </Popover>
 
-                        <div className="newGroup" primary={true} onClick={() => {}}>
-                            <label className="newGroupLbl"> NEW GROUP </label>
-                        </div>
-                    </div>
-
-                    {
-                      this.props.getCurrentUser ?(
-                      <label className="nameLbl">{ this.props.name } { this.props.surname }</label>)
-                      :
-                      (<label className="nameLbl">No Logged in</label>)
-                    }
-
-                    {
-                      !this.props.currentUser ?
-                      <Route render={({ history }) => (
-                        <div className="newChat" primary={true} onClick={() => { history.push('/')}}>
-                            <label className="newChatLbl"> LOG IN </label>
-                        </div>
-                      )} />
-
-                      :
-                      <div>
-                          <IconMenu
-                          className="miniImgPlaceholder"
-                              iconButtonElement={
-                                  <IconButton>
-                                      <img
-                                          className="miniProImage"
-                                          src={this.props.pic}
-                                          alt=" "
-                                      ></img>
-                                  </IconButton>
-                              }
-                              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-                              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-                          >
-                              <Route
-                                  render={({ history }) => (
-                                      <MenuItem
-                                          primaryText="Settings"
-                                          onClick={() => {
-                                              history.push('/settings');
-                                          }}
-                                      />
-                                  )}>
-                              </Route>
-                              <Route
-                                  render={({ history }) => (
-
-                                      <MenuItem
-                                          primaryText="Log out"
-                                          onClick={() => {
-                                              this.props.logOut()
-                                              history.push('/');
-                                          }}
-                                      />
-                                  )}>
-                          </Route>
-                          </IconMenu>
-                          <div>
-                              <img className="logoImg"
-                                src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
-                                alt=""
-                              ></img>
-                            </div>
-
-                      </div>
-                    }
-
+                    
+                <div className="newChat initial" primary={true} onClick={() => {}}>
+                    <label className="newGroupLbl">NEW GROUP</label>
                 </div>
-        )
+                <div class="auto" />
+
+                <div class="test initial">
+                    {this.props.getCurrentUser ? (
+                        <label className="nameLbl">
+                            {this.props.name} {this.props.surname}
+                        </label>
+                    ) : (
+                        <label className="nameLbl">No Logged in</label>
+                    )}
+                </div>
+                <div class="test initial">
+                    <IconMenu
+                        className="miniImgPlaceholder"
+                        iconButtonElement={
+                            <IconButton className="miniProImage">
+                                <img className="miniProImage" src={this.props.pic} alt=" " />
+                            </IconButton>
+                        }
+                        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    >
+                        <Route
+                            render={({ history }) => (
+                                <MenuItem
+                                    primaryText="Settings"
+                                    onClick={() => {
+                                        history.push('/settings');
+                                    }}
+                                />
+                            )}
+                        />
+                        <Route
+                            render={({ history }) => (
+                                <MenuItem
+                                    primaryText="Log out"
+                                    onClick={() => {
+                                        this.props.logOut();
+                                        history.push('/');
+                                    }}
+                                />
+                            )}
+                        />
+                    </IconMenu>
+                </div>
+                <div className="test initial">
+                    <img
+                        className="logoImg "
+                        src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
+                        alt=""
+                    />
+                </div>
+            </div>
+        );
     }
 }
 

@@ -18,7 +18,7 @@ const initialState = {
     },
     currentUserChats: [],
     filteredChats: [],
-    currentUser:null,
+    currentUser: null,
     receiver: {
         userID: 10,
         userName: 'Takie',
@@ -132,13 +132,13 @@ export default (state = initialState, action) => {
 
         case CHANGE_USER_ACCOUNT:
             user = state.currentUser;
-            if(action.new.userName){
+            if (action.new.userName) {
                 user.userName = action.new.userName;
                 user.userSurname = action.new.userSurname;
             }
 
-            if(action.new.userImg){
-                user.userImg =action.new.userImg;
+            if (action.new.userImg) {
+                user.userImg = action.new.userImg;
             }
 
             return {
