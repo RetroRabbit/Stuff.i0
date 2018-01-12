@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 
 import {
-    getUser,
+    getUsers,
     changeUser,
     getCurrentUser,
     registerUser,
@@ -44,15 +44,14 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-  try{
-      var fullTime = str.split('T')[1];
-      var hour = fullTime.split(':')[0];
-      var minute = fullTime.split(':')[1];
-      return hour + ":" + minute;
-    }catch(ex){
-      return "-----";
+    try {
+        var fullTime = str.split('T')[1];
+        var hour = fullTime.split(':')[0];
+        var minute = fullTime.split(':')[1];
+        return hour + ':' + minute;
+    } catch (ex) {
+        return '-----';
     }
-
 };
 
 const cardHeaderStyle = {
@@ -156,7 +155,6 @@ const NewText = function(props) {
                     hintText="Insert Text Message Here"
                     onKeyDown={e => {
                         if (e.key === 'Enter' && e.target.value.length > 0) {
-
                             props.addMsg(
                                 e.target.value,
                                 props.currentUser.userID,
@@ -165,9 +163,9 @@ const NewText = function(props) {
                             props.getUserChats();
 
                             e.target.value = '';
-                            setTimeout(function () {
-                              var objDiv = document.getElementById("theChat");
-                              objDiv.scrollTop =  objDiv.scrollHeight;
+                            setTimeout(function() {
+                                var objDiv = document.getElementById('theChat');
+                                objDiv.scrollTop = objDiv.scrollHeight;
                             }, 1);
                         }
                     }}
@@ -203,16 +201,19 @@ class AccountScreen extends Component {
         try {
             props.getCurrentUser();
             var id = props.currentUser.userID;
-        }
-        catch(exc){
-                window.location.href = '/';
+        } catch (exc) {
+            window.location.href = '/';
         }
 
-        props.getUserChats();
+        props.getUsers();
         props.getMsgs(props.currentUser.userID, props.receiver.userID);
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
+    }
+
+    componentWillReceiveProps(newProps) {
+        console.log(newProps);
     }
 
     filterList = function(text) {
@@ -246,13 +247,12 @@ class AccountScreen extends Component {
 
     render() {
         return (
-            <div className="auto">
+            <div>
                 <HeaderNav
                     pic={this.props.currentUser.userImg}
                     surname={this.props.currentUser.userSurname}
                     name={this.props.currentUser.userName}
                 />
-
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar
@@ -280,7 +280,7 @@ class AccountScreen extends Component {
                 </div>
 
                 <div id="theChat" className="mainBubbleContainer">
-                  {this.props.msgs.map(chat => {
+                    {this.props.msgs.map(chat => {
                         if (
                             chat.senderId === this.props.currentUser.userID &&
                             chat.receiverId === this.props.receiver.userID
@@ -330,7 +330,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            getUser,
+            getUsers,
             getCurrentUser,
             changeUser,
             addMsg,

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const USER_ACCOUNT = 'Account/USER_ACCOUNT';
 export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT';
@@ -10,11 +10,12 @@ export const CURRENT_USER_CHATS = 'Account/CURRENT_USER_CHATS';
 export const FILTER_USER_CHATS = 'Account/FILTER_USER_CHATS';
 export const CHANGE_SELECTED_CHAT = 'Account/CHANGE_SELECTED_CHAT';
 export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
+export const ALL_USERS = 'Account/ALL_USERS';
 
 const initialState = {
-    api:{
-      host:'http://192.168.0.20',
-      port:54980
+    api: {
+        host: 'http://192.168.0.20',
+        port: 54980
     },
     currentUserChats: [],
     filteredChats: [],
@@ -28,63 +29,35 @@ const initialState = {
         userImg:
             'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
     },
-    users: [
-        {
-            userID: 20,
-            userName: 'Joe',
-            userSurname: 'Sirwali',
-            userPassword: 'joe',
-            userEmail: 'joe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 10,
-            userName: 'Takie',
-            userSurname: 'Ndou',
-            userEmail: 'mulavhe@gmail.com',
-            userPassword: 'joseph',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1',
-            latestMessage: ''
-        },
-        {
-            userID: 2,
-            userName: 'Rendani',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 4,
-            userName: 'Joseph',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 0,
-            userName: 'Joseph',
-            userSurname: 'Sirwali',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        },
-        {
-            userID: 10,
-            userName: 'Victim',
-            userSurname: 'That',
-            userEmail: 'mulavhe@gmail.com',
-            userImg:
-                'https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1396485177%2Ftrevor_cartoon_profile.jpg&f=1'
-        }
-    ]
+    users: []
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ALL_USERS:
+            alert('Got all users');
+            console.log('Got all users');
+
+            var users = [];
+
+            for (let i = 0; i < action.users.length; i++) {
+                alert(i + ' index');
+                users.push({
+                    userID: action.users[i].id,
+                    userName: action.users[i].name,
+                    userSurname: action.users[i].surname,
+                    userImg: action.users[i].image,
+                    userEmail: action.users[i].email
+                });
+            }
+
+            alert(users.length + ' users in db');
+
+            return {
+                ...state,
+                users: users
+            };
+
         case REGISTER_USER_ACCOUNT:
             var user = null;
             user = action.user;
@@ -112,22 +85,17 @@ export default (state = initialState, action) => {
             };
 
         case CURRENT_USER_ACCOUNT:
-
             return {
                 ...state
             };
 
         case USER_ACCOUNT:
-            user = null;
-            for (let i = 0; i < state.users.length; i++) {
-                if (state.users[i].userID === action.ID) {
-                    user = state.users[i];
-                }
-            }
-
+            alert('here ....');
+            console.log('here ....');
+            console.log(action.user);
             return {
                 ...state,
-                currentUser: user
+                currentUser: action.user
             };
 
         case CHANGE_USER_ACCOUNT:
@@ -158,7 +126,10 @@ export default (state = initialState, action) => {
             let userChats = [];
 
             for (let msg of msgs) {
-                if (msg.recieverID === state.currentUser.userID || msg.senderId === state.currentUser.userID) {
+                if (
+                    msg.recieverID === state.currentUser.userID ||
+                    msg.senderId === state.currentUser.userID
+                ) {
                     for (let user of state.users) {
                         if (msg.senderId === user.userID || msg.receiverId === user.userID) {
                             if (userChats.length > 0) {
@@ -172,7 +143,6 @@ export default (state = initialState, action) => {
                                     }
                                 }
                                 if (!duplicatefound) {
-
                                     user.latestMessage = msg.text;
                                     user.selected = false;
                                     userChats.push(user);
@@ -182,7 +152,7 @@ export default (state = initialState, action) => {
                                 user.selected = false;
                                 userChats.push(user);
                             }
-                          }
+                        }
                     }
                 }
             }
@@ -221,7 +191,11 @@ export default (state = initialState, action) => {
 
 export const getUser = userID => {
     return dispatch => {
-        dispatch({ type: USER_ACCOUNT, ID: userID });
+        axios
+            .get(initialState.api.host + ':' + initialState.api.port + 'api/Users/' + userID)
+            .then(function(response) {
+                dispatch({ type: USER_ACCOUNT, user: response.data });
+            });
     };
 };
 
@@ -232,8 +206,8 @@ export const changeReciever = reciever => {
 };
 
 export const filterUserChats = updatedList => {
-  return dispatch => {
-      dispatch({ type: FILTER_USER_CHATS, updatedList: updatedList });
+    return dispatch => {
+        dispatch({ type: FILTER_USER_CHATS, updatedList: updatedList });
     };
 };
 
@@ -243,13 +217,26 @@ export const changeSelectedChat = tempChats => {
     };
 };
 
+export const getUsers = () => {
+    return dispatch => {
+        alert('About to');
+        axios
+            .get(initialState.api.host + ':' + initialState.api.port + '/api/Users/GetAllUsers')
+            .then(function(response) {
+                dispatch({ type: ALL_USERS, users: response.data });
+            })
+            .catch(function(error) {});
+    };
+};
+
 export const getUserChats = allMsgs => {
     return dispatch => {
-        axios.get(initialState.api.host + ':'  + initialState.api.port + '/api/chats').then(function (response) {
-          dispatch({ type: CURRENT_USER_CHATS, allMsgs: response.data });
-        }).catch(function (error) {
-
-      });
+        axios
+            .get(initialState.api.host + ':' + initialState.api.port + '/api/chats')
+            .then(function(response) {
+                dispatch({ type: CURRENT_USER_CHATS, allMsgs: response.data });
+            })
+            .catch(function(error) {});
     };
 };
 

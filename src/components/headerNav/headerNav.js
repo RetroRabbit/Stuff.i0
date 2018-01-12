@@ -11,22 +11,27 @@ import Popover from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 
 import Avatar from 'material-ui/Avatar';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 
 import FlatButton from 'material-ui/FlatButton/FlatButton';
 
 import TextField from 'material-ui/TextField';
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
-import { getUser, changeUser, getCurrentUser, registerUser, loginUser ,logOut} from '../../reducers/Account';
+import {
+    getUser,
+    changeUser,
+    getCurrentUser,
+    registerUser,
+    loginUser,
+    logOut
+} from '../../reducers/Account';
 
 import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
-
 class HeaderNav extends Component {
-
     constructor(props) {
         super(props);
         this.props = props;
@@ -38,9 +43,9 @@ class HeaderNav extends Component {
     }
 
     state = {
-      open:false,
-      txtSearch:''
-    }
+        open: false,
+        txtSearch: ''
+    };
 
     handleChange = (event, logged) => {
         this.setState({ logged: logged });
@@ -54,16 +59,15 @@ class HeaderNav extends Component {
         'padding-bottom': '2px'
     };
 
-
-render() {
+    render() {
         return (
             <div class="navBar">
                 <Route
                     render={({ history }) => (
                         <div
                             class="newChat initial"
-                            onMouseEnter={(e) =>{
-                                this.setState({ open: true })
+                            onMouseEnter={e => {
+                                this.setState({ open: true });
                             }}
                             onClick={() => {
                                 history.push('/accountScreen');
@@ -74,75 +78,91 @@ render() {
                     )}
                 />
 
-                    
-                              <Popover
-                                open={this.state.open}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                                targetOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                                onRequestClose={this.handleRequestClose}>
-                                  <Card>
-                                      <CardTitle title="Search for a user"/>
-                                      <CardText>
-                                        <div>
-                                          <FlatButton label="X" onClick={(e)=>{ this.setState({ open: false })}}>
-
-                                          </FlatButton>
-                                        </div>
-                                        <TextField
-                                            hintText="Friend's Email"
-                                            onKeyDown={e => {
-                                                if (e.key === 'Enter' && e.target.value.length > 0) {
-                                                    e.target.value = '';
-                                                }
-                                                this.setState({txtSearch : e.target.value});
-
-                                            }}
-                                            style={{
-                                                padding: '1px 0px 1px 25px',
-                                                width: '100%'
-                                            }}
-                                        />
-                                      </CardText>
-                                    </Card>
-                                    <List>
-                                      <Subheader>Users that contains : { this.state.txtSearch } </Subheader>
-                                      <Route render={({ history }) => (
-                                           this.props.users.map(user =>(
-                                              (user.userEmail.indexOf(this.state.txtSearch) !== -1) ||
-                                              (user.userSurname.indexOf(this.state.txtSearch) !== -1) ||
-                                              (user.userName.indexOf(this.state.txtSearch) !== -1) ?
-
-                                                      <ListItem
-                                                        leftAvatar={
-                                                          <Avatar src={ user.userImg } />
+                <Popover
+                    open={this.state.open}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    onRequestClose={this.handleRequestClose}
+                >
+                    <Card>
+                        <CardTitle title="Search for a user" />
+                        <CardText>
+                            <div>
+                                <FlatButton
+                                    label="X"
+                                    onClick={e => {
+                                        this.setState({ open: false });
+                                    }}
+                                />
+                            </div>
+                            <TextField
+                                hintText="Friend's Email"
+                                onKeyDown={e => {
+                                    if (e.key === 'Enter' && e.target.value.length > 0) {
+                                        e.target.value = '';
+                                    }
+                                    this.setState({ txtSearch: e.target.value });
+                                }}
+                                style={{
+                                    padding: '1px 0px 1px 25px',
+                                    width: '100%'
+                                }}
+                            />
+                        </CardText>
+                    </Card>
+                    <List>
+                        <Subheader>Users that contains : {this.state.txtSearch} </Subheader>
+                        <Route
+                            render={({ history }) =>
+                                this.props.users.map(
+                                    user =>
+                                        user.userEmail.indexOf(this.state.txtSearch) !== -1 ||
+                                        user.userSurname.indexOf(this.state.txtSearch) !== -1 ||
+                                        user.userName.indexOf(this.state.txtSearch) !== -1 ? (
+                                            <ListItem
+                                                leftAvatar={<Avatar src={user.userImg} />}
+                                                primaryText={user.userSurname + ' ' + user.userName}
+                                                secondaryText={user.userEmail}
+                                                onClick={e => {
+                                                    let found = false;
+                                                    for (
+                                                        let i = 0;
+                                                        i < this.props.msgs.length;
+                                                        i++
+                                                    ) {
+                                                        if (
+                                                            (this.props.msgs[i].senderID ===
+                                                                this.props.currentUser.userID &&
+                                                                this.props.msgs[i].receiverID ===
+                                                                    user.userID) ||
+                                                            (this.props.msgs[i].receiverID ===
+                                                                this.props.currentUser.userID &&
+                                                                this.props.msgs[i].senderID ===
+                                                                    user.userID)
+                                                        ) {
+                                                            found = true;
                                                         }
-                                                        primaryText={ user.userSurname + " " + user.userName}
-                                                        secondaryText={ user.userEmail }
-                                                        onClick={(e)=>{
-                                                          let found = false;
-                                                          for(let i=0;i<this.props.msgs.length;i++){
-                                                            if(this.props.msgs[i].senderID === this.props.currentUser.userID && this.props.msgs[i].receiverID === user.userID ||
-                                                               this.props.msgs[i].receiverID === this.props.currentUser.userID && this.props.msgs[i].senderID === user.userID){
-                                                              found = true;
-                                                            }
-                                                          }
-                                                          if(!found){
-                                                            this.props.addMsg("Hi",this.props.currentUser.userID,user.userID);
-                                                          }
-                                                          history.push('/accountScreen');
-                                                          this.setState({open:false});
-                                                        }}
-                                                      />
-                                          :
+                                                    }
+                                                    if (!found) {
+                                                        this.props.addMsg(
+                                                            'Hi',
+                                                            this.props.currentUser.userID,
+                                                            user.userID
+                                                        );
+                                                    }
+                                                    history.push('/accountScreen');
+                                                    this.setState({ open: false });
+                                                }}
+                                            />
+                                        ) : (
+                                            <p />
+                                        )
+                                )
+                            }
+                        />
+                    </List>
+                </Popover>
 
-                                          <p></p>
-
-                                          ))
-                                      )} />
-                                     </List>
-                              </Popover>
-
-                    
                 <div className="newChat initial" primary={true} onClick={() => {}}>
                     <label className="newGroupLbl">NEW GROUP</label>
                 </div>
@@ -203,29 +223,30 @@ render() {
     }
 }
 
-
-const mapStateToProps = state =>
-{
-  return {
-    chats: state.Chat.chats,
-    msgs: state.Chat.msgs,
-    currentUser: state.Account.currentUser,
-    users: state.Account.users,
-    receiver: state.Account.receiver
-  };
+const mapStateToProps = state => {
+    return {
+        chats: state.Chat.chats,
+        msgs: state.Chat.msgs,
+        currentUser: state.Account.currentUser,
+        users: state.Account.users,
+        receiver: state.Account.receiver
+    };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-    getUser,
-    getCurrentUser,
-    changeUser,
-    addMsg,
-    getMsgs,
-    registerUser,
-    loginUser,
-    getChats,
-    logOut
-  }, dispatch);
-
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getUser,
+            getCurrentUser,
+            changeUser,
+            addMsg,
+            getMsgs,
+            registerUser,
+            loginUser,
+            getChats,
+            logOut
+        },
+        dispatch
+    );
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);
