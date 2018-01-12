@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://192.168.0.20:52498/",
+      "applicationUrl": "http://localhost:52498/",
       "sslPort": 0
     }
   },
@@ -17,13 +17,13 @@
       }
     },
     "stuffWebApi": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://192.168.0.20:52499/"
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "api/values",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "applicationUrl": "http://localhost:52499/"
     }
   }
 }
