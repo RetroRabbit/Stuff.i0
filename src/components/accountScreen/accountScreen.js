@@ -44,11 +44,15 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-    var value = str.getMinutes().toString();
-    if (value.length === 1) {
-        value += "0";
+    try{
+      var fullTime = str.split('T')[1];
+      var hour = fullTime.split(':')[0];
+      var minute = fullTime.split(':')[1];
+      return hour + ":" + minute;
+    }catch(ex){
+      return "-----";
     }
-    return str.getHours() + ':' + value;
+
 };
 
 const cardHeaderStyle = {
@@ -152,12 +156,19 @@ const NewText = function(props) {
                     hintText="Insert Text Message Here"
                     onKeyDown={e => {
                         if (e.key === 'Enter' && e.target.value.length > 0) {
+
                             props.addMsg(
                                 e.target.value,
                                 props.currentUser.userID,
                                 props.receiver.userID
                             );
+                            props.getUserChats();
+
                             e.target.value = '';
+                            setTimeout(function () {
+                              var objDiv = document.getElementById("theChat");
+                              objDiv.scrollTop =  objDiv.scrollHeight;
+                            }, 1);
                         }
                     }}
                     style={{
@@ -191,12 +202,13 @@ class AccountScreen extends Component {
         super(props);
         try{
             props.getCurrentUser();
+            var id = props.currentUser.userID;
         }
         catch(exc){
                 window.location.href = '/';
         }
 
-        props.getUserChats(this.props.allMsgs);
+        props.getUserChats();
         props.getMsgs(props.currentUser.userID, props.receiver.userID);
 
         this.filterList = this.filterList.bind(this);
@@ -267,11 +279,11 @@ class AccountScreen extends Component {
                     </ul>
                 </div>
 
-                <div className="mainBubbleContainer">
-                    {this.props.msgs.map(chat => {
+                <div id="theChat" className="mainBubbleContainer">
+                  {this.props.msgs.map(chat => {
                         if (
-                            chat.senderID === this.props.currentUser.userID &&
-                            chat.receiverID === this.props.receiver.userID
+                            chat.senderId === this.props.currentUser.userID &&
+                            chat.receiverId === this.props.receiver.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">
@@ -280,8 +292,8 @@ class AccountScreen extends Component {
                                 </div>
                             );
                         } else if (
-                            chat.senderID === this.props.receiver.userID &&
-                            chat.receiverID === this.props.currentUser.userID
+                            chat.senderId === this.props.receiver.userID &&
+                            chat.receiverId === this.props.currentUser.userID
                         ) {
                             return (
                                 <div className="bubbleContainer">

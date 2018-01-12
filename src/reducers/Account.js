@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const USER_ACCOUNT = 'Account/USER_ACCOUNT';
 export const REGISTER_USER_ACCOUNT = 'Account/REGISTER_USER_ACCOUNT';
 export const LOGIN_USER_ACCOUNT = 'Account/LOGIN_USER_ACCOUNT';
@@ -113,12 +112,6 @@ export default (state = initialState, action) => {
             };
 
         case CURRENT_USER_ACCOUNT:
-            axios.get( state.api.host + ':'  + state.api.port + '/api/chats').then(function (response) {
-                console.log(response.data);
-            }).catch(function (error) {
-                alert(error);
-                console.log(error);
-            });
 
             return {
                 ...state
@@ -165,9 +158,9 @@ export default (state = initialState, action) => {
             let userChats = [];
 
             for (let msg of msgs) {
-                if (msg.recieverID === state.currentUser.userID) {
+                if (msg.recieverID === state.currentUser.userID || msg.senderId === state.currentUser.userID) {
                     for (let user of state.users) {
-                        if (msg.senderID === user.userID) {
+                        if (msg.senderId === user.userID || msg.receiverId === user.userID) {
                             if (userChats.length > 0) {
                                 let duplicatefound = false;
                                 for (let userDet of userChats) {
@@ -179,6 +172,7 @@ export default (state = initialState, action) => {
                                     }
                                 }
                                 if (!duplicatefound) {
+
                                     user.latestMessage = msg.text;
                                     user.selected = false;
                                     userChats.push(user);
@@ -188,10 +182,11 @@ export default (state = initialState, action) => {
                                 user.selected = false;
                                 userChats.push(user);
                             }
-                        }
+                          }
                     }
                 }
             }
+
             console.log(userChats);
             return {
                 ...state,
@@ -237,8 +232,8 @@ export const changeReciever = reciever => {
 };
 
 export const filterUserChats = updatedList => {
-    return dispatch => {
-        dispatch({ type: FILTER_USER_CHATS, updatedList: updatedList });
+  return dispatch => {
+      dispatch({ type: FILTER_USER_CHATS, updatedList: updatedList });
     };
 };
 
@@ -250,7 +245,11 @@ export const changeSelectedChat = tempChats => {
 
 export const getUserChats = allMsgs => {
     return dispatch => {
-        dispatch({ type: CURRENT_USER_CHATS, allMsgs: allMsgs });
+        axios.get(initialState.api.host + ':'  + initialState.api.port + '/api/chats').then(function (response) {
+          dispatch({ type: CURRENT_USER_CHATS, allMsgs: response.data });
+        }).catch(function (error) {
+
+      });
     };
 };
 

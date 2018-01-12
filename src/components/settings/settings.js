@@ -56,11 +56,12 @@ class settings extends Component {
       super(props);
       props.getCurrentUser();
       try{
-        props.getCurrentUser();
-        }
-        catch(exc){
-                window.location.href = '/';
-        }
+          props.getCurrentUser();
+          var id = props.currentUser.userID;
+      }
+      catch(exc){
+              window.location.href = '/';
+      }
 
   }
 
