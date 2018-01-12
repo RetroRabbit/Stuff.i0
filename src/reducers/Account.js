@@ -12,7 +12,7 @@ export const CHANGE_SELECTED_CHAT = 'Account/CHANGE_SELECTED_CHAT';
 export const CHANGE_RECIEVER = 'Account/CHANGE_RECIEVER';
 export const ALL_USERS = 'Account/ALL_USERS';
 
-const link = 'http://192.168.0.20:54980';
+const link = 'http://192.168.0.20:52499';
 
 const initialState = {
     currentUserChats: [],
@@ -33,14 +33,10 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case ALL_USERS:
-            alert('Got all users');
-            console.log('Got all users');
-
             var users = [];
 
             for (let i = 0; i < action.users.length; i++) {
-                alert(i + ' index');
-                users.push({
+              users.push({
                     userID: action.users[i].id,
                     userName: action.users[i].name,
                     userSurname: action.users[i].surname,
@@ -49,7 +45,7 @@ export default (state = initialState, action) => {
                 });
             }
 
-            alert(users.length + ' users in db');
+            console.log(users.length + ' users in db');
 
             return {
                 ...state,
@@ -67,15 +63,15 @@ export default (state = initialState, action) => {
             };
 
         case LOGIN_USER_ACCOUNT:
-            user = null;
-            for (let i = 0; i < state.users.length; i++) {
-                if (
-                    state.users[i].userEmail === action.user.userEmail &&
-                    state.users[i].userPassword === action.user.userPassword
-                ) {
-                    user = state.users[i];
-                }
-            }
+            var user = null;
+            user = action.user;
+            user.userID = action.user.id;
+            user.userName = action.user.name;
+            user.userSurname = action.user.surname;
+            user.userEmail = action.user.email;
+            user.userImg = action.user.image;
+
+            state.currentUser = user;
 
             return {
                 ...state,
@@ -88,7 +84,7 @@ export default (state = initialState, action) => {
             };
 
         case USER_ACCOUNT:
-            alert('here ....');
+            console.log('here ....');
             console.log('here ....');
             console.log(action.user);
             return {
@@ -119,17 +115,36 @@ export default (state = initialState, action) => {
             };
 
         case CURRENT_USER_CHATS:
-            console.log('dispatching CURRENT_USER_CHATS');
-            let msgs = action.allMsgs;
-            let userChats = [];
+            console.log("Are you sure")
+            var users = state.users;
+              for(let i=0;i<action.userChats.length;i++){
+                      for(let j=0;j<state.users.length;j++){
+                          if(state.users[j].userID !== state.currentUser.userID && state.users[j].userID == action.userChats[i].senderId){
 
+                            action.userChats[i].userID = state.users[j].userID;
+                            action.userChats[i].userName = state.users[j].userName;
+                            action.userChats[i].userImg = state.users[j].userImg;
 
-            alert("Current user chats " + )
-            console.log(userChats);
+                          }else if(state.users[j].userID !== state.currentUser.userID && state.users[j].userID == action.userChats[i].receiverId){
+
+                              action.userChats[i].userID = state.users[j].userID;
+                              action.userChats[i].userName = state.users[j].userName;
+                              action.userChats[i].userImg = state.users[j].userImg;
+
+                          }
+                      }
+                      console.log(action.userChats.length+ " == " + i)
+              }
+            state.currentUserChats =  action.userChats;
+            state.filteredChats =  action.userChats;
+            console.log(state.filteredChats.length + " filteredChats");
+            console.log(action.userChats);
+            console.log("Done")
+
             return {
                 ...state,
-                currentUserChats: userChats,
-                filteredChats: userChats
+                currentUserChats: action.userChats,
+                filteredChats: action.userChats
             };
 
         case FILTER_USER_CHATS:
@@ -187,7 +202,7 @@ export const changeSelectedChat = tempChats => {
 
 export const getUsers = () => {
     return dispatch => {
-        alert('About to');
+        console.log('About to');
         axios
             .get(link + '/api/Users/GetAllUsers')
             .then(function(response) {
@@ -198,44 +213,40 @@ export const getUsers = () => {
 };
 
 export const getUserChats = (userID) => {
-    return dispatch => {
+  return dispatch => {
         axios
-            .get(link + '/api/Chats/GetBySender/' + userID)
+            .get(link + '/api/Chats/getChatsforuser/' + userID)
             .then(function(response) {
+                var userChats = []
+                var chat = response.data[0];
+                chat.latestMessage = response.data[0].text;
+                chat.selected = false;
+                userChats.push(chat);
 
-
-              for (let msg of msgs) {
-              {
-                  for (let user of state.users) {
-                      if (msg.senderId === user.userID || msg.receiverId === user.userID) {
-                          if (userChats.length > 0) {
-                              let duplicatefound = false;
-                              for (let userDet of userChats) {
-                                  if (userDet.userID === user.userID) {
-                                      userDet = user;
-                                      userDet.latestMessage = msg.text;
-                                      userDet.selected = false;
-                                      duplicatefound = true;
-                                  }
-                              }
-                              if (!duplicatefound) {
-                                  user.latestMessage = msg.text;
-                                  user.selected = false;
-                                  userChats.push(user);
-                              }
-                          } else {
-                              user.latestMessage = msg.text;
-                              user.selected = false;
-                              userChats.push(user);
-                          }
+                for(let i=1;i<response.data.length;i++){
+                    let duplicatefound = false;
+                    for(let j=0;j<userChats.length;j++){
+                      if((response.data[i].senderId == userChats[j].senderId && response.data[i].receiverId == userChats[j].receiverId  || (response.data[i].senderId == userChats[j].receiverId && response.data[i].receiverId == userChats[j].senderId))){
+                        userChats[j].latestMessage = response.data[i].text;
+                        userChats[j].selected = false;
+                        duplicatefound = true;
                       }
+                    }
+                    if(!duplicatefound){
+                      chat = response.data[i];
+                      chat.latestMessage = response.data[i].text;
+                      chat.selected = false;
+                      userChats.push(chat);
+                    }
                   }
-              }
 
-              dispatch({ type: CURRENT_USER_CHATS, allChats: response.data });
+                  dispatch({ type: CURRENT_USER_CHATS, userChats: userChats });
             })
-            .catch(function(error) {});
-    };
+            .catch(function(error) {
+                console.log(error)
+                console.log("Server not running")
+            });
+          }
 };
 
 export const getCurrentUser = () => {
@@ -257,9 +268,20 @@ export const registerUser = user => {
 };
 
 export const loginUser = user => {
-    return dispatch => {
-        dispatch({ type: LOGIN_USER_ACCOUNT, user: user });
-    };
+  return dispatch => {
+      console.log('About to');
+      axios
+          .get(link + '/api/Users/GetAllUsers')
+          .then(function(response) {
+            for(let i =0;i<response.data.length;i++){
+                if(user.userEmail == response.data[i].email && user.userPassword == response.data[i].password){
+                  dispatch({ type: LOGIN_USER_ACCOUNT, user: response.data[i] });
+                  return;
+                }
+              }
+          })
+          .catch(function(error) {});
+  };
 };
 
 export const changeUser = changes => {

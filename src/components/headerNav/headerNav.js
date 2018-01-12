@@ -21,6 +21,7 @@ import TextField from 'material-ui/TextField';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 import {
+    getUsers,
     getUser,
     changeUser,
     getCurrentUser,
@@ -35,6 +36,7 @@ class HeaderNav extends Component {
     constructor(props) {
         super(props);
         this.props = props;
+        props.getUsers();
         try {
             props.getCurrentUser();
         } catch (exc) {
@@ -236,6 +238,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
+            getUsers,
             getUser,
             getCurrentUser,
             changeUser,

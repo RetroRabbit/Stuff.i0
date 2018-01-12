@@ -21,7 +21,7 @@ import {
     changeReciever
 } from '../../reducers/Account';
 
-import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
+import { addMsg, getMsgs, getChats, updateMsgs } from '../../reducers/Chat';
 
 const ChatBubbleRightStyle = {
     backgroundColor: '#007D80',
@@ -44,14 +44,15 @@ const getShort = str => {
 };
 
 const getShortTime = str => {
-    try {
-        var fullTime = str.split('T')[1];
-        var hour = fullTime.split(':')[0];
-        var minute = fullTime.split(':')[1];
-        return hour + ':' + minute;
-    } catch (ex) {
-        return '-----';
+    try{
+      var fullTime = str.split('T')[1];
+      var hour = fullTime.split(':')[0];
+      var minute = fullTime.split(':')[1];
+      return hour + ":" + minute;
+    }catch(ex){
+      return "-----";
     }
+
 };
 
 const cardHeaderStyle = {
@@ -155,17 +156,19 @@ const NewText = function(props) {
                     hintText="Insert Text Message Here"
                     onKeyDown={e => {
                         if (e.key === 'Enter' && e.target.value.length > 0) {
+
                             props.addMsg(
                                 e.target.value,
                                 props.currentUser.userID,
                                 props.receiver.userID
                             );
-                            props.getUserChats();
+
+                            props.getUserChats(props.currentUser.userID);
 
                             e.target.value = '';
-                            setTimeout(function() {
-                                var objDiv = document.getElementById('theChat');
-                                objDiv.scrollTop = objDiv.scrollHeight;
+                            setTimeout(function () {
+                              var objDiv = document.getElementById("theChat");
+                              objDiv.scrollTop =  objDiv.scrollHeight;
                             }, 1);
                         }
                     }}
@@ -198,18 +201,28 @@ const MessageTimeRight = function(props) {
 class AccountScreen extends Component {
     constructor(props) {
         super(props);
-        try {
+        try{
             props.getCurrentUser();
             var id = props.currentUser.userID;
-        } catch (exc) {
-            window.location.href = '/';
-        }
+            props.getUsers();
+            props.getUserChats(id);
 
-        props.getUsers();
-        props.getMsgs(props.currentUser.userID, props.receiver.userID);
+            setInterval(()=>{
+              try{
+                props.getMsgs(props.currentUser.userID, props.receiver.userID);
+                props.updateMsgs(props.currentUser.userID,props.receiver.userID);
+              }catch(exc){
+
+              }
+            },500)
+        }
+        catch(exc){
+                window.location.href = '/';
+        }
 
         this.filterList = this.filterList.bind(this);
         //this.state = { initialItems: initialItems, items: initialItems };
+
     }
 
     componentWillReceiveProps(newProps) {
@@ -227,6 +240,8 @@ class AccountScreen extends Component {
     changeSelected = function(chat) {
         let userID = chat.userID;
         let tempChats = this.props.filteredChats;
+
+        console.log(userID + " is thier ID")
 
         for (let i = 0; i < tempChats.length; i++) {
             tempChats[i].selected = false;
@@ -248,11 +263,7 @@ class AccountScreen extends Component {
     render() {
         return (
             <div>
-                <HeaderNav
-                    pic={this.props.currentUser.userImg}
-                    surname={this.props.currentUser.userSurname}
-                    name={this.props.currentUser.userName}
-                />
+                <HeaderNav pic={ this.props.currentUser.userImg } surname={ this.props.currentUser.userSurname  } name={ this.props.currentUser.userName } />
                 <div className="leftPanelContainer">
                     <div className="searchContainer">
                         <SearchBar
@@ -280,7 +291,7 @@ class AccountScreen extends Component {
                 </div>
 
                 <div id="theChat" className="mainBubbleContainer">
-                    {this.props.msgs.map(chat => {
+                  {this.props.msgs.map(chat => {
                         if (
                             chat.senderId === this.props.currentUser.userID &&
                             chat.receiverId === this.props.receiver.userID
@@ -341,7 +352,8 @@ const mapDispatchToProps = dispatch =>
             getUserChats,
             filterUserChats,
             changeSelectedChat,
-            changeReciever
+            changeReciever,
+            updateMsgs
         },
         dispatch
     );
