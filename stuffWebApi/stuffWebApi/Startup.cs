@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using stuffWebApi.Data;
 using stuffWebApi.Models;
 
 namespace stuffWebApi
@@ -28,7 +27,6 @@ namespace stuffWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ChatInitializer>();
             // Add Cors
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -49,7 +47,7 @@ namespace stuffWebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ChatInitializer chatSeeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -63,8 +61,6 @@ namespace stuffWebApi
 
             //app.UseMvcWithDefaultRoute();
             app.UseMvc();
-
-            chatSeeder.Seed().Wait();
         }
     }
 }
