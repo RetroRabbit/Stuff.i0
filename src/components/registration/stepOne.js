@@ -67,7 +67,7 @@ class StepOne extends React.Component {
                             </form>
                         </div>
                     </MuiThemeProvider>
-                    <div>
+                    <div className="nextBox">
                         <Route
                             render={({ history }) => (
                                 <FlatButton

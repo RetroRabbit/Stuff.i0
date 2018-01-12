@@ -48,7 +48,7 @@ class HeaderNav extends Component {
                 <Route
                     render={({ history }) => (
                         <div
-                            class="newChat"
+                            class="newChat initial"
                             onClick={() => {
                                 history.push('/accountScreen');
                             }}
@@ -58,7 +58,7 @@ class HeaderNav extends Component {
                     )}
                 />
 
-                <div className="newChat" primary={true} onClick={() => {}}>
+                <div className="newChat initial" primary={true} onClick={() => {}}>
                     <label className="newGroupLbl">NEW GROUP</label>
                 </div>
                 <div class="auto" />
@@ -110,6 +110,7 @@ class HeaderNav extends Component {
                     <img
                         className="logoImg "
                         src="https://files.slack.com/files-pri/T02LJS8M9-F8Q87RMGD/icon.png"
+                        alt=""
                     />
                 </div>
             </div>

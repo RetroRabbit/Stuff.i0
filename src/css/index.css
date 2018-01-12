@@ -59,9 +59,7 @@ and (orientation: landscape) {
 
 .text-center {
   margin: auto;
-  display: flex !important;
   text-align: center;
-  justify-content: center;
 }
 
 .oval {
