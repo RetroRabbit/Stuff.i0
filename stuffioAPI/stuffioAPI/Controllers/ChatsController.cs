@@ -69,7 +69,7 @@ namespace stuffioAPI.Controllers
             _context.Chats.Add(chat);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetChat", new { id = chat.Id }, chat);
+            return Ok(chat);
         }
     }
 }
