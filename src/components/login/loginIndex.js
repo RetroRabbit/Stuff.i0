@@ -6,7 +6,6 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import './loginIndex.css';
 
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -106,7 +105,6 @@ const mapStateToProps = state => ({
     currentUser: state.Account.currentUser,
     users: state.Account.users
 });
-
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(

@@ -10,12 +10,12 @@ class StepThree extends React.Component {
     render() {
         return (
             <div className="pageContainer">
-                <div className="reg-rectangle">
-                    <h2 className="step-one">Last Step</h2>
-                    <h2 className="the-basics">YOUR FIRST CHAT</h2>
+                <div className="regRectangle">
+                    <h2 className="stepHeading">Last Step</h2>
+                    <h2 className="titleHeading">YOUR FIRST CHAT</h2>
 
                     <MuiThemeProvider>
-                        <div className="form-field">
+                        <div className="formField">
                             <form>
                                 <br />
                                 <br />
@@ -23,7 +23,6 @@ class StepThree extends React.Component {
                                 <br />
                                 <TextField
                                     className="input"
-                                    hintText="Fiends' Email"
                                     floatingLabelText="Friends' Email"
                                     floatingLabelStyle={{ color: white }}
                                 />
@@ -43,7 +42,7 @@ class StepThree extends React.Component {
                                         this.setState({ logged: false });
                                         history.push('/Login');
                                     }}
-                                    className="next-button"
+                                    className="nextButton"
                                     label="Submit"
                                 />
                             )}
@@ -58,7 +57,7 @@ class StepThree extends React.Component {
                                         this.setState({ logged: false });
                                         history.push('/Login');
                                     }}
-                                    className="skip-for-now "
+                                    className="skipForNow "
                                     label="Next Step"
                                 >
                                     Skip for now

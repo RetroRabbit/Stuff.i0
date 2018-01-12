@@ -21,70 +21,76 @@ import {
 import { addMsg, getMsgs, getChats } from '../../reducers/Chat';
 
 class StepOne extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-  }
+    constructor(props) {
+        super(props);
+        this.props = props;
+    }
 
-  render() {
-    return (
-      <div className="pageContainer">
-      <div className="regRectangle">
-        <h2 className="stepHeading">Step One</h2>
-        <h2 className="titleHeading">THE BASICS</h2>
-        <MuiThemeProvider>
-          <div className="formField" >
-            <form>
-              <TextField
-                className="input"
-                type="text"
-                floatingLabelText="Your Name"
-                floatingLabelStyle={{ color: white }}
-                onChange={(e)=>{
-										this.username = e.target.value;
-									}}
-              />
-              <br />
-              <TextField
-                className="input"
-                type="email"
-                floatingLabelText="Email"
-                floatingLabelStyle={{ color: white }}
-                onChange={(e)=>{
-										this.email = e.target.value;
-									}}
-              />
-              <br />
-              <TextField
-                className="input"
-                type="password"
-                floatingLabelText="Password"
-                floatingLabelStyle={{ color: white }}
-                onChange={(e)=>{
-										this.password = e.target.value;
-									}}
-              />
-          </form>
-          </div>
-        </MuiThemeProvider>
-        <div className="nextBox">
-
-        <Route render={({ history }) => (
-          <FlatButton {...this.props}
-            onClick={() => {
-              this.props.registerUser({userName:this.username, userEmail:this.email, userPassword:this.password})
-              this.setState({ logged: false })
-              history.push('/StepTwo')
-            }}
-            className="nextButton"
-            label="Next Step" />
-        )} />
-        </div>
-      </div>
-    </div>
-    )
-  }
-
+    render() {
+        return (
+            <div className="pageContainer">
+                <div className="regRectangle">
+                    <h2 className="stepHeading">Step One</h2>
+                    <h2 className="titleHeading">THE BASICS</h2>
+                    <MuiThemeProvider>
+                        <div className="formField">
+                            <form>
+                                <TextField
+                                    className="input"
+                                    type="text"
+                                    floatingLabelText="Your Name"
+                                    floatingLabelStyle={{ color: white }}
+                                    onChange={e => {
+                                        this.username = e.target.value;
+                                    }}
+                                />
+                                <br />
+                                <TextField
+                                    className="input"
+                                    type="email"
+                                    floatingLabelText="Email"
+                                    floatingLabelStyle={{ color: white }}
+                                    onChange={e => {
+                                        this.email = e.target.value;
+                                    }}
+                                />
+                                <br />
+                                <TextField
+                                    className="input"
+                                    type="password"
+                                    floatingLabelText="Password"
+                                    floatingLabelStyle={{ color: white }}
+                                    onChange={e => {
+                                        this.password = e.target.value;
+                                    }}
+                                />
+                            </form>
+                        </div>
+                    </MuiThemeProvider>
+                    <div className="nextBox">
+                        <Route
+                            render={({ history }) => (
+                                <FlatButton
+                                    {...this.props}
+                                    onClick={() => {
+                                        this.props.registerUser({
+                                            userName: this.username,
+                                            userEmail: this.email,
+                                            userPassword: this.password
+                                        });
+                                        this.setState({ logged: false });
+                                        history.push('/StepTwo');
+                                    }}
+                                    className="nextButton"
+                                    label="Next Step"
+                                />
+                            )}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 const mapStateToProps = state => ({
     chats: state.Chat.chats,
