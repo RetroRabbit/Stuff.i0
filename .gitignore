@@ -19,3 +19,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/stuffWebApi/.vs
+/stuffWebApi/stuffWebApi/stuffWebApi.csproj.user
+/stuffWebApi/stuffWebApi/obj
+/stuffWebApi/stuffWebApi/bin
+
