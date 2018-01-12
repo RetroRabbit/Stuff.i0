@@ -277,8 +277,7 @@ class AccountScreen extends Component {
                             <li
                                 data-category={chat}
                                 key={chat}
-                                onClick={() => this.changeSelected(chat)}
-                            >
+                                onClick={() => this.changeSelected(chat)}>
                                 <ChatCard
                                     title={chat.userName}
                                     avatar={chat.userImg}

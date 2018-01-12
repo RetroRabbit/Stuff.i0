@@ -135,6 +135,7 @@ export default (state = initialState, action) => {
                       }
                       console.log(action.userChats.length+ " == " + i)
               }
+
             state.currentUserChats =  action.userChats;
             state.filteredChats =  action.userChats;
             console.log(state.filteredChats.length + " filteredChats");
@@ -238,6 +239,7 @@ export const getUserChats = (userID) => {
                       chat.selected = false;
                       userChats.push(chat);
                     }
+
                   }
 
                   dispatch({ type: CURRENT_USER_CHATS, userChats: userChats });
