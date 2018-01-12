@@ -1,10 +1,10 @@
-﻿using stuffioAPI.Models;
+﻿using stuffWebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace stuffioAPI.Data
+namespace stuffWebApi.Data
 {
     public class ChatInitializer
     {

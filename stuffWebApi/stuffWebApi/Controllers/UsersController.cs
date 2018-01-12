@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Cors;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using stuffioAPI.Models;
-using stuffioAPI.ViewModels;
+using stuffWebApi.ViewModels;
 
-namespace stuffioAPI.Controllers
+namespace stuffWebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Users")]

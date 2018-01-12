@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace stuffioAPI.ViewModels
+namespace stuffWebApi.ViewModels
 {
     public class UserViewModel
     {

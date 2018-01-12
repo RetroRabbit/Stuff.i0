@@ -11,10 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using stuffioAPI.Data;
-using stuffioAPI.Models;
+using stuffWebApi.Data;
+using stuffWebApi.Models;
 
-namespace stuffioAPI
+namespace stuffWebApi
 {
     public class Startup
     {
@@ -28,7 +28,7 @@ namespace stuffioAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddTransient<ChatInitializer>();
+            services.AddTransient<ChatInitializer>();
             // Add Cors
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {

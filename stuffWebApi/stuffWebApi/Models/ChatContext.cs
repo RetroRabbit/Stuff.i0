@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace stuffioAPI.Models
+namespace stuffWebApi.Models
 {
     public class ChatContext : DbContext
     {

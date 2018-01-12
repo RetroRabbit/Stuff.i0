@@ -20,7 +20,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/stuffioAPI/.vs
-/stuffioAPI/stuffioAPI/stuffioAPI.csproj.user
-/stuffioAPI/stuffioAPI/obj
-/stuffioAPI/stuffioAPI/bin
+/stuffWebApi/.vs
+/stuffWebApi/stuffWebApi/stuffWebApi.csproj.user
+/stuffWebApi/stuffWebApi/obj
+/stuffWebApi/stuffWebApi/bin
+
