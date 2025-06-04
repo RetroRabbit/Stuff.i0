@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.30.0",
     "history": "^4.7.2",
     "material-ui": "^0.20.0",
     "material-ui-search-bar": "^0.4.1",
